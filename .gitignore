@@ -1,0 +1,53 @@
+## Ignore build outputs
+bin/
+obj/
+out/
+
+## Rider / IntelliJ
+.idea/
+*.sln.docstates
+
+## User-specific files
+*.user
+*.userosscache
+*.suo
+*.userprefs
+*.pidb
+*.booproj
+
+## Visual Studio / VSCode settings
+.vs/
+.vscode/
+
+## NuGet packages
+*.nupkg
+packages/
+*.snupkg
+
+## Logs / cache
+*.log
+*.tlog
+*.tmp
+*.cache
+*.pid
+
+## OS specific
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+
+# Linux
+*~
+
+## ASP.NET specific
+appsettings.Development.json
+appsettings.Local.json
+appsettings.*.json
+
+## Others
+.env
+*.publishsettings
