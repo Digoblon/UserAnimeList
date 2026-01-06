@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Shared\UserAnimeList.Communication\UserAnimeList.Communication.csproj" />
+      <ProjectReference Include="..\..\Shared\UserAnimeList.Exception\UserAnimeList.Exception.csproj" />
+      <ProjectReference Include="..\UserAnimeList.Domain\UserAnimeList.Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="FluentValidation" Version="12.1.1" />
+      <PackageReference Include="Mapster" Version="7.4.0" />
+      <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.11" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.11" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.11" />
+    </ItemGroup>
+
+</Project>
