@@ -1,5 +1,9 @@
 using Microsoft.OpenApi.Models;
 using Scalar.AspNetCore;
+using UserAnimeList.Application;
+using UserAnimeList.Filters;
+using UserAnimeList.Infrastructure;
+using UserAnimeList.Middleware;
 
 const string AUTHENTICATION_TYPE = "Bearer";
 
@@ -39,6 +43,14 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddMvc(options =>options.Filters.Add<ExceptionFilter>());
+
+builder.Services.AddApplication(builder.Configuration);
+builder.Services.AddInfrastructure(builder.Configuration);
+//builder.Services.AddScoped<ITokenProvider, HttpContextTokenValue>();
+
+builder.Services.AddRouting(options => options.LowercaseUrls = true);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -49,9 +61,11 @@ if (app.Environment.IsDevelopment())
     app.MapScalarApiReference();
 }
 
+app.UseMiddleware<CultureMiddleware>();
+
 app.UseHttpsRedirection();
+app.MapControllers();
 
 
 
-
-app.Run();
+await app.RunAsync();
