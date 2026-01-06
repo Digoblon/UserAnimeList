@@ -2,8 +2,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9E080B18-3AC1-455E-A199-BEC89E116581}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D3CE58DC-9802-41F0-B717-3047F97CEA76}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{81DD5D3B-61A7-4A10-A68F-52CC1061C66D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserAnimeList.API", "src\Backend\UserAnimeList.API\UserAnimeList.API.csproj", "{A1C9196A-845B-4EAC-8277-79BF06EB3E00}"
