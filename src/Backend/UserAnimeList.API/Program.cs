@@ -114,3 +114,8 @@ static List<string> NormalizeErrors(List<string> rawErrors)
 
     return errors.Distinct().ToList();
 }
+
+public partial class Program
+{
+    protected Program() { }
+}
