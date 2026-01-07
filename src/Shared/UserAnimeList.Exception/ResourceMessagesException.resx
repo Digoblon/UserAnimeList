@@ -72,4 +72,10 @@
     <data name="USER_WITHOUT_PERMISSION_ACCESS_RESOURCE" xml:space="preserve">
       <value>You can't access this resource.</value>
     </data>
+  <data name="INVALID_JSON" xml:space="preserve">
+    <value>Invalid JSON format.</value>
+  </data>
+  <data name="INVALID_REQUEST_BODY" xml:space="preserve">
+    <value>Request body is invalid or missing.</value>
+  </data>
 </root>

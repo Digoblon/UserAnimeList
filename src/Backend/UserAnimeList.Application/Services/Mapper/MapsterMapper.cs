@@ -7,6 +7,15 @@ namespace UserAnimeList.Application.Services.Mapper;
 
 public class MapsterMapper : IAppMapper
 {
-    //public User MapToUserEntity(RequestRegisterUserJson request) => request.Adapt<User>();
-    public TDestination Map<TDestination>(object source) => source.Adapt<TDestination>();
+    private readonly TypeAdapterConfig _config;
+
+    public MapsterMapper(TypeAdapterConfig config)
+    {
+        _config = config;
+    }
+
+    public TDestination Map<TDestination>(object source)
+    {
+        return source.Adapt<TDestination>(_config);
+    }
 }

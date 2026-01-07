@@ -16,11 +16,11 @@ public class ExceptionFilter : IExceptionFilter
             ThrowUnknownException(context);
     }
 
-    private static void HandleProjectException(UserAnimeListException myRecipeBookException,ExceptionContext context)
+    private static void HandleProjectException(UserAnimeListException userAnimeListException,ExceptionContext context)
     {
         
-        context.HttpContext.Response.StatusCode = (int)myRecipeBookException.GetStatusCode();
-        context.Result = new ObjectResult(new ResponseErrorJson(myRecipeBookException.GetErrorMessages()));
+        context.HttpContext.Response.StatusCode = (int)userAnimeListException.GetStatusCode();
+        context.Result = new ObjectResult(new ResponseErrorJson(userAnimeListException.GetErrorMessages()));
     }
     
     private static void ThrowUnknownException(ExceptionContext context)

@@ -29,7 +29,7 @@ public class PasswordValidator<T> : PropertyValidator<T,string>
     {
         int charCount = 0;
         
-        if (password.Length < 8 && password.Length > 50)
+        if (password.Length is < 8 or > 50)
         {
             context.MessageFormatter.AppendArgument("ErrorMessage", ResourceMessagesException.INVALID_PASSWORD);
 

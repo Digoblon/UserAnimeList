@@ -16,12 +16,11 @@ public static class DependencyInjectionExtension
 
     private static void AddMapster(IServiceCollection services)
     {
-        var config = TypeAdapterConfig.GlobalSettings;
+        var config = new TypeAdapterConfig();
 
-        config.Scan(typeof(DependencyInjectionExtension).Assembly);
+        new MappingConfiguration().Register(config);
 
         services.AddSingleton(config);
-        
         services.AddScoped<IAppMapper, Services.Mapper.MapsterMapper>();
     }
 

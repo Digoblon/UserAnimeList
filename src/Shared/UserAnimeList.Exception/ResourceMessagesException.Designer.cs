@@ -132,11 +132,29 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid JSON format..
+        /// </summary>
+        public static string INVALID_JSON {
+            get {
+                return ResourceManager.GetString("INVALID_JSON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password must be between 6 - 50 characters long and contain at least three of the following: uppercase, lowercase, numbers and symbols...
         /// </summary>
         public static string INVALID_PASSWORD {
             get {
                 return ResourceManager.GetString("INVALID_PASSWORD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Request body is invalid or missing..
+        /// </summary>
+        public static string INVALID_REQUEST_BODY {
+            get {
+                return ResourceManager.GetString("INVALID_REQUEST_BODY", resourceCulture);
             }
         }
         

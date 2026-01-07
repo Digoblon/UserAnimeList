@@ -16,10 +16,10 @@ public class UserRepository : IUserRepository
     public async Task AddAsync(User user) => await _dbContext.Users.AddAsync(user);
     
 
-    public async Task<bool> ExistsActiveUserWithEmailAsync(string email)
+    public async Task<bool> ExistsActiveUserWithEmail(string email)
         => await _dbContext.Users.AnyAsync(u=>u.Email.Equals(email));
     
-    public async Task<bool> ExistsActiveUserWithUserNameAsync(string username)
+    public async Task<bool> ExistsActiveUserWithUserName(string username)
         => await _dbContext.Users.AnyAsync(u=>u.UserName.Equals(username));
     
 }

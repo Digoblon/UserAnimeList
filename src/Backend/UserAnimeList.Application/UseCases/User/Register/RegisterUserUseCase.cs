@@ -51,11 +51,11 @@ public class RegisterUserUseCase : IRegisterUserUseCase
         
         var result =  await validator.ValidateAsync(request);
         
-        var emailExist = await _userRepository.ExistsActiveUserWithEmailAsync(request.Email);
+        var emailExist = await _userRepository.ExistsActiveUserWithEmail(request.Email);
         if(emailExist)
             result.Errors.Add(new ValidationFailure(string.Empty, ResourceMessagesException.EMAIL_ALREADY_REGISTERED));
         
-        var userNameExist = await _userRepository.ExistsActiveUserWithUserNameAsync(request.UserName);
+        var userNameExist = await _userRepository.ExistsActiveUserWithUserName(request.UserName);
         if(userNameExist)
             result.Errors.Add(new ValidationFailure(string.Empty, ResourceMessagesException.USERNAME_ALREADY_REGISTERED));
             
