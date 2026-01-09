@@ -168,11 +168,29 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your username or password is incorrect..
+        /// </summary>
+        public static string LOGIN_OR_PASSWORD_INVALID {
+            get {
+                return ResourceManager.GetString("LOGIN_OR_PASSWORD_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The name cannot be empty..
         /// </summary>
         public static string NAME_EMPTY {
             get {
                 return ResourceManager.GetString("NAME_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter a valid username (letters, numbers, underscores and dashes only)..
+        /// </summary>
+        public static string NAME_INVALID_FORMAT {
+            get {
+                return ResourceManager.GetString("NAME_INVALID_FORMAT", resourceCulture);
             }
         }
         

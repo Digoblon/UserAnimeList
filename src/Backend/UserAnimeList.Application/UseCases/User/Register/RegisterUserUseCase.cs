@@ -5,6 +5,7 @@ using UserAnimeList.Communication.Responses;
 using UserAnimeList.Domain.Repositories;
 using UserAnimeList.Domain.Repositories.User;
 using UserAnimeList.Domain.Security.Cryptography;
+using UserAnimeList.Domain.Security.Tokens;
 using UserAnimeList.Exception;
 using UserAnimeList.Exception.Exceptions;
 
@@ -16,32 +17,39 @@ public class RegisterUserUseCase : IRegisterUserUseCase
     private readonly IPasswordEncrypter _passwordEncrypter;
     private readonly IUserRepository _userRepository;
     private readonly IUnitOfWork _unitOfWork;
+    private readonly IAccessTokenGenerator _accessTokenGenerator;
 
     public RegisterUserUseCase(IAppMapper mapper, 
         IPasswordEncrypter passwordEncrypter,
         IUserRepository userRepository,
-        IUnitOfWork unitOfWork)
+        IUnitOfWork unitOfWork,
+        IAccessTokenGenerator accessTokenGenerator)
     
     {
         _mapper = mapper;
         _passwordEncrypter = passwordEncrypter;
         _unitOfWork = unitOfWork;
         _userRepository = userRepository;
+        _accessTokenGenerator = accessTokenGenerator;
     }
-    public async Task<ResponseRegisterUser> Execute(RequestRegisterUserJson request)
+    public async Task<ResponseRegisteredUserJson> Execute(RequestRegisterUserJson request)
     {
         await Validate(request);
 
         var user = _mapper.Map<Domain.Entities.User>(request);
         user.Password = _passwordEncrypter.Encrypt(request.Password);
 
-        await _userRepository.AddAsync(user);
+        await _userRepository.Add(user);
 
         await _unitOfWork.Commit();
 
-        return new ResponseRegisterUser
+        return new ResponseRegisteredUserJson
         {
-            UserName = request.UserName
+            UserName = request.UserName,
+            Tokens = new ResponseTokensJson
+            {
+                AccessToken = _accessTokenGenerator.Generate(user.Id)
+            }
         };
     }
 

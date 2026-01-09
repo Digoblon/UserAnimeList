@@ -15,11 +15,12 @@ public class UserRepositoryBuilder
         _repository.Setup(repository => repository.ExistsActiveUserWithEmail(email)).ReturnsAsync(true);
     }
     
-    /*
-    public void GetByEmail(User user)
+    
+    public void GetByLogin(User user, string login)
     {
-        _repository.Setup(repository => repository.GetB(user.Email)).ReturnsAsync(user);
-    }*/
+        
+        _repository.Setup(repository => repository.GetByLogin(login)).ReturnsAsync(user);
+    }
     
     public IUserRepository Build() =>  _repository.Object;
 }

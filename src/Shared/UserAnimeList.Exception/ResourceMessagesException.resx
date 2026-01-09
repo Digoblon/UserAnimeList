@@ -78,4 +78,10 @@
   <data name="INVALID_REQUEST_BODY" xml:space="preserve">
     <value>Request body is invalid or missing.</value>
   </data>
+  <data name="NAME_INVALID_FORMAT" xml:space="preserve">
+    <value>Please enter a valid username (letters, numbers, underscores and dashes only).</value>
+  </data>
+  <data name="LOGIN_OR_PASSWORD_INVALID" xml:space="preserve">
+    <value>Your username or password is incorrect.</value>
+  </data>
 </root>

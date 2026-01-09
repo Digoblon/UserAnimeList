@@ -4,7 +4,6 @@ using Scalar.AspNetCore;
 using UserAnimeList.Application;
 using UserAnimeList.Communication.Responses;
 using UserAnimeList.Exception;
-using UserAnimeList.Filters;
 using UserAnimeList.Infrastructure;
 using UserAnimeList.Middleware;
 
@@ -46,7 +45,6 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.AddSwaggerGen();
 
-//builder.Services.AddMvc(options =>options.Filters.Add<ExceptionFilter>());
 
 builder.Services.AddApplication(builder.Configuration);
 builder.Services.AddInfrastructure(builder.Configuration);

@@ -2,6 +2,7 @@ using CommonTestUtilities.Cryptography;
 using CommonTestUtilities.Mapper;
 using CommonTestUtilities.Repositories;
 using CommonTestUtilities.Requests;
+using CommonTestUtilities.Tokens;
 using UserAnimeList.Application.UseCases.User.Register;
 using UserAnimeList.Domain.Extensions;
 using UserAnimeList.Exception;
@@ -77,14 +78,14 @@ public class RegisterUserUseCaseTest
         var unitOfWork = UnitOfWorkBuilder.Build();
         var userRepositoryBuilder = new UserRepositoryBuilder();
         var userRepository = userRepositoryBuilder.Build();
-        //var accessTokenGenerator = JwtTokenGeneratorBuilder.Build();
+        var accessTokenGenerator = JwtTokenGeneratorBuilder.Build();
         //var refreshTokenGenerator = RefreshTokenGeneratorBuilder.Build();
         //var tokenRepository = new TokenRepositoryBuilder().Build();
 
         if (email.NotEmpty())
             userRepositoryBuilder.ExistActiveUserWithEmail(email);
 
-        return new RegisterUserUseCase(mapper, passwordEncrypter,userRepository, unitOfWork );
+        return new RegisterUserUseCase(mapper, passwordEncrypter,userRepository, unitOfWork,accessTokenGenerator);
 
     }
 }
