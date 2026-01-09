@@ -13,7 +13,7 @@ public class UserRepository : IUserRepository
         _dbContext = dbContext;
     }
     
-    public async Task AddAsync(User user) => await _dbContext.Users.AddAsync(user);
+    public async Task Add(User user) => await _dbContext.Users.AddAsync(user);
     
 
     public async Task<bool> ExistsActiveUserWithEmail(string email)
@@ -21,5 +21,17 @@ public class UserRepository : IUserRepository
     
     public async Task<bool> ExistsActiveUserWithUserName(string username)
         => await _dbContext.Users.AnyAsync(u=>u.UserName.Equals(username));
-    
+
+    public async Task<User?> GetByLogin(string login)
+    {
+        
+        if (login.Contains('@'))
+        {
+            return await _dbContext.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Email.Equals(login) && u.IsActive);
+        }
+        else
+        {
+            return await _dbContext.Users.AsNoTracking().FirstOrDefaultAsync(u => u.UserName.Equals(login) &&  u.IsActive);
+        }
+    }
 }

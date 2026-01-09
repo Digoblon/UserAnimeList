@@ -5,5 +5,5 @@ namespace UserAnimeList.Application.UseCases.User.Register;
 
 public interface IRegisterUserUseCase
 {
-    public Task<ResponseRegisterUser> Execute(RequestRegisterUserJson request);
+    public Task<ResponseRegisteredUserJson> Execute(RequestRegisterUserJson request);
 }

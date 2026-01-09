@@ -2,6 +2,7 @@ using Mapster;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using UserAnimeList.Application.Services.Mapper;
+using UserAnimeList.Application.UseCases.Login.DoLogin;
 using UserAnimeList.Application.UseCases.User.Register;
 
 namespace UserAnimeList.Application;
@@ -27,5 +28,6 @@ public static class DependencyInjectionExtension
     private static void AddUseCases(IServiceCollection services)
     {
         services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
+        services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
     }
 }
