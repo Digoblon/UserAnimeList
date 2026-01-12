@@ -1,0 +1,56 @@
+using FluentValidation.Results;
+using UserAnimeList.Communication.Requests;
+using UserAnimeList.Domain.Repositories;
+using UserAnimeList.Domain.Repositories.User;
+using UserAnimeList.Domain.Security.Cryptography;
+using UserAnimeList.Domain.Services.LoggedUser;
+using UserAnimeList.Exception;
+using UserAnimeList.Exception.Exceptions;
+
+namespace UserAnimeList.Application.UseCases.User.ChangePassword;
+
+public class ChangePasswordUseCase : IChangePasswordUseCase
+{
+    private readonly ILoggedUser _loggedUser;
+    private readonly IUserRepository _repository;
+    private readonly IUnitOfWork _unitOfWork;
+    private readonly IPasswordEncrypter _passwordEncrypter;
+        
+    public ChangePasswordUseCase(ILoggedUser loggedUser,IUserRepository repository, IUnitOfWork unitOfWork,IPasswordEncrypter passwordEncrypter)
+    {
+        _loggedUser = loggedUser;
+        _repository = repository;
+        _unitOfWork = unitOfWork;
+        _passwordEncrypter = passwordEncrypter;
+    }
+
+    public async Task Execute(RequestChangePasswordJson request)
+    {
+        var user = await _loggedUser.User();
+        
+        Validate(request, user);
+        
+        user.Password = _passwordEncrypter.Encrypt(request.NewPassword);
+        
+        _repository.Update(user);
+        
+        await _unitOfWork.Commit();
+        
+        
+    }
+
+    private void Validate(RequestChangePasswordJson request, Domain.Entities.User loggedUser)
+    {
+        var result = new ChangePasswordValidator().Validate(request);
+        
+        
+        if(request.NewPassword != request.ConfirmNewPassword)
+            result.Errors.Add(new ValidationFailure(string.Empty, ResourceMessagesException.PASSWORDS_NOT_MATCH));
+        
+        if(!_passwordEncrypter.IsValid(request.Password,loggedUser.Password))
+            result.Errors.Add(new ValidationFailure(string.Empty,ResourceMessagesException.PASSWORD_DIFFERENT_CURRENT_PASSWORD));
+
+        if (!result.IsValid)
+            throw new ErrorOnValidationException(result.Errors.Select(e => e.ErrorMessage).ToList());
+    }
+}

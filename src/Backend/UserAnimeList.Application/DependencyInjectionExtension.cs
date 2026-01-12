@@ -3,8 +3,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using UserAnimeList.Application.Services.Mapper;
 using UserAnimeList.Application.UseCases.Login.DoLogin;
+using UserAnimeList.Application.UseCases.User.ChangePassword;
 using UserAnimeList.Application.UseCases.User.Profile;
 using UserAnimeList.Application.UseCases.User.Register;
+using UserAnimeList.Application.UseCases.User.Update;
 
 namespace UserAnimeList.Application;
 
@@ -31,5 +33,7 @@ public static class DependencyInjectionExtension
         services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
         services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
         services.AddScoped<IGetUserProfileUseCase, GetUserProfileUseCase>();
+        services.AddScoped<IUpdateUserUseCase, UpdateUserUseCase>();
+        services.AddScoped<IChangePasswordUseCase, ChangePasswordUseCase>();
     }
 }
