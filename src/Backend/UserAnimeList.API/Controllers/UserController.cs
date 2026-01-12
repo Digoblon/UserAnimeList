@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
+using UserAnimeList.Application.UseCases.User.Profile;
 using UserAnimeList.Application.UseCases.User.Register;
+using UserAnimeList.Attributes;
 using UserAnimeList.Communication.Requests;
+using UserAnimeList.Communication.Responses;
 
 namespace UserAnimeList.Controllers
 {
@@ -16,5 +19,17 @@ namespace UserAnimeList.Controllers
             
             return Created(string.Empty, result);
         }
+        
+        [HttpGet]
+        [ProducesResponseType(typeof(ResponseUserProfileJson), StatusCodes.Status200OK)]
+        [AuthenticatedUser]
+        public async Task<IActionResult> GetUserProfile([FromServices] IGetUserProfileUseCase useCase)
+        {
+            var result = await useCase.Execute();
+            
+            return Ok(result);
+        }
     }
+    
+    
 }

@@ -17,8 +17,6 @@ builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options => 
 {
-    //options.OperationFilter<IdsFilter>();
-    
     options.AddSecurityDefinition(AUTHENTICATION_TYPE, new OpenApiSecurityScheme {
         Type = SecuritySchemeType.ApiKey,
         In = ParameterLocation.Header,
@@ -45,9 +43,10 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.AddSwaggerGen();
 
-
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddApplication(builder.Configuration);
 builder.Services.AddInfrastructure(builder.Configuration);
+
 //builder.Services.AddScoped<ITokenProvider, HttpContextTokenValue>();
 
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
