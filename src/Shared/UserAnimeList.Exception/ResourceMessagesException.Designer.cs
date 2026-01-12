@@ -231,6 +231,15 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The passwords does not match..
+        /// </summary>
+        public static string PASSWORDS_NOT_MATCH {
+            get {
+                return ResourceManager.GetString("PASSWORDS_NOT_MATCH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unknown error..
         /// </summary>
         public static string UNKNOWN_ERROR {
