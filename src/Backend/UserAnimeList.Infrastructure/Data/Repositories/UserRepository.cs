@@ -14,13 +14,23 @@ public class UserRepository : IUserRepository
     }
     
     public async Task Add(User user) => await _dbContext.Users.AddAsync(user);
-    
+    public async Task<User?> GetById(Guid id)
+    {
+        return await _dbContext
+            .Users
+            .AsNoTracking()
+            .FirstAsync(u => u.Id == id);
+    }
+
 
     public async Task<bool> ExistsActiveUserWithEmail(string email)
         => await _dbContext.Users.AnyAsync(u=>u.Email.Equals(email));
     
     public async Task<bool> ExistsActiveUserWithUserName(string username)
         => await _dbContext.Users.AnyAsync(u=>u.UserName.Equals(username));
+
+    public Task<bool> ExistActiveUserWithId(Guid id)
+        =>  _dbContext.Users.AnyAsync(u => u.Id.Equals(id) && u.IsActive);
 
     public async Task<User?> GetByLogin(string login)
     {

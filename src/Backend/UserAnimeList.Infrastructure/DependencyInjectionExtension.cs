@@ -1,16 +1,19 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Http;
 using UserAnimeList.Domain.Repositories;
 using UserAnimeList.Domain.Repositories.User;
 using UserAnimeList.Domain.Security.Cryptography;
 using UserAnimeList.Domain.Security.Tokens;
+using UserAnimeList.Domain.Services.LoggedUser;
 using UserAnimeList.Infrastructure.Data;
 using UserAnimeList.Infrastructure.Data.Repositories;
 using UserAnimeList.Infrastructure.Extensions;
 using UserAnimeList.Infrastructure.Security.Cryptography;
 using UserAnimeList.Infrastructure.Security.Tokens.Access.Generator;
 using UserAnimeList.Infrastructure.Security.Tokens.Access.Validator;
+using UserAnimeList.Infrastructure.Services.LoggedUser;
 
 namespace UserAnimeList.Infrastructure;
 
@@ -47,7 +50,7 @@ public static class DependencyInjectionExtension
     {
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IUserRepository, UserRepository>();
-
+        services.AddScoped<ILoggedUser, LoggedUser>();
     } 
 
     private static void AddPasswordEncrypter(IServiceCollection services)
