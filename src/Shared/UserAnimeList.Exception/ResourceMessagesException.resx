@@ -84,4 +84,7 @@
   <data name="LOGIN_OR_PASSWORD_INVALID" xml:space="preserve">
     <value>Your username or password is incorrect.</value>
   </data>
+  <data name="PASSWORDS_NOT_MATCH" xml:space="preserve">
+    <value>The passwords does not match.</value>
+  </data>
 </root>

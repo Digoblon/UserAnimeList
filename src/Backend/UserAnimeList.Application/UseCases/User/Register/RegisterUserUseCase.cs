@@ -59,6 +59,9 @@ public class RegisterUserUseCase : IRegisterUserUseCase
         
         var result =  await validator.ValidateAsync(request);
         
+        if(request.Password != request.ConfirmPassword)
+            result.Errors.Add(new ValidationFailure(string.Empty, ResourceMessagesException.PASSWORDS_NOT_MATCH));
+        
         var emailExist = await _userRepository.ExistsActiveUserWithEmail(request.Email);
         if(emailExist)
             result.Errors.Add(new ValidationFailure(string.Empty, ResourceMessagesException.EMAIL_ALREADY_REGISTERED));
