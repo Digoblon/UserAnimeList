@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
+using UserAnimeList.Application.UseCases.User.ChangePassword;
 using UserAnimeList.Application.UseCases.User.Profile;
 using UserAnimeList.Application.UseCases.User.Register;
+using UserAnimeList.Application.UseCases.User.Update;
 using UserAnimeList.Attributes;
 using UserAnimeList.Communication.Requests;
 using UserAnimeList.Communication.Responses;
@@ -28,6 +30,30 @@ namespace UserAnimeList.Controllers
             var result = await useCase.Execute();
             
             return Ok(result);
+        }
+        
+        [HttpPut]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        [AuthenticatedUser]
+        public async Task<IActionResult> Update([FromServices] IUpdateUserUseCase useCase,
+            [FromBody] RequestUpdateUserJson request)
+        {
+            await useCase.Execute(request);
+            
+            return NoContent();
+        }
+        
+        [HttpPut("change-password")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        [AuthenticatedUser]
+        public async Task<IActionResult> ChangePassword([FromServices] IChangePasswordUseCase useCase,
+            [FromBody] RequestChangePasswordJson request)
+        {
+            await useCase.Execute(request);
+            
+            return NoContent();
         }
     }
     
