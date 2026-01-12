@@ -7,7 +7,7 @@ using WebApi.Test.InlineData;
 
 namespace WebApi.Test.User.Register;
 
-public class RegisterUserTest : UserAnimeLIstClassFixture
+public class RegisterUserTest : UserAnimeListClassFixture
 {
     private readonly string method = "user";
     public RegisterUserTest(CustomWebApplicationFactory factory) : base(factory) { }
@@ -54,7 +54,7 @@ public class RegisterUserTest : UserAnimeLIstClassFixture
         var expectedMessage = ResourceMessagesException.ResourceManager.GetString("NAME_EMPTY", new CultureInfo(culture));
         
         Assert.Single(errors);
-        Assert.Equal(errors.First().ToString(), expectedMessage);
+        Assert.Equal(expectedMessage,errors.First().ToString());
         //errors.Should().ContainSingle().And.Contain(error => error.GetString()!.Equals(expectedMessage));
     }
 }

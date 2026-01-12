@@ -8,7 +8,7 @@ using WebApi.Test.InlineData;
 
 namespace WebApi.Test.User.Login.DoLogin;
 
-public class DoLoginTest : UserAnimeLIstClassFixture
+public class DoLoginTest : UserAnimeListClassFixture
 {
     private readonly string method = "login";
     

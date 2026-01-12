@@ -3,11 +3,11 @@ using System.Net.Http.Json;
 
 namespace WebApi.Test;
 
-public class UserAnimeLIstClassFixture: IClassFixture<CustomWebApplicationFactory>
+public class UserAnimeListClassFixture: IClassFixture<CustomWebApplicationFactory>
 {
     private readonly HttpClient _httpClient;
 
-    public UserAnimeLIstClassFixture(CustomWebApplicationFactory  factory) => _httpClient = factory.CreateClient();
+    public UserAnimeListClassFixture(CustomWebApplicationFactory  factory) => _httpClient = factory.CreateClient();
     
     protected async Task<HttpResponseMessage> DoPost(string method, object request,string token = "", string culture = "en")
     {
@@ -16,6 +16,15 @@ public class UserAnimeLIstClassFixture: IClassFixture<CustomWebApplicationFactor
         
         return await _httpClient.PostAsJsonAsync(method,request);
     }
+
+    protected async Task<HttpResponseMessage> DoGet(string method, string token = "", string culture = "en")
+    {
+        ChangeRequestCulture(culture);
+        AuthorizeRequest(token);
+        
+        return await _httpClient.GetAsync(method);
+    }
+    
     
     private void ChangeRequestCulture(string culture)
     {
