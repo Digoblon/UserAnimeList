@@ -46,6 +46,7 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
     public string GetPassword() => _password;
     public string GetUserName() => _user.UserName;
     public Guid GetId() => _user.Id;
+    public int GetTokenVersion() => _user.TokenVersion;
 
 
     private void StartDatabase(UserAnimeListDbContext dbContext)

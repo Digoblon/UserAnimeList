@@ -27,38 +27,60 @@ public class AuthenticatedUserFilter : IAsyncAuthorizationFilter
         try
         {
             var token = TokenOnRequest(context);
-            var id = _accessTokenValidator.ValidateAndGetId(token);
-            var exist = await _repository.ExistActiveUserWithId(id);
+            var tokenData = _accessTokenValidator.Validate(token);
 
-            if (!exist)
-                throw new UnauthorizedException(ResourceMessagesException.USER_WITHOUT_PERMISSION_ACCESS_RESOURCE);
-            
-            context.HttpContext.Items[UserIdKey] = id;
+            var user = await _repository.GetById(tokenData.UserId);
+
+            if (user is null || !user.IsActive)
+                throw new UnknownUserException(ResourceMessagesException.NO_ACCESS);
+
+            if (user.TokenVersion != tokenData.TokenVersion)
+                throw new SecurityTokenException(ResourceMessagesException.WRONG_TOKEN_VERSION);
+
+            context.HttpContext.Items[UserIdKey] = user.Id;
         }
         catch (SecurityTokenExpiredException)
         {
-            context.Result = new UnauthorizedObjectResult(new ResponseErrorJson("Token is expired")
+            context.Result = new UnauthorizedObjectResult(new ResponseErrorJson(ResourceMessagesException.TOKEN_EXPIRED)
             {
                 TokenIsExpired = true
             });
         }
+        catch (SecurityTokenException)
+        {
+            context.Result =
+                new UnauthorizedObjectResult(new ResponseErrorJson(ResourceMessagesException.INVALID_TOKEN));
+        }
+        catch (SecurityTokenMalformedException)
+        {
+            context.Result =
+                new UnauthorizedObjectResult(new ResponseErrorJson(ResourceMessagesException.INVALID_TOKEN));
+        }
         catch (UserAnimeListException ex)
         {
-            context.Result = new UnauthorizedObjectResult(new ResponseErrorJson(ex.Message));
-        }
-        catch
-        {
-            context.Result = new UnauthorizedObjectResult(new ResponseErrorJson(ResourceMessagesException.USER_WITHOUT_PERMISSION_ACCESS_RESOURCE));
+            context.Result = new UnauthorizedObjectResult(new ResponseErrorJson(ex.Message))
+            {
+                StatusCode = (int)ex.GetStatusCode()
+            };
         }
 
     }
 
     private static string TokenOnRequest(AuthorizationFilterContext context)
     {
-        var authentication = context.HttpContext.Request.Headers.Authorization.ToString();
-        if (string.IsNullOrWhiteSpace(authentication))
+        if (!context.HttpContext.Request.Headers.TryGetValue("Authorization", out var authorizationHeader))
             throw new UnauthorizedException(ResourceMessagesException.NO_TOKEN);
 
-        return authentication["Bearer ".Length..].Trim();
+        var authorization = authorizationHeader.ToString();
+
+        if (!authorization.StartsWith("Bearer ", StringComparison.OrdinalIgnoreCase))
+            throw new UnauthorizedException(ResourceMessagesException.INVALID_TOKEN);
+
+        var token = authorization["Bearer ".Length..].Trim();
+
+        if (string.IsNullOrWhiteSpace(token))
+            throw new UnauthorizedException(ResourceMessagesException.INVALID_TOKEN);
+
+        return token;
     }
 }

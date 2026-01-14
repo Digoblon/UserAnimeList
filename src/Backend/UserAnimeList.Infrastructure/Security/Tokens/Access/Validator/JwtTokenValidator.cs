@@ -12,23 +12,30 @@ public class JwtTokenValidator: JwtTokenHandler,IAccessTokenValidator
     
     public JwtTokenValidator(string signingKey) => _signingKey = signingKey;
 
-    public Guid ValidateAndGetId(string token)
+    public AccessTokenData Validate(string token)
     {
         var validationParameters = new TokenValidationParameters()
         {
             ValidateAudience = false,
             ValidateIssuer = false,
             IssuerSigningKey = SecurityKey(_signingKey),
-            ClockSkew = new TimeSpan(0)
+            ClockSkew = TimeSpan.Zero
         };
 
         var tokenHandler = new JwtSecurityTokenHandler();
 
         var principal = tokenHandler.ValidateToken(token, validationParameters, out _);
 
-        var id = principal.Claims.First(c => c.Type == ClaimTypes.NameIdentifier).Value;
+        var userId = Guid.Parse(
+            principal.Claims.First(c => c.Type == ClaimTypes.NameIdentifier).Value
+        );
+
+        var tokenVersion = int.Parse(
+            principal.Claims.First(c => c.Type == "token_version").Value
+        );
         
-        return Guid.Parse(id);
+        
+        return new AccessTokenData(userId, tokenVersion);
     }
     
 }

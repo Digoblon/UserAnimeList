@@ -17,6 +17,7 @@ public class ChangePasswordUseCaseTest
     public async Task Success()
     {
         (var user, var password) = UserBuilder.Build();
+        var oldTokenVersion = user.TokenVersion;
 
         var request = RequestChangePasswordJsonBuilder.Build();
         request.Password = password;
@@ -26,6 +27,9 @@ public class ChangePasswordUseCaseTest
         Func<Task> act = async () => await useCase.Execute(request);
 
         await act();
+        var newTokenVersion = user.TokenVersion;
+        
+        Assert.NotEqual(oldTokenVersion, newTokenVersion);
     }
 
     [Fact]

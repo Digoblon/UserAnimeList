@@ -40,15 +40,17 @@ public class ChangePasswordUseCase : IChangePasswordUseCase
         
         user.Password = _passwordEncrypter.Encrypt(request.NewPassword);
         
+        user.IncrementTokenVersion();
+        
         _repository.Update(user);
         
         await _unitOfWork.Commit();
-
+        
         return new ResponseChangePasswordJson
         {
             Tokens = new ResponseTokensJson 
             {
-                AccessToken = _accessTokenGenerator.Generate(user.Id)
+                AccessToken = _accessTokenGenerator.Generate(user.Id, user.TokenVersion)
             }
         };
     }

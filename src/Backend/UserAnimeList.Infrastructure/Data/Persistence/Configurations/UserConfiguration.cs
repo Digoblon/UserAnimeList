@@ -26,5 +26,8 @@ public class UserConfiguration : BaseEntityConfiguration<User>
             .IsRequired()
             .HasMaxLength(256);
 
+        builder.Property(u => u.TokenVersion)
+            .IsRequired();
+
     }
 }

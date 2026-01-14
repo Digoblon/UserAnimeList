@@ -7,7 +7,12 @@ public class GetUserProfileInvalidTokenTest : UserAnimeListClassFixture
 {
     private readonly string METHOD = "user";
     
-    public GetUserProfileInvalidTokenTest(CustomWebApplicationFactory factory) : base(factory) { }
+    private readonly Guid _id;
+
+    public GetUserProfileInvalidTokenTest(CustomWebApplicationFactory factory) : base(factory)
+    {
+        _id = factory.GetId();
+    }
     
     [Fact]
     public async Task Error_Token_Invalid()
@@ -28,7 +33,17 @@ public class GetUserProfileInvalidTokenTest : UserAnimeListClassFixture
     [Fact]
     public async Task Error_Token_With_User_NotFound()
     {
-        var token = JwtTokenGeneratorBuilder.Build().Generate(Guid.NewGuid());
+        var token = JwtTokenGeneratorBuilder.Build().Generate(Guid.NewGuid(), 1);
+        
+        var response = await DoGet(METHOD, token: token);
+        
+        Assert.Equal(HttpStatusCode.Forbidden,response.StatusCode);
+    }
+
+    [Fact]
+    public async Task Error_Token_Version_Mismatch()
+    {
+        var token = JwtTokenGeneratorBuilder.Build().Generate(_id, 0);
         
         var response = await DoGet(METHOD, token: token);
         
