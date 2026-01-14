@@ -8,10 +8,11 @@ public partial class RequestRegisterUserJsonBuilder
 {
     public static RequestRegisterUserJson Build(int passwordLength = 10)
     {
-        var request =  new Faker<RequestRegisterUserJson>()
+        var request = new Faker<RequestRegisterUserJson>()
             .RuleFor(user => user.UserName, (f) => SanitizeUserName(f.Internet.UserName()))
             .RuleFor(user => user.Email, (f, u) => f.Internet.Email(u.UserName))
-            .RuleFor(user => user.Password, _ => PasswordGenerator.GenerateValid(passwordLength));
+            .RuleFor(user => user.Password, _ => PasswordGenerator.GenerateValid(passwordLength))
+            .RuleFor(u => u.ConfirmPassword, (_, u) => u.Password);
 
         return request;
     }

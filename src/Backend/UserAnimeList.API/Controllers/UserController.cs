@@ -45,7 +45,7 @@ namespace UserAnimeList.Controllers
         }
         
         [HttpPut("change-password")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         [AuthenticatedUser]
         public async Task<IActionResult> ChangePassword([FromServices] IChangePasswordUseCase useCase,
