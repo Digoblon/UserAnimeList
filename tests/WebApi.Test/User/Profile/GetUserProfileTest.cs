@@ -11,6 +11,7 @@ public class GetUserProfileTest : UserAnimeListClassFixture
     private readonly string _email;
     private readonly string _userName;
     private readonly Guid _id;
+    private readonly int _tokenVersion;
 
 
     public GetUserProfileTest(CustomWebApplicationFactory factory) : base(factory)
@@ -18,12 +19,13 @@ public class GetUserProfileTest : UserAnimeListClassFixture
         _email = factory.GetEmail();
         _userName = factory.GetUserName();
         _id = factory.GetId();
+        _tokenVersion = factory.GetTokenVersion();
     }
 
     [Fact]
     public async Task Success()
     {
-        var token = JwtTokenGeneratorBuilder.Build().Generate(_id);
+        var token = JwtTokenGeneratorBuilder.Build().Generate(_id, _tokenVersion);
         
         var response = await DoGet(METHOD, token: token);
 

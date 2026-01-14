@@ -16,11 +16,12 @@ public class ChangePasswordTest : UserAnimeListClassFixture
     private readonly Guid _id;
     private readonly string _email;
     private readonly string _password;
-
+    private readonly int _tokenVersion;
 
     public ChangePasswordTest(CustomWebApplicationFactory factory) : base(factory)
     {
         _id = factory.GetId();
+        _tokenVersion = factory.GetTokenVersion();
         _password = factory.GetPassword();
         _email = factory.GetEmail();
     }
@@ -31,7 +32,7 @@ public class ChangePasswordTest : UserAnimeListClassFixture
         var request = RequestChangePasswordJsonBuilder.Build();
         request.Password = _password;
         
-        var token = JwtTokenGeneratorBuilder.Build().Generate(_id);
+        var token = JwtTokenGeneratorBuilder.Build().Generate(_id, _tokenVersion);
         
         var response = await DoPut(METHOD, request, token);
 
@@ -71,7 +72,7 @@ public class ChangePasswordTest : UserAnimeListClassFixture
         };
         
         
-        var token = JwtTokenGeneratorBuilder.Build().Generate(_id);
+        var token = JwtTokenGeneratorBuilder.Build().Generate(_id, _tokenVersion);
         
         var response = await DoPut(METHOD, request,token,culture);
         

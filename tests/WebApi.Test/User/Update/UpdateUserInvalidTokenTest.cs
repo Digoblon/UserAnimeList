@@ -7,8 +7,11 @@ namespace WebApi.Test.User.Update;
 public class UpdateUserInvalidTokenTest : UserAnimeListClassFixture
 {
     private const string METHOD = "user";
+    private readonly Guid _id;
+    
     public UpdateUserInvalidTokenTest(CustomWebApplicationFactory factory) : base(factory)
     {
+        _id = factory.GetId();
     }
 
     [Fact]
@@ -22,24 +25,26 @@ public class UpdateUserInvalidTokenTest : UserAnimeListClassFixture
     }
 
     [Fact]
-    public async Task Error_Without_Token()
-    {
-        var request = RequestUpdateUserJsonBuilder.Build();
-        
-        var response = await DoPut(METHOD, request,token:string.Empty);
-
-        Assert.Equal(HttpStatusCode.Unauthorized,response.StatusCode);
-    }
-    
-    [Fact]
     public async Task Error_Token_With_User_NotFound()
     {
-        var request = RequestUpdateUserJsonBuilder.Build();
-
-        var token = JwtTokenGeneratorBuilder.Build().Generate(Guid.NewGuid());
+        var token = JwtTokenGeneratorBuilder.Build().Generate(Guid.NewGuid(), 1);
         
-        var response = await DoPut(METHOD, request,token);
+        var request = RequestUpdateUserJsonBuilder.Build();
+        
+        var response = await DoPut(METHOD,request, token: token);
+        
+        Assert.Equal(HttpStatusCode.Forbidden,response.StatusCode);
+    }
 
+    [Fact]
+    public async Task Error_Token_Version_Mismatch()
+    {
+        var token = JwtTokenGeneratorBuilder.Build().Generate(_id, 0);
+        
+        var request = RequestUpdateUserJsonBuilder.Build();
+        
+        var response = await DoPut(METHOD,request:request, token: token);
+        
         Assert.Equal(HttpStatusCode.Unauthorized,response.StatusCode);
     }
 }

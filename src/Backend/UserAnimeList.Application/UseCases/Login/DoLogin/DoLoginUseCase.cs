@@ -35,7 +35,7 @@ public class DoLoginUseCase : IDoLoginUseCase
             UserName = user.UserName,
             Tokens = new ResponseTokensJson
                 {   
-                    AccessToken = _accessTokenGenerator.Generate(user.Id)
+                    AccessToken = _accessTokenGenerator.Generate(user.Id, user.TokenVersion)
                 }
         };
     }

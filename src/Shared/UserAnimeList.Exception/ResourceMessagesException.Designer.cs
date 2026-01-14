@@ -168,6 +168,15 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Authentication token is invalid..
+        /// </summary>
+        public static string INVALID_TOKEN {
+            get {
+                return ResourceManager.GetString("INVALID_TOKEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Your username or password is incorrect..
         /// </summary>
         public static string LOGIN_OR_PASSWORD_INVALID {
@@ -195,7 +204,16 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Request don&apos;t have token..
+        ///   Looks up a localized string similar to User has no access..
+        /// </summary>
+        public static string NO_ACCESS {
+            get {
+                return ResourceManager.GetString("NO_ACCESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Authentication token was not provided..
         /// </summary>
         public static string NO_TOKEN {
             get {
@@ -240,11 +258,29 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Token expired..
+        /// </summary>
+        public static string TOKEN_EXPIRED {
+            get {
+                return ResourceManager.GetString("TOKEN_EXPIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unknown error..
         /// </summary>
         public static string UNKNOWN_ERROR {
             get {
                 return ResourceManager.GetString("UNKNOWN_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User not found in database..
+        /// </summary>
+        public static string USER_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("USER_NOT_FOUND", resourceCulture);
             }
         }
         
@@ -263,6 +299,15 @@ namespace UserAnimeList.Exception {
         public static string USERNAME_ALREADY_REGISTERED {
             get {
                 return ResourceManager.GetString("USERNAME_ALREADY_REGISTERED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Token version mismatch.
+        /// </summary>
+        public static string WRONG_TOKEN_VERSION {
+            get {
+                return ResourceManager.GetString("WRONG_TOKEN_VERSION", resourceCulture);
             }
         }
     }

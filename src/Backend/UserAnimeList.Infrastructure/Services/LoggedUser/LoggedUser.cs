@@ -22,7 +22,7 @@ public class LoggedUser : ILoggedUser
         _repository = repository;
     }
 
-    public async Task<User?> User()
+    public async Task<User> User()
     {
         var httpContext = _httpContextAccessor.HttpContext
                           ?? throw new UnauthorizedException(ResourceMessagesException.NO_TOKEN);
@@ -30,8 +30,15 @@ public class LoggedUser : ILoggedUser
         if (!httpContext.Items.TryGetValue(UserIdKey, out var value))
             throw new UnauthorizedException(ResourceMessagesException.NO_TOKEN);
 
-        var userId = (Guid)value;
+        if (value is not Guid userId)
+            throw new UnauthorizedException(ResourceMessagesException.NO_TOKEN);
+        
+        //var userId = (Guid)value;
 
-        return await _repository.GetById(userId);
+        var user = await _repository.GetById(userId)
+                   ?? throw new UnauthorizedException(ResourceMessagesException.USER_NOT_FOUND);
+
+        return user;
+            
     }
 }

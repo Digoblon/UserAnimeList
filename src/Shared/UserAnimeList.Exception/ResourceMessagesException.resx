@@ -54,9 +54,9 @@
     <data name="NAME_EMPTY" xml:space="preserve">
       <value>The name cannot be empty.</value>
     </data>
-    <data name="NO_TOKEN" xml:space="preserve">
-      <value>Request don't have token.</value>
-    </data>
+  <data name="NO_TOKEN" xml:space="preserve">
+    <value>Authentication token was not provided.</value>
+  </data>
     <data name="ONLY_IMAGES_ACCEPTED" xml:space="preserve">
       <value>Only images (PNG, JPG, JPEG) are accepted.</value>
     </data>
@@ -86,5 +86,20 @@
   </data>
   <data name="PASSWORDS_NOT_MATCH" xml:space="preserve">
     <value>The passwords does not match.</value>
+  </data>
+  <data name="INVALID_TOKEN" xml:space="preserve">
+    <value>Authentication token is invalid.</value>
+  </data>
+  <data name="TOKEN_EXPIRED" xml:space="preserve">
+    <value>Token expired.</value>
+  </data>
+  <data name="NO_ACCESS" xml:space="preserve">
+    <value>User has no access.</value>
+  </data>
+  <data name="USER_NOT_FOUND" xml:space="preserve">
+    <value>User not found in database.</value>
+  </data>
+  <data name="WRONG_TOKEN_VERSION" xml:space="preserve">
+    <value>Token version mismatch</value>
   </data>
 </root>

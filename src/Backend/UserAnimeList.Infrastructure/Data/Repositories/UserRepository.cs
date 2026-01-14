@@ -21,7 +21,7 @@ public class UserRepository : IUserRepository
         return await _dbContext
             .Users
             .AsNoTracking()
-            .FirstAsync(u => u.Id == id);
+            .FirstOrDefaultAsync(u => u.Id == id);
     }
 
 
