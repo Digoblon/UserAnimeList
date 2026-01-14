@@ -15,6 +15,11 @@ public class UserRepositoryBuilder
         _repository.Setup(repository => repository.ExistsActiveUserWithEmail(email)).ReturnsAsync(true);
     }
     
+    public UserRepositoryBuilder GetById(User user)
+    {
+        _repository.Setup(x=> x.GetById(user.Id)).ReturnsAsync(user);
+        return this;
+    }
     
     public void GetByLogin(User user, string login)
     {

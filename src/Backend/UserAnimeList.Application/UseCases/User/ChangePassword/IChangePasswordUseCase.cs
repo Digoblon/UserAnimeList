@@ -5,5 +5,5 @@ namespace UserAnimeList.Application.UseCases.User.ChangePassword;
 
 public interface IChangePasswordUseCase
 {
-    public Task<ResponseTokensJson> Execute(RequestChangePasswordJson request);
+    public Task<ResponseChangePasswordJson> Execute(RequestChangePasswordJson request);
 }

@@ -25,6 +25,14 @@ public class UserAnimeListClassFixture: IClassFixture<CustomWebApplicationFactor
         return await _httpClient.GetAsync(method);
     }
     
+    protected async Task<HttpResponseMessage> DoPut(string method,object request, string token = "", string culture = "en")
+    {
+        ChangeRequestCulture(culture);
+        AuthorizeRequest(token);
+        
+        return await _httpClient.PutAsJsonAsync(method, request);
+    }
+    
     
     private void ChangeRequestCulture(string culture)
     {

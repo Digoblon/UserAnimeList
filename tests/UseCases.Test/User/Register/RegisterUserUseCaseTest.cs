@@ -23,6 +23,7 @@ public class RegisterUserUseCaseTest
 
         Assert.NotNull(result);
         Assert.Equal(request.UserName, result.UserName);
+        Assert.Equal(request.Password,request.ConfirmPassword);
         
         //result.Should().NotBeNull();
         //result.Tokens.Should().NotBeNull();
@@ -68,6 +69,25 @@ public class RegisterUserUseCaseTest
 
         Assert.Single(errors);
         Assert.Contains(ResourceMessagesException.NAME_EMPTY, errors);
+        
+    }
+    
+    [Fact]
+    public async Task Error_Password_Not_Match()
+    {
+        var request = RequestRegisterUserJsonBuilder.Build();
+        request.ConfirmPassword = "1Aaaaaaa";
+        
+        var useCase = CreateUseCase();
+        
+        Func<Task> act = async ()  => await useCase.Execute(request);
+        
+        var exception = await Assert.ThrowsAsync<ErrorOnValidationException>(act);
+
+        var errors = exception.GetErrorMessages();
+
+        Assert.Single(errors);
+        Assert.Contains(ResourceMessagesException.PASSWORDS_NOT_MATCH, errors);
         
     }
 

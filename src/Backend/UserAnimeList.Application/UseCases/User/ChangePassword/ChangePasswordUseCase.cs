@@ -32,7 +32,7 @@ public class ChangePasswordUseCase : IChangePasswordUseCase
         _accessTokenGenerator = accessTokenGenerator;
     }
 
-    public async Task<ResponseTokensJson> Execute(RequestChangePasswordJson request)
+    public async Task<ResponseChangePasswordJson> Execute(RequestChangePasswordJson request)
     {
         var user = await _loggedUser.User();
         
@@ -44,9 +44,12 @@ public class ChangePasswordUseCase : IChangePasswordUseCase
         
         await _unitOfWork.Commit();
 
-        return new ResponseTokensJson
+        return new ResponseChangePasswordJson
         {
-            AccessToken = _accessTokenGenerator.Generate(user.Id)
+            Tokens = new ResponseTokensJson 
+            {
+                AccessToken = _accessTokenGenerator.Generate(user.Id)
+            }
         };
     }
 

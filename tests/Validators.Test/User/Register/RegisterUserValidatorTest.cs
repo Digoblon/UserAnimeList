@@ -159,4 +159,5 @@ public class RegisterUserValidatorTest
         Assert.Contains(ResourceMessagesException.PASSWORD_EMPTY, result.Errors.First().ErrorMessage);
         //result.Errors.Should().ContainSingle().And.Contain(e=> e.ErrorMessage.Equals(ResourceMessagesException.PASSWORD_EMPTY));
     }
+
 }
