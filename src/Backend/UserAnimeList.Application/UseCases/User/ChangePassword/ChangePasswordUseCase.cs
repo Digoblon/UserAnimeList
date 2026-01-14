@@ -1,8 +1,10 @@
 using FluentValidation.Results;
 using UserAnimeList.Communication.Requests;
+using UserAnimeList.Communication.Responses;
 using UserAnimeList.Domain.Repositories;
 using UserAnimeList.Domain.Repositories.User;
 using UserAnimeList.Domain.Security.Cryptography;
+using UserAnimeList.Domain.Security.Tokens;
 using UserAnimeList.Domain.Services.LoggedUser;
 using UserAnimeList.Exception;
 using UserAnimeList.Exception.Exceptions;
@@ -15,16 +17,22 @@ public class ChangePasswordUseCase : IChangePasswordUseCase
     private readonly IUserRepository _repository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IPasswordEncrypter _passwordEncrypter;
+    private readonly IAccessTokenGenerator _accessTokenGenerator;
         
-    public ChangePasswordUseCase(ILoggedUser loggedUser,IUserRepository repository, IUnitOfWork unitOfWork,IPasswordEncrypter passwordEncrypter)
+    public ChangePasswordUseCase(ILoggedUser loggedUser,
+        IUserRepository repository, 
+        IUnitOfWork unitOfWork,
+        IPasswordEncrypter passwordEncrypter,  
+        IAccessTokenGenerator accessTokenGenerator)
     {
         _loggedUser = loggedUser;
         _repository = repository;
         _unitOfWork = unitOfWork;
         _passwordEncrypter = passwordEncrypter;
+        _accessTokenGenerator = accessTokenGenerator;
     }
 
-    public async Task Execute(RequestChangePasswordJson request)
+    public async Task<ResponseTokensJson> Execute(RequestChangePasswordJson request)
     {
         var user = await _loggedUser.User();
         
@@ -35,8 +43,11 @@ public class ChangePasswordUseCase : IChangePasswordUseCase
         _repository.Update(user);
         
         await _unitOfWork.Commit();
-        
-        
+
+        return new ResponseTokensJson
+        {
+            AccessToken = _accessTokenGenerator.Generate(user.Id)
+        };
     }
 
     private void Validate(RequestChangePasswordJson request, Domain.Entities.User loggedUser)

@@ -51,9 +51,9 @@ namespace UserAnimeList.Controllers
         public async Task<IActionResult> ChangePassword([FromServices] IChangePasswordUseCase useCase,
             [FromBody] RequestChangePasswordJson request)
         {
-            await useCase.Execute(request);
+            var result = await useCase.Execute(request);
             
-            return NoContent();
+            return Ok(result);
         }
     }
     
