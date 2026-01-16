@@ -26,16 +26,17 @@ public class DoLoginUseCaseTest
         var result = await useCase.Execute(login);
         
         Assert.NotNull(result);
-        //result.Should().NotBeNull();
-        Assert.NotNull(result.Tokens);
-        //result.Tokens.Should().NotBeNull();
+        
         Assert.NotNull(result.UserName);
         Assert.NotEmpty(result.UserName);
         Assert.Equal(result.UserName, user.UserName);
-        //result.Name.Should().NotBeNullOrWhiteSpace().And.Be(user.Name);
+        
+        Assert.NotNull(result.Tokens);
         Assert.NotNull(result.Tokens.AccessToken);
         Assert.NotEmpty(result.Tokens.AccessToken);
-        //result.Tokens.AccessToken.Should().NotBeNullOrEmpty();
+        
+        Assert.NotNull(result.Tokens.RefreshToken);
+        Assert.NotEmpty(result.Tokens.RefreshToken);
     }
     
     [Fact]
@@ -52,16 +53,17 @@ public class DoLoginUseCaseTest
         var result = await useCase.Execute(login);
         
         Assert.NotNull(result);
-        //result.Should().NotBeNull();
-        Assert.NotNull(result.Tokens);
-        //result.Tokens.Should().NotBeNull();
+        
         Assert.NotNull(result.UserName);
         Assert.NotEmpty(result.UserName);
         Assert.Equal(result.UserName, user.UserName);
-        //result.Name.Should().NotBeNullOrWhiteSpace().And.Be(user.Name);
+        
+        Assert.NotNull(result.Tokens);
         Assert.NotNull(result.Tokens.AccessToken);
         Assert.NotEmpty(result.Tokens.AccessToken);
-        //result.Tokens.AccessToken.Should().NotBeNullOrEmpty();
+        
+        Assert.NotNull(result.Tokens.RefreshToken);
+        Assert.NotEmpty(result.Tokens.RefreshToken);
     }
 
     [Fact]
@@ -85,13 +87,13 @@ public class DoLoginUseCaseTest
         var userRepositoryBuilder = new UserRepositoryBuilder();
         var userRepository = userRepositoryBuilder.Build();
         var accessTokenGenerator = JwtTokenGeneratorBuilder.Build();
-        //var refreshTokenGenerator = RefreshTokenGeneratorBuilder.Build();
-        //var unitOfWork = UnitOfWorkBuilder.Build();
-        //var tokenRepository = new TokenRepositoryBuilder().Build();
+        var refreshTokenGenerator = RefreshTokenGeneratorBuilder.Build();
+        var unitOfWork = UnitOfWorkBuilder.Build();
+        var tokenRepository = new TokenRepositoryBuilder().Build();
 
         if (user is not null)
             userRepositoryBuilder.GetByLogin(user,login);
 
-        return new DoLoginUseCase(userRepository, passwordEncrypter, accessTokenGenerator);
+        return new DoLoginUseCase(userRepository, passwordEncrypter, accessTokenGenerator,refreshTokenGenerator, tokenRepository, unitOfWork);
     }
 }

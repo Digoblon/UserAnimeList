@@ -31,19 +31,17 @@ public class UserRepository : IUserRepository
     public async Task<bool> ExistsActiveUserWithUserName(string username)
         => await _dbContext.Users.AnyAsync(u=>u.UserName.Equals(username));
 
-    public Task<bool> ExistActiveUserWithId(Guid id)
-        =>  _dbContext.Users.AnyAsync(u => u.Id.Equals(id) && u.IsActive);
+    public async Task<bool> ExistActiveUserWithId(Guid id)
+        => await _dbContext.Users.AnyAsync(u => u.Id.Equals(id) && u.IsActive);
 
     public async Task<User?> GetByLogin(string login)
     {
-        
-        if (login.Contains('@'))
-        {
-            return await _dbContext.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Email.Equals(login) && u.IsActive);
-        }
-        else
-        {
-            return await _dbContext.Users.AsNoTracking().FirstOrDefaultAsync(u => u.UserName.Equals(login) &&  u.IsActive);
-        }
+        login = login.Trim().ToLower();
+
+        return await _dbContext.Users
+            .AsNoTracking()
+            .FirstOrDefaultAsync(u =>
+                u.IsActive &&
+                (u.Email.Equals(login, StringComparison.CurrentCultureIgnoreCase) || u.UserName.Equals(login, StringComparison.CurrentCultureIgnoreCase)));
     }
 }

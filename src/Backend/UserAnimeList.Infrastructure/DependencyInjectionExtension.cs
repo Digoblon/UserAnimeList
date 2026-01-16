@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Http;
 using UserAnimeList.Domain.Repositories;
+using UserAnimeList.Domain.Repositories.Token;
 using UserAnimeList.Domain.Repositories.User;
 using UserAnimeList.Domain.Security.Cryptography;
 using UserAnimeList.Domain.Security.Tokens;
@@ -13,6 +14,7 @@ using UserAnimeList.Infrastructure.Extensions;
 using UserAnimeList.Infrastructure.Security.Cryptography;
 using UserAnimeList.Infrastructure.Security.Tokens.Access.Generator;
 using UserAnimeList.Infrastructure.Security.Tokens.Access.Validator;
+using UserAnimeList.Infrastructure.Security.Tokens.Refresh;
 using UserAnimeList.Infrastructure.Services.LoggedUser;
 
 namespace UserAnimeList.Infrastructure;
@@ -31,6 +33,7 @@ public static class DependencyInjectionExtension
 
     private static void AddDbContext(IServiceCollection services, IConfiguration configuration)
     {
+        //if(configuration.IsUnitTestEnvironment()) return;
         services.AddDbContext<UserAnimeListDbContext>(options =>
             options.UseSqlServer(configuration.ConnectionString()));
     }
@@ -51,6 +54,10 @@ public static class DependencyInjectionExtension
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<ILoggedUser, LoggedUser>();
+        services.AddScoped<ITokenRepository, TokenRepository>();
+        services.AddScoped<IRefreshTokenGenerator, RefreshTokenGenerator>();
+        services.AddScoped<IRefreshTokenValidator, RefreshTokenValidator>();
+        
     } 
 
     private static void AddPasswordEncrypter(IServiceCollection services)
