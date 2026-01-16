@@ -6,6 +6,7 @@ namespace UserAnimeList.Infrastructure.Data;
 public class UserAnimeListDbContext(DbContextOptions<UserAnimeListDbContext> options) : DbContext(options)
 {
     public DbSet<User> Users { get; set; }
+    public DbSet<RefreshToken> RefreshTokens { get; set; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

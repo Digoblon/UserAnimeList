@@ -2,6 +2,7 @@ using FluentValidation.Results;
 using UserAnimeList.Communication.Requests;
 using UserAnimeList.Communication.Responses;
 using UserAnimeList.Domain.Repositories;
+using UserAnimeList.Domain.Repositories.Token;
 using UserAnimeList.Domain.Repositories.User;
 using UserAnimeList.Domain.Security.Cryptography;
 using UserAnimeList.Domain.Security.Tokens;
@@ -18,18 +19,21 @@ public class ChangePasswordUseCase : IChangePasswordUseCase
     private readonly IUnitOfWork _unitOfWork;
     private readonly IPasswordEncrypter _passwordEncrypter;
     private readonly IAccessTokenGenerator _accessTokenGenerator;
+    private readonly ITokenRepository _tokenRepository;
         
     public ChangePasswordUseCase(ILoggedUser loggedUser,
         IUserRepository repository, 
         IUnitOfWork unitOfWork,
         IPasswordEncrypter passwordEncrypter,  
-        IAccessTokenGenerator accessTokenGenerator)
+        IAccessTokenGenerator accessTokenGenerator,
+        ITokenRepository tokenRepository)
     {
         _loggedUser = loggedUser;
         _repository = repository;
         _unitOfWork = unitOfWork;
         _passwordEncrypter = passwordEncrypter;
         _accessTokenGenerator = accessTokenGenerator;
+        _tokenRepository = tokenRepository;
     }
 
     public async Task<ResponseChangePasswordJson> Execute(RequestChangePasswordJson request)
@@ -41,6 +45,9 @@ public class ChangePasswordUseCase : IChangePasswordUseCase
         user.Password = _passwordEncrypter.Encrypt(request.NewPassword);
         
         user.IncrementTokenVersion();
+        
+        
+        await _tokenRepository.RevokeAllForUser(user.Id);
         
         _repository.Update(user);
         

@@ -102,4 +102,7 @@
   <data name="WRONG_TOKEN_VERSION" xml:space="preserve">
     <value>Token version mismatch</value>
   </data>
+  <data name="USER_HAS_NO_ACCESS" xml:space="preserve">
+    <value>The user has no access.</value>
+  </data>
 </root>

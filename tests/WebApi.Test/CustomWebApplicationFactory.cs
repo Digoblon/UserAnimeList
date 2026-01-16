@@ -1,19 +1,24 @@
 using CommonTestUtilities.Entities;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestPlatform.TestHost;
+using UserAnimeList.Domain.Entities;
 using UserAnimeList.Infrastructure.Data;
 
 namespace WebApi.Test;
 
 public class CustomWebApplicationFactory : WebApplicationFactory<Program>
 {
+    //private SqliteConnection _connection = null!;
+    
     private UserAnimeList.Domain.Entities.User _user = null!;
+    private RefreshToken _refreshToken = null!;
     
     private string _password = string.Empty;
-
+    
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.UseEnvironment("Test")
@@ -41,19 +46,23 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
                 StartDatabase(dbContext);
             });
     }
-
+    
     public string GetEmail() => _user.Email;
     public string GetPassword() => _password;
     public string GetUserName() => _user.UserName;
     public Guid GetId() => _user.Id;
     public int GetTokenVersion() => _user.TokenVersion;
+    public string GetRefreshToken() => _refreshToken.Token;
 
 
     private void StartDatabase(UserAnimeListDbContext dbContext)
     {
         (_user, _password) = UserBuilder.Build();
 
+        _refreshToken = RefreshTokenBuilder.Build(_user);
+
         dbContext.Users.Add(_user);
+        dbContext.RefreshTokens.Add(_refreshToken);
 
         dbContext.SaveChanges();
     }

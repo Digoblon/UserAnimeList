@@ -77,7 +77,7 @@ public class ChangePasswordUseCaseTest
     {
         (var user, var password) = UserBuilder.Build();
 
-        var request = RequestChangePasswordJsonBuilder.Build();
+        var request = RequestChangePasswordJsonBuilder.Build(9);
         request.Password = password;
         request.ConfirmNewPassword = request.NewPassword + "A";
         
@@ -100,8 +100,9 @@ public class ChangePasswordUseCaseTest
         var unitOfWork = UnitOfWorkBuilder.Build();
         var passwordEncrypter = PasswordEncrypterBuilder.Build();
         var accessTokenGenerator = JwtTokenGeneratorBuilder.Build();
+        var tokenRepository = new TokenRepositoryBuilder().Build();
         
         
-        return new ChangePasswordUseCase(loggedUser,userRepository,unitOfWork,passwordEncrypter,accessTokenGenerator);
+        return new ChangePasswordUseCase(loggedUser,userRepository,unitOfWork,passwordEncrypter,accessTokenGenerator,tokenRepository );
     }
 }

@@ -13,7 +13,7 @@ public class UserConfiguration : BaseEntityConfiguration<User>
         builder.ToTable("Users");
         
         
-         builder.Property(u => u.UserName)
+        builder.Property(u => u.UserName)
              .IsRequired()
              .HasMaxLength(50);
         builder.HasIndex(u => u.UserName).IsUnique();
@@ -29,5 +29,8 @@ public class UserConfiguration : BaseEntityConfiguration<User>
         builder.Property(u => u.TokenVersion)
             .IsRequired();
 
+        builder.HasMany(u => u.RefreshTokens)
+            .WithOne(rt => rt.User)
+            .HasForeignKey(rt => rt.UserId);
     }
 }

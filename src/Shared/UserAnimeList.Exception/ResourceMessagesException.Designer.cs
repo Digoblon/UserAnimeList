@@ -276,6 +276,15 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The user has no access..
+        /// </summary>
+        public static string USER_HAS_NO_ACCESS {
+            get {
+                return ResourceManager.GetString("USER_HAS_NO_ACCESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User not found in database..
         /// </summary>
         public static string USER_NOT_FOUND {
