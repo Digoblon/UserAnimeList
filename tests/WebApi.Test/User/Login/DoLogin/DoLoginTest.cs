@@ -57,16 +57,17 @@ public class DoLoginTest : UserAnimeListClassFixture
         var request = RequestLoginJsonBuilder.Build();
         
         var response = await DoPost(method:method, request:request,culture:culture);
-        //response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
+        Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
         
         await using var responseBody = await response.Content.ReadAsStreamAsync();
         var responseData = await JsonDocument.ParseAsync(responseBody);
         
         var errors = responseData.RootElement.GetProperty("errors").EnumerateArray();
 
-        var expectedMessage = ResourceMessagesException.ResourceManager.GetString("EMAIL_OR_PASSWORD_INVALID", new CultureInfo(culture));
+        var expectedMessage = ResourceMessagesException.ResourceManager.GetString("LOGIN_OR_PASSWORD_INVALID", new CultureInfo(culture));
         
-        //errors.Should().ContainSingle().And.Contain(error => error.GetString()!.Equals(expectedMessage));
+        Assert.Single(errors);
+        Assert.Equal(expectedMessage, errors.First().GetString());
     }
     
 }
