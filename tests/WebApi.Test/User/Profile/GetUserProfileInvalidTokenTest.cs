@@ -1,5 +1,6 @@
 using System.Net;
 using CommonTestUtilities.Tokens;
+using UserAnimeList.Enums;
 
 namespace WebApi.Test.User.Login.DoLogin;
 
@@ -8,10 +9,12 @@ public class GetUserProfileInvalidTokenTest : UserAnimeListClassFixture
     private readonly string METHOD = "user";
     
     private readonly Guid _id;
+    private readonly UserRole _userRole;
 
     public GetUserProfileInvalidTokenTest(CustomWebApplicationFactory factory) : base(factory)
     {
         _id = factory.GetId();
+        _userRole = factory.GetRole();
     }
     
     [Fact]
@@ -33,7 +36,7 @@ public class GetUserProfileInvalidTokenTest : UserAnimeListClassFixture
     [Fact]
     public async Task Error_Token_With_User_NotFound()
     {
-        var token = JwtTokenGeneratorBuilder.Build().Generate(Guid.NewGuid(), 1);
+        var token = JwtTokenGeneratorBuilder.Build().Generate(Guid.NewGuid(), 1,_userRole);
         
         var response = await DoGet(METHOD, token: token);
         
@@ -43,7 +46,7 @@ public class GetUserProfileInvalidTokenTest : UserAnimeListClassFixture
     [Fact]
     public async Task Error_Token_Version_Mismatch()
     {
-        var token = JwtTokenGeneratorBuilder.Build().Generate(_id, 0);
+        var token = JwtTokenGeneratorBuilder.Build().Generate(_id, 0, _userRole);
         
         var response = await DoGet(METHOD, token: token);
         

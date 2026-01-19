@@ -4,6 +4,7 @@ using System.Text.Json;
 using CommonTestUtilities.Requests;
 using CommonTestUtilities.Tokens;
 using UserAnimeList.Communication.Requests;
+using UserAnimeList.Enums;
 using UserAnimeList.Exception;
 using WebApi.Test.InlineData;
 
@@ -17,6 +18,7 @@ public class ChangePasswordTest : UserAnimeListClassFixture
     private readonly string _email;
     private readonly string _password;
     private readonly int _tokenVersion;
+    private readonly UserRole _userRole;
 
     public ChangePasswordTest(CustomWebApplicationFactory factory) : base(factory)
     {
@@ -24,6 +26,7 @@ public class ChangePasswordTest : UserAnimeListClassFixture
         _tokenVersion = factory.GetTokenVersion();
         _password = factory.GetPassword();
         _email = factory.GetEmail();
+        _userRole = factory.GetRole();
     }
 
     [Fact]
@@ -32,7 +35,7 @@ public class ChangePasswordTest : UserAnimeListClassFixture
         var request = RequestChangePasswordJsonBuilder.Build();
         request.Password = _password;
         
-        var token = JwtTokenGeneratorBuilder.Build().Generate(_id, _tokenVersion);
+        var token = JwtTokenGeneratorBuilder.Build().Generate(_id, _tokenVersion,_userRole);
         
         var response = await DoPut(METHOD, request, token);
 
@@ -72,7 +75,7 @@ public class ChangePasswordTest : UserAnimeListClassFixture
         };
         
         
-        var token = JwtTokenGeneratorBuilder.Build().Generate(_id, _tokenVersion);
+        var token = JwtTokenGeneratorBuilder.Build().Generate(_id, _tokenVersion, _userRole);
         
         var response = await DoPut(METHOD, request,token,culture);
         

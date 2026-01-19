@@ -2,6 +2,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using UserAnimeList.Domain.Security.Tokens;
+using UserAnimeList.Enums;
 
 namespace UserAnimeList.Infrastructure.Security.Tokens.Access.Generator;
 
@@ -16,12 +17,13 @@ public class JwtTokenGenerator : JwtTokenHandler,IAccessTokenGenerator
         _signingKey = signingKey;
     }
     
-    public string Generate(Guid id, int tokenVersion)
+    public string Generate(Guid id, int tokenVersion, UserRole role)
     {
         var claims = new List<Claim>
         {
             new (ClaimTypes.NameIdentifier, id.ToString()),
-            new ("token_version", tokenVersion.ToString())
+            new ("token_version", tokenVersion.ToString()),
+            new (ClaimTypes.Role, role.ToString()),
         };
         var tokenDescriptor = new SecurityTokenDescriptor
         {

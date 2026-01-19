@@ -159,6 +159,15 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid role claim..
+        /// </summary>
+        public static string INVALID_ROLE_CLAIM {
+            get {
+                return ResourceManager.GetString("INVALID_ROLE_CLAIM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to We couldn&apos;t find a valid session. Please log in to access this feature..
         /// </summary>
         public static string INVALID_SESSION {

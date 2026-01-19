@@ -105,4 +105,7 @@
   <data name="USER_HAS_NO_ACCESS" xml:space="preserve">
     <value>The user has no access.</value>
   </data>
+  <data name="INVALID_ROLE_CLAIM" xml:space="preserve">
+    <value>Invalid role claim.</value>
+  </data>
 </root>

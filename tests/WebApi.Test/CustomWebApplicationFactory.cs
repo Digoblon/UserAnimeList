@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestPlatform.TestHost;
 using UserAnimeList.Domain.Entities;
+using UserAnimeList.Enums;
 using UserAnimeList.Infrastructure.Data;
 
 namespace WebApi.Test;
@@ -52,7 +53,9 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
     public string GetUserName() => _user.UserName;
     public Guid GetId() => _user.Id;
     public int GetTokenVersion() => _user.TokenVersion;
+    public UserRole GetRole() => _user.Role;
     public string GetRefreshToken() => _refreshToken.Token;
+    
 
 
     private void StartDatabase(UserAnimeListDbContext dbContext)

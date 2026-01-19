@@ -2,6 +2,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using UserAnimeList.Domain.Security.Tokens;
+using UserAnimeList.Enums;
+using UserAnimeList.Exception;
 using UserAnimeList.Infrastructure.Security.Tokens.Access.Generator;
 
 namespace UserAnimeList.Infrastructure.Security.Tokens.Access.Validator;
@@ -34,8 +36,13 @@ public class JwtTokenValidator: JwtTokenHandler,IAccessTokenValidator
             principal.Claims.First(c => c.Type == "token_version").Value
         );
         
+        var roleClaim = principal.Claims.First(c => c.Type == ClaimTypes.Role).Value;
+
+        if (!Enum.TryParse<UserRole>(roleClaim, out var role))
+            throw new SecurityTokenException(ResourceMessagesException.INVALID_ROLE_CLAIM);
         
-        return new AccessTokenData(userId, tokenVersion);
+        
+        return new AccessTokenData(userId, tokenVersion, role);
     }
     
 }

@@ -28,6 +28,9 @@ public class UserConfiguration : BaseEntityConfiguration<User>
 
         builder.Property(u => u.TokenVersion)
             .IsRequired();
+        
+        builder.Property(u => u.Role)
+            .IsRequired();
 
         builder.HasMany(u => u.RefreshTokens)
             .WithOne(rt => rt.User)
