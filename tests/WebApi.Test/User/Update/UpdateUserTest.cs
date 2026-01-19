@@ -3,6 +3,7 @@ using System.Net;
 using System.Text.Json;
 using CommonTestUtilities.Requests;
 using CommonTestUtilities.Tokens;
+using UserAnimeList.Enums;
 using UserAnimeList.Exception;
 using WebApi.Test.InlineData;
 
@@ -14,12 +15,14 @@ private const string METHOD = "user";
 
 private readonly Guid _id;
 private readonly int _tokenVersion;
+private readonly UserRole _userRole;
 
 
 public UpdateUserTest(CustomWebApplicationFactory factory) : base(factory)
 {
     _id = factory.GetId();
     _tokenVersion = factory.GetTokenVersion();
+    _userRole = factory.GetRole();
 }
 
 [Fact]
@@ -27,7 +30,7 @@ public async Task Success()
 {
     var request = RequestUpdateUserJsonBuilder.Build();
         
-    var token = JwtTokenGeneratorBuilder.Build().Generate(_id, _tokenVersion);
+    var token = JwtTokenGeneratorBuilder.Build().Generate(_id, _tokenVersion, _userRole);
         
     var response = await DoPut(METHOD, request, token);
 
@@ -41,7 +44,7 @@ public async Task Error_Empty_UserName(string culture)
     var request = RequestUpdateUserJsonBuilder.Build();
     request.UserName = string.Empty;
         
-    var token = JwtTokenGeneratorBuilder.Build().Generate(_id, _tokenVersion);
+    var token = JwtTokenGeneratorBuilder.Build().Generate(_id, _tokenVersion, _userRole);
         
     var response = await DoPut(METHOD, request,token,culture);
     Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);

@@ -1,6 +1,7 @@
 using System.Net;
 using CommonTestUtilities.Tokens;
 using UserAnimeList.Communication.Requests;
+using UserAnimeList.Enums;
 
 namespace WebApi.Test.User.ChangePassword;
 
@@ -9,9 +10,11 @@ public class ChangePasswordInvalidTokenTest : UserAnimeListClassFixture
     private const string METHOD = "user/change-password";
 
     private readonly Guid _id;
+    private readonly UserRole _userRole;
     public ChangePasswordInvalidTokenTest(CustomWebApplicationFactory factory) : base(factory)
     {
         _id = factory.GetId();
+        _userRole = factory.GetRole();
     }
 
     [Fact]
@@ -37,7 +40,7 @@ public class ChangePasswordInvalidTokenTest : UserAnimeListClassFixture
     [Fact]
     public async Task Error_Token_With_User_NotFound()
     {
-        var token = JwtTokenGeneratorBuilder.Build().Generate(Guid.NewGuid(), 1);
+        var token = JwtTokenGeneratorBuilder.Build().Generate(Guid.NewGuid(), 1,_userRole);
         var request = new RequestChangePasswordJson();
         var response = await DoPut(METHOD,request:request, token: token);
         
@@ -47,7 +50,7 @@ public class ChangePasswordInvalidTokenTest : UserAnimeListClassFixture
     [Fact]
     public async Task Error_Token_Version_Mismatch()
     {
-        var token = JwtTokenGeneratorBuilder.Build().Generate(_id, 0);
+        var token = JwtTokenGeneratorBuilder.Build().Generate(_id, 0,_userRole);
         var request = new RequestChangePasswordJson();
         var response = await DoPut(METHOD,request:request, token: token);
         
