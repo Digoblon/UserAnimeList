@@ -42,6 +42,7 @@ public class UserRepository : IUserRepository
             .AsNoTracking()
             .FirstOrDefaultAsync(u =>
                 u.IsActive &&
-                (u.Email.Equals(login, StringComparison.CurrentCultureIgnoreCase) || u.UserName.Equals(login, StringComparison.CurrentCultureIgnoreCase)));
+                //(u.Email.Equals(login, StringComparison.CurrentCultureIgnoreCase) || u.UserName.Equals(login, StringComparison.CurrentCultureIgnoreCase)));
+                (u.Email.ToLower() == login || u.UserName.ToLower() == login));
     }
 }

@@ -22,5 +22,8 @@ public abstract class BaseEntityConfiguration<T>
         builder.Property(e => e.IsActive)
             .IsRequired()
             .HasDefaultValue(true);
+        
+        builder.Property(e => e.DeletedOn)
+            .IsRequired(false);
     }
 }
