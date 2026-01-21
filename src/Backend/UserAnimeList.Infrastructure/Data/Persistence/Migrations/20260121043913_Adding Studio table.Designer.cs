@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UserAnimeList.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using UserAnimeList.Infrastructure.Data;
 namespace UserAnimeList.Infrastructure.Data.Persistence.Migrations
 {
     [DbContext(typeof(UserAnimeListDbContext))]
-    partial class UserAnimeListDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260121043913_Adding Studio table")]
+    partial class AddingStudiotable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -85,14 +88,9 @@ namespace UserAnimeList.Infrastructure.Data.Persistence.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("NameNormalized")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("NameNormalized")
+                    b.HasIndex("Name")
                         .IsUnique();
 
                     b.ToTable("Studios", (string)null);

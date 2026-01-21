@@ -5,14 +5,14 @@ using UserAnimeList.Domain.Services.LoggedUser;
 
 namespace UserAnimeList.Application.UseCases.User.Delete.SoftDelete;
 
-public class SoftDeleteUseCase : ISoftDeleteUseCase
+public class SoftDeleteUserUseCase : ISoftDeleteUserUseCase
 {
     private readonly ILoggedUser _loggedUser;
     private readonly IUserRepository _userRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly ITokenRepository _tokenRepository;
     
-    public SoftDeleteUseCase(ILoggedUser loggedUser, 
+    public SoftDeleteUserUseCase(ILoggedUser loggedUser, 
         IUserRepository userRepository, 
         IUnitOfWork unitOfWork,
         ITokenRepository tokenRepository)

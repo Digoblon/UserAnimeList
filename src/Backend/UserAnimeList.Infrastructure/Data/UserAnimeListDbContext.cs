@@ -7,6 +7,7 @@ public class UserAnimeListDbContext(DbContextOptions<UserAnimeListDbContext> opt
 {
     public DbSet<User> Users { get; set; }
     public DbSet<RefreshToken> RefreshTokens { get; set; }
+    public DbSet<Studio>  Studios { get; set; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -7,7 +7,7 @@ namespace UserAnimeList.Attributes;
 
 public class AdminOnlyAttribute : TypeFilterAttribute
 {
-    public AdminOnlyAttribute() : base(typeof(RequireRoleFilter)) { }
+    public AdminOnlyAttribute() : base(typeof(AdminOnlyFilter)) { }
     
 }
 public class AdminOnlyFilter : IAsyncAuthorizationFilter

@@ -4,6 +4,7 @@ using Scalar.AspNetCore;
 using UserAnimeList.Application;
 using UserAnimeList.Communication.Responses;
 using UserAnimeList.Exception;
+using UserAnimeList.Filters;
 using UserAnimeList.Infrastructure;
 using UserAnimeList.Middleware;
 
@@ -46,6 +47,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddApplication(builder.Configuration);
 builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddScoped<AuthenticatedUserFilter>();
+
 
 //builder.Services.AddScoped<ITokenProvider, HttpContextTokenValue>();
 

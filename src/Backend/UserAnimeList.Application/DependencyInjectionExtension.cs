@@ -3,6 +3,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using UserAnimeList.Application.Services.Mapper;
 using UserAnimeList.Application.UseCases.Login.DoLogin;
+using UserAnimeList.Application.UseCases.Studio.Delete.SoftDelete;
+using UserAnimeList.Application.UseCases.Studio.Get.ById;
+using UserAnimeList.Application.UseCases.Studio.Get.ByName;
+using UserAnimeList.Application.UseCases.Studio.Register;
+using UserAnimeList.Application.UseCases.Studio.Update;
 using UserAnimeList.Application.UseCases.Token.RefreshToken;
 using UserAnimeList.Application.UseCases.User.ChangePassword;
 using UserAnimeList.Application.UseCases.User.Delete.SoftDelete;
@@ -38,6 +43,12 @@ public static class DependencyInjectionExtension
         services.AddScoped<IUpdateUserUseCase, UpdateUserUseCase>();
         services.AddScoped<IChangePasswordUseCase, ChangePasswordUseCase>();
         services.AddScoped<IUseRefreshTokenUseCase, UseRefreshTokenUseCase>();
-        services.AddScoped<ISoftDeleteUseCase, SoftDeleteUseCase>();
+        services.AddScoped<ISoftDeleteUserUseCase, SoftDeleteUserUseCase>();
+        services.AddScoped<IRegisterStudioUseCase, RegisterStudioUseCase>();
+        services.AddScoped<IGetStudioByIdUseCase, GetStudioByIdUseCase>();
+        services.AddScoped<IGetStudioByNameUseCase, GetStudioByNameUseCase>();
+        services.AddScoped<IUpdateStudioUseCase, UpdateStudioUseCase>();
+        services.AddScoped<ISoftDeleteStudioUseCase, SoftDeleteStudioUseCase>();
+        
     }
 }

@@ -1,6 +1,6 @@
 namespace UserAnimeList.Application.UseCases.User.Delete.SoftDelete;
 
-public interface ISoftDeleteUseCase
+public interface ISoftDeleteUserUseCase
 {
     public Task Execute();
 }
