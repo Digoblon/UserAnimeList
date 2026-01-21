@@ -108,4 +108,19 @@
   <data name="INVALID_ROLE_CLAIM" xml:space="preserve">
     <value>Invalid role claim.</value>
   </data>
+  <data name="STUDIO_ALREADY_REGISTERED" xml:space="preserve">
+    <value>The Studio is already registered.</value>
+  </data>
+  <data name="STUDIO_NOT_FOUND" xml:space="preserve">
+    <value>Studio not found.</value>
+  </data>
+  <data name="INVALID_ID" xml:space="preserve">
+    <value>Invalid Id format.</value>
+  </data>
+  <data name="NEW_NAME_EMPTY" xml:space="preserve">
+    <value>The new name cannot be empty.</value>
+  </data>
+  <data name="NEW_NAME_EQUAL" xml:space="preserve">
+    <value>The new name cannot be the same as the old name.</value>
+  </data>
 </root>

@@ -5,7 +5,7 @@ using UserAnimeList.Application.UseCases.User.Delete.SoftDelete;
 
 namespace UseCases.Test.User.Delete.SoftDelete;
 
-public class SoftDeleteUseCaseTest
+public class SoftDeleteUserUseCaseTest
 {
     [Fact]
     public async Task Success()
@@ -33,7 +33,7 @@ public class SoftDeleteUseCaseTest
     }
     
     
-    private static SoftDeleteUseCase CreateUseCase(UserAnimeList.Domain.Entities.User user)
+    private static SoftDeleteUserUseCase CreateUseCase(UserAnimeList.Domain.Entities.User user)
     {
         var loggedUser = LoggedUserBuilder.Build(user);
         var userRepositoryBuilder = new UserRepositoryBuilder();
@@ -41,6 +41,6 @@ public class SoftDeleteUseCaseTest
         var unitOfWork = UnitOfWorkBuilder.Build();
         var tokenRepository = new TokenRepositoryBuilder().Build();
 
-        return new SoftDeleteUseCase(loggedUser, userRepository, unitOfWork,tokenRepository);
+        return new SoftDeleteUserUseCase(loggedUser, userRepository, unitOfWork,tokenRepository);
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Http;
 using UserAnimeList.Domain.Repositories;
+using UserAnimeList.Domain.Repositories.Studio;
 using UserAnimeList.Domain.Repositories.Token;
 using UserAnimeList.Domain.Repositories.User;
 using UserAnimeList.Domain.Security.Cryptography;
@@ -57,7 +58,8 @@ public static class DependencyInjectionExtension
         services.AddScoped<ITokenRepository, TokenRepository>();
         services.AddScoped<IRefreshTokenGenerator, RefreshTokenGenerator>();
         services.AddScoped<IRefreshTokenValidator, RefreshTokenValidator>();
-        
+        services.AddScoped<IStudioRepository, StudioRepository>();
+
     } 
 
     private static void AddPasswordEncrypter(IServiceCollection services)

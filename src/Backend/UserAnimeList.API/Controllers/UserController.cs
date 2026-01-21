@@ -60,9 +60,9 @@ namespace UserAnimeList.Controllers
         [HttpDelete("me")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [AuthenticatedUser]
-        public async Task<IActionResult> SoftDelete([FromServices] ISoftDeleteUseCase useCase)
+        public async Task<IActionResult> SoftDelete([FromServices] ISoftDeleteUserUseCase userUseCase)
         {
-            await useCase.Execute();
+            await userUseCase.Execute();
             
             return NoContent();
         }

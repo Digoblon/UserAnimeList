@@ -132,6 +132,15 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid Id format..
+        /// </summary>
+        public static string INVALID_ID {
+            get {
+                return ResourceManager.GetString("INVALID_ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid JSON format..
         /// </summary>
         public static string INVALID_JSON {
@@ -213,6 +222,24 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The new name cannot be empty..
+        /// </summary>
+        public static string NEW_NAME_EMPTY {
+            get {
+                return ResourceManager.GetString("NEW_NAME_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The new name cannot be the same as the old name..
+        /// </summary>
+        public static string NEW_NAME_EQUAL {
+            get {
+                return ResourceManager.GetString("NEW_NAME_EQUAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User has no access..
         /// </summary>
         public static string NO_ACCESS {
@@ -263,6 +290,24 @@ namespace UserAnimeList.Exception {
         public static string PASSWORDS_NOT_MATCH {
             get {
                 return ResourceManager.GetString("PASSWORDS_NOT_MATCH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Studio is already registered..
+        /// </summary>
+        public static string STUDIO_ALREADY_REGISTERED {
+            get {
+                return ResourceManager.GetString("STUDIO_ALREADY_REGISTERED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Studio not found..
+        /// </summary>
+        public static string STUDIO_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("STUDIO_NOT_FOUND", resourceCulture);
             }
         }
         
