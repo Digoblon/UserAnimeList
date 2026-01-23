@@ -132,6 +132,15 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This genre is already registered..
+        /// </summary>
+        public static string GENRE_ALREADY_REGISTERED {
+            get {
+                return ResourceManager.GetString("GENRE_ALREADY_REGISTERED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid Id format..
         /// </summary>
         public static string INVALID_ID {
