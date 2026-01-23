@@ -17,6 +17,8 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
     
     private UserAnimeList.Domain.Entities.User _user = null!;
     private UserAnimeList.Domain.Entities.Studio _studio = null!;
+    private UserAnimeList.Domain.Entities.Genre _genre = null!;
+    
     private RefreshToken _refreshToken = null!;
     
     private string _password = string.Empty;
@@ -59,6 +61,9 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
     
     public Guid GetStudioId() => _studio.Id;
     public string GetStudioName() => _studio.Name;
+
+    public Guid GetGenreId() => _genre.Id;
+    public string GetGenreName() => _genre.Name;
     
 
 
@@ -67,11 +72,13 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
         (_user, _password) = UserBuilder.Build();
         _user.Role = UserRole.Admin;
         _studio = StudioBuilder.Build();
+        _genre  = GenreBuilder.Build();
 
         _refreshToken = RefreshTokenBuilder.Build(_user);
 
         dbContext.Users.Add(_user);
         dbContext.Studios.Add(_studio);
+        dbContext.Genres.Add(_genre);
         dbContext.RefreshTokens.Add(_refreshToken);
 
         dbContext.SaveChanges();
