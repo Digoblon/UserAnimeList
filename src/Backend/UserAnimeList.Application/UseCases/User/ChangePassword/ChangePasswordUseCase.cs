@@ -19,6 +19,7 @@ public class ChangePasswordUseCase : IChangePasswordUseCase
     private readonly IUnitOfWork _unitOfWork;
     private readonly IPasswordEncrypter _passwordEncrypter;
     private readonly IAccessTokenGenerator _accessTokenGenerator;
+    private readonly IRefreshTokenGenerator _refreshTokenGenerator;
     private readonly ITokenRepository _tokenRepository;
         
     public ChangePasswordUseCase(ILoggedUser loggedUser,
@@ -26,6 +27,7 @@ public class ChangePasswordUseCase : IChangePasswordUseCase
         IUnitOfWork unitOfWork,
         IPasswordEncrypter passwordEncrypter,  
         IAccessTokenGenerator accessTokenGenerator,
+        IRefreshTokenGenerator refreshTokenGenerator,
         ITokenRepository tokenRepository)
     {
         _loggedUser = loggedUser;
@@ -33,6 +35,7 @@ public class ChangePasswordUseCase : IChangePasswordUseCase
         _unitOfWork = unitOfWork;
         _passwordEncrypter = passwordEncrypter;
         _accessTokenGenerator = accessTokenGenerator;
+        _refreshTokenGenerator = refreshTokenGenerator;
         _tokenRepository = tokenRepository;
     }
 
@@ -46,8 +49,10 @@ public class ChangePasswordUseCase : IChangePasswordUseCase
         
         user.IncrementTokenVersion();
         
-        
         await _tokenRepository.RevokeAllForUser(user.Id);
+        
+        var refreshToken = await CreateAndSaveRefreshToken(user);
+        
         
         _repository.Update(user);
         
@@ -57,9 +62,23 @@ public class ChangePasswordUseCase : IChangePasswordUseCase
         {
             Tokens = new ResponseTokensJson 
             {
-                AccessToken = _accessTokenGenerator.Generate(user.Id, user.TokenVersion,user.Role)
+                AccessToken = _accessTokenGenerator.Generate(user.Id, user.TokenVersion,user.Role),
+                RefreshToken = refreshToken
             }
         };
+    }
+    
+    private async Task<string> CreateAndSaveRefreshToken(Domain.Entities.User user)
+    {
+        var refreshToken = new Domain.Entities.RefreshToken
+        {
+            Token = _refreshTokenGenerator.Generate(),
+            UserId = user.Id
+        };
+
+        await _tokenRepository.SaveNewRefreshToken(refreshToken);
+
+        return refreshToken.Token;
     }
 
     private void Validate(RequestChangePasswordJson request, Domain.Entities.User loggedUser)

@@ -36,18 +36,25 @@ public class TokenRepository : ITokenRepository
             await _dbContext.RefreshTokens
                 .Where(t => t.UserId == userId && t.RevokedOn == null)
                 .ExecuteUpdateAsync(setters =>
-                    setters.SetProperty(t => t.RevokedOn, utcNow)
+                    setters
+                        .SetProperty(t => t.RevokedOn, utcNow)
+                        .SetProperty(t => t.IsActive, false)
                 );
         }
         catch (InvalidOperationException)
         {
             // Fallback para providers que não suportam ExecuteUpdate (ex: InMemory)
+            // Utilizado nos testes de integração
             var tokens = await _dbContext.RefreshTokens
                 .Where(t => t.UserId == userId && t.RevokedOn == null)
                 .ToListAsync();
 
             foreach (var token in tokens)
+            {
                 token.RevokedOn = utcNow;
+                token.IsActive = false;
+            }
+
         }
     }
 }

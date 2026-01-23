@@ -17,7 +17,6 @@ public partial class UserBuilder
             .RuleFor(user => user.UserName, (f) => SanitizeUserName(f.Internet.UserName()))
             .RuleFor(user => user.Email, (f, user) => f.Internet.Email(user.UserName))
             .RuleFor(user => user.Password, _ => passwordEncrypter.Encrypt(password));
-
         return (user, password);
 
     }

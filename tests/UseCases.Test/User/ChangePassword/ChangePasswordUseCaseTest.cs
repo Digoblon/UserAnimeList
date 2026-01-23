@@ -100,9 +100,10 @@ public class ChangePasswordUseCaseTest
         var unitOfWork = UnitOfWorkBuilder.Build();
         var passwordEncrypter = PasswordEncrypterBuilder.Build();
         var accessTokenGenerator = JwtTokenGeneratorBuilder.Build();
+        var refreshTokenGenerator = RefreshTokenGeneratorBuilder.Build();
         var tokenRepository = new TokenRepositoryBuilder().Build();
         
         
-        return new ChangePasswordUseCase(loggedUser,userRepository,unitOfWork,passwordEncrypter,accessTokenGenerator,tokenRepository );
+        return new ChangePasswordUseCase(loggedUser,userRepository,unitOfWork,passwordEncrypter,accessTokenGenerator,refreshTokenGenerator,tokenRepository);
     }
 }

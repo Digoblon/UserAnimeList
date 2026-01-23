@@ -1,0 +1,47 @@
+using Moq;
+using UserAnimeList.Domain.Entities;
+using UserAnimeList.Domain.Repositories.Studio;
+
+public class StudioRepositoryBuilder
+{
+    private readonly Mock<IStudioRepository> _repository;
+    private readonly List<Studio> _studios = new();
+
+    public StudioRepositoryBuilder() => _repository = new Mock<IStudioRepository>();
+
+    public void ExistsActiveStudioWithName(string name)
+    {
+        _repository
+            .Setup(repository => repository.ExistsActiveStudioWithName(name))
+            .ReturnsAsync(true);
+    }
+
+    public StudioRepositoryBuilder GetById(Studio studio)
+    {
+        _repository
+            .Setup(x => x.GetById(studio.Id.ToString()))
+            .ReturnsAsync(studio);
+
+        return this;
+    }
+    public StudioRepositoryBuilder SearchByName(Studio studio)
+    {
+        _studios.Add(studio);
+
+        _repository
+            .Setup(r => r.SearchByName(It.IsAny<string>()))
+            .ReturnsAsync((string name) =>
+            {
+                if (string.IsNullOrEmpty(name))
+                    return new List<Studio>();
+
+                return _studios
+                    .Where(s => s.Name.Contains(name))
+                    .ToList();
+            });
+
+        return this;
+    }
+
+    public IStudioRepository Build() => _repository.Object;
+}

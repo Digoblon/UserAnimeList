@@ -19,10 +19,13 @@ public static class PasswordGenerator
 
         var remaining = faker.Random.String2(
             remainingLength,
+            // ReSharper disable once StringLiteralTypo
             "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         );
 
-        return new string($"{upper}{lower}{digit}{remaining}");
+        var password = new string($"{upper}{lower}{digit}{remaining}");
+
+        return password;
 
     }
 }
