@@ -99,13 +99,13 @@ public class RegisterUserUseCaseTest
         var userRepositoryBuilder = new UserRepositoryBuilder();
         var userRepository = userRepositoryBuilder.Build();
         var accessTokenGenerator = JwtTokenGeneratorBuilder.Build();
-        //var refreshTokenGenerator = RefreshTokenGeneratorBuilder.Build();
-        //var tokenRepository = new TokenRepositoryBuilder().Build();
+        var refreshTokenGenerator = RefreshTokenGeneratorBuilder.Build();
+        var tokenRepository = new TokenRepositoryBuilder().Build();
 
         if (email.NotEmpty())
             userRepositoryBuilder.ExistActiveUserWithEmail(email);
 
-        return new RegisterUserUseCase(mapper, passwordEncrypter,userRepository, unitOfWork,accessTokenGenerator);
+        return new RegisterUserUseCase(mapper, passwordEncrypter,userRepository, unitOfWork,accessTokenGenerator,refreshTokenGenerator, tokenRepository);
 
     }
 }

@@ -3,12 +3,14 @@ using Microsoft.OpenApi.Models;
 using Scalar.AspNetCore;
 using UserAnimeList.Application;
 using UserAnimeList.Communication.Responses;
+using UserAnimeList.Domain.Security.Tokens;
 using UserAnimeList.Exception;
 using UserAnimeList.Filters;
 using UserAnimeList.Infrastructure;
 using UserAnimeList.Middleware;
+using UserAnimeList.Token;
 
-const string AUTHENTICATION_TYPE = "Bearer";
+const string authenticationType = "Bearer";
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,10 +20,10 @@ builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options => 
 {
-    options.AddSecurityDefinition(AUTHENTICATION_TYPE, new OpenApiSecurityScheme {
+    options.AddSecurityDefinition(authenticationType, new OpenApiSecurityScheme {
         Type = SecuritySchemeType.ApiKey,
         In = ParameterLocation.Header,
-        Scheme = AUTHENTICATION_TYPE,
+        Scheme = authenticationType,
         Name = "Authorization",
         Description = @"JWT Authorization header using the Bearer scheme. 
                         Enter 'Bearer'  [space] and then your token in the text input below.
@@ -32,10 +34,10 @@ builder.Services.AddSwaggerGen(options =>
         new OpenApiSecurityScheme {
             Reference = new OpenApiReference {
                 Type = ReferenceType.SecurityScheme,
-                Id = AUTHENTICATION_TYPE
+                Id = authenticationType
             },
             Scheme = "oauth2",
-            Name = AUTHENTICATION_TYPE,
+            Name = authenticationType,
             In = ParameterLocation.Header
         },
         Array.Empty<string>()
@@ -50,7 +52,7 @@ builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddScoped<AuthenticatedUserFilter>();
 
 
-//builder.Services.AddScoped<ITokenProvider, HttpContextTokenValue>();
+builder.Services.AddScoped<ITokenProvider, HttpContextTokenValue>();
 
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 

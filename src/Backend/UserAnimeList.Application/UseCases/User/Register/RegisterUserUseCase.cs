@@ -3,6 +3,7 @@ using UserAnimeList.Application.Services.Mapper;
 using UserAnimeList.Communication.Requests;
 using UserAnimeList.Communication.Responses;
 using UserAnimeList.Domain.Repositories;
+using UserAnimeList.Domain.Repositories.Token;
 using UserAnimeList.Domain.Repositories.User;
 using UserAnimeList.Domain.Security.Cryptography;
 using UserAnimeList.Domain.Security.Tokens;
@@ -18,12 +19,16 @@ public class RegisterUserUseCase : IRegisterUserUseCase
     private readonly IUserRepository _userRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IAccessTokenGenerator _accessTokenGenerator;
+    private readonly IRefreshTokenGenerator _refreshTokenGenerator;
+    private readonly ITokenRepository _tokenRepository;
 
     public RegisterUserUseCase(IAppMapper mapper, 
         IPasswordEncrypter passwordEncrypter,
         IUserRepository userRepository,
         IUnitOfWork unitOfWork,
-        IAccessTokenGenerator accessTokenGenerator)
+        IAccessTokenGenerator accessTokenGenerator,
+        IRefreshTokenGenerator refreshTokenGenerator,
+        ITokenRepository tokenRepository)
     
     {
         _mapper = mapper;
@@ -31,6 +36,8 @@ public class RegisterUserUseCase : IRegisterUserUseCase
         _unitOfWork = unitOfWork;
         _userRepository = userRepository;
         _accessTokenGenerator = accessTokenGenerator;
+        _refreshTokenGenerator = refreshTokenGenerator;
+        _tokenRepository = tokenRepository;
     }
     public async Task<ResponseRegisteredUserJson> Execute(RequestRegisterUserJson request)
     {
@@ -38,6 +45,8 @@ public class RegisterUserUseCase : IRegisterUserUseCase
 
         var user = _mapper.Map<Domain.Entities.User>(request);
         user.Password = _passwordEncrypter.Encrypt(request.Password);
+        
+        var refreshToken = await CreateAndSaveRefreshToken(user);
 
         await _userRepository.Add(user);
 
@@ -48,9 +57,23 @@ public class RegisterUserUseCase : IRegisterUserUseCase
             UserName = request.UserName,
             Tokens = new ResponseTokensJson
             {
-                AccessToken = _accessTokenGenerator.Generate(user.Id, user.TokenVersion,user.Role)
+                AccessToken = _accessTokenGenerator.Generate(user.Id, user.TokenVersion,user.Role),
+                RefreshToken = refreshToken
             }
         };
+    }
+    
+    private async Task<string> CreateAndSaveRefreshToken(Domain.Entities.User user)
+    {
+        var refreshToken = new Domain.Entities.RefreshToken
+        {
+            Token = _refreshTokenGenerator.Generate(),
+            UserId = user.Id
+        };
+
+        await _tokenRepository.SaveNewRefreshToken(refreshToken);
+
+        return refreshToken.Token;
     }
 
     private async Task Validate(RequestRegisterUserJson request)

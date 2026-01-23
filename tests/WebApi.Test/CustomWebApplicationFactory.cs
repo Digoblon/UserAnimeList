@@ -16,6 +16,7 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
     //private SqliteConnection _connection = null!;
     
     private UserAnimeList.Domain.Entities.User _user = null!;
+    private UserAnimeList.Domain.Entities.Studio _studio = null!;
     private RefreshToken _refreshToken = null!;
     
     private string _password = string.Empty;
@@ -56,15 +57,21 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
     public UserRole GetRole() => _user.Role;
     public string GetRefreshToken() => _refreshToken.Token;
     
+    public Guid GetStudioId() => _studio.Id;
+    public string GetStudioName() => _studio.Name;
+    
 
 
     private void StartDatabase(UserAnimeListDbContext dbContext)
     {
         (_user, _password) = UserBuilder.Build();
+        _user.Role = UserRole.Admin;
+        _studio = StudioBuilder.Build();
 
         _refreshToken = RefreshTokenBuilder.Build(_user);
 
         dbContext.Users.Add(_user);
+        dbContext.Studios.Add(_studio);
         dbContext.RefreshTokens.Add(_refreshToken);
 
         dbContext.SaveChanges();
