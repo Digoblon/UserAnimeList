@@ -2,6 +2,11 @@ using Mapster;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using UserAnimeList.Application.Services.Mapper;
+using UserAnimeList.Application.UseCases.Genre.Delete.SoftDelete;
+using UserAnimeList.Application.UseCases.Genre.Get.ById;
+using UserAnimeList.Application.UseCases.Genre.Get.ByName;
+using UserAnimeList.Application.UseCases.Genre.Register;
+using UserAnimeList.Application.UseCases.Genre.Update;
 using UserAnimeList.Application.UseCases.Login.DoLogin;
 using UserAnimeList.Application.UseCases.Studio.Delete.SoftDelete;
 using UserAnimeList.Application.UseCases.Studio.Get.ById;
@@ -49,6 +54,11 @@ public static class DependencyInjectionExtension
         services.AddScoped<IGetStudioByNameUseCase, GetStudioByNameUseCase>();
         services.AddScoped<IUpdateStudioUseCase, UpdateStudioUseCase>();
         services.AddScoped<ISoftDeleteStudioUseCase, SoftDeleteStudioUseCase>();
+        services.AddScoped<IRegisterGenreUseCase, RegisterGenreUseCase>();
+        services.AddScoped<IGetGenreByIdUseCase, GetGenreByIdUseCase>();
+        services.AddScoped<IGetGenreByNameUseCase, GetGenreByNameUseCase>();
+        services.AddScoped<IUpdateGenreUseCase, UpdateGenreUseCase>();
+        services.AddScoped<ISoftDeleteGenreUseCase, SoftDeleteGenreUseCase>();
         
     }
 }

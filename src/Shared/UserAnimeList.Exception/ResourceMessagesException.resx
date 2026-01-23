@@ -123,4 +123,7 @@
   <data name="NEW_NAME_EQUAL" xml:space="preserve">
     <value>The new name cannot be the same as the old name.</value>
   </data>
+  <data name="GENRE_ALREADY_REGISTERED" xml:space="preserve">
+    <value>This genre is already registered.</value>
+  </data>
 </root>
