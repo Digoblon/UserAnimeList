@@ -1,4 +1,4 @@
-namespace UserAnimeList.Enums;
+namespace UserAnimeList.Domain.Enums;
 
 public enum UserListStatus
 {

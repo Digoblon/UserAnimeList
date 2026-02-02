@@ -64,6 +64,25 @@ public class UpdateStudioUseCaseTest
         Assert.NotEqual(request.Name,studio.Name);
         Assert.NotEqual(request.Description,studio.Description);
     }
+    
+    [Fact]
+    public async Task Error_Studio_Not_Found()
+    {
+        var studio = StudioBuilder.Build();
+
+        var request = RequestUpdateStudioJsonBuilder.Build();
+
+        var useCase = CreateUseCase(studio,request.Name);
+        
+        Func<Task> act = async () => await useCase.Execute(request,Guid.NewGuid().ToString());
+        
+        var exception = await Assert.ThrowsAsync<NotFoundException>(act);
+        Assert.Single(exception.GetErrorMessages());
+        Assert.Equal(ResourceMessagesException.STUDIO_NOT_FOUND, exception.GetErrorMessages().FirstOrDefault());
+        
+        Assert.NotEqual(request.Name,studio.Name);
+        Assert.NotEqual(request.Description,studio.Description);
+    }
 
 
     private static UpdateStudioUseCase CreateUseCase(UserAnimeList.Domain.Entities.Studio studio, string? name = null)

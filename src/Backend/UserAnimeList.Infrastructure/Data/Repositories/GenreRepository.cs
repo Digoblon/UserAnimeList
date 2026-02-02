@@ -37,4 +37,16 @@ public class GenreRepository : IGenreRepository
     {
         return await _dbContext.Genres.AsNoTracking().Where(s => s.IsActive && s.NameNormalized.Contains(name.ToLower())).ToListAsync();
     }
+
+    public async Task<IList<Guid>> GetGenresInList(IList<Guid> genres)
+    {
+        if (genres is null || genres.Count == 0)
+            return [];
+        
+        return await _dbContext.Genres
+            .Where(g => genres.Contains(g.Id))
+            .Where(g => g.DeletedOn == null && g.IsActive)
+            .Select(g => g.Id)
+            .ToListAsync();
+    }
 }

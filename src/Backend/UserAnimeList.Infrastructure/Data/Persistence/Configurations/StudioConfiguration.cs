@@ -20,10 +20,15 @@ public class StudioConfiguration : BaseEntityConfiguration<Studio>
             .IsRequired()
             .HasMaxLength(50);
         
-        builder.HasIndex(u => u.NameNormalized).IsUnique();
+        builder.HasIndex(u => u.NameNormalized).IsUnique().HasFilter("[DeletedOn] IS NULL");
         
-        builder.Property(s => s.Description)
+        builder.Property(s => s.Description) 
             .HasMaxLength(2000);
         
+        builder.HasQueryFilter(s => s.IsActive && s.DeletedOn == null);
+        
+        builder.HasMany(s => s.Animes)
+            .WithOne(a => a.Studio)
+            .HasForeignKey(a => a.StudioId);
     }
 }

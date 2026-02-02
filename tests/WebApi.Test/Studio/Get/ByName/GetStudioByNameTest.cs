@@ -18,7 +18,7 @@ public class GetStudioByNameTest : UserAnimeListClassFixture
     [Fact]
     public async Task Success()
     {
-        var request = new RequestStudioGetByName
+        var request = new RequestStudioGetByNameJson
         {
             Name = _studioName
         };
@@ -37,7 +37,7 @@ public class GetStudioByNameTest : UserAnimeListClassFixture
     [Fact]
     public async Task Success_NoContent()
     {
-        var request = new RequestStudioGetByName
+        var request = new RequestStudioGetByNameJson
         {
             Name = "aaaaaaaa"
         };

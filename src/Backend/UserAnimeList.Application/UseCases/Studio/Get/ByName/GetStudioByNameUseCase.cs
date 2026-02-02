@@ -15,7 +15,7 @@ public class GetStudioByNameUseCase : IGetStudioByNameUseCase
         _repository = repository;
         _mapper = mapper;
     }
-    public async Task<ResponseStudiosJson> Execute(RequestStudioGetByName request)
+    public async Task<ResponseStudiosJson> Execute(RequestStudioGetByNameJson request)
     {
         var studios = await _repository.SearchByName(request.Name);
         

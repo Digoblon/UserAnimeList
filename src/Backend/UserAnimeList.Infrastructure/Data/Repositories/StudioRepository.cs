@@ -37,4 +37,16 @@ public class StudioRepository : IStudioRepository
     {
         return await _dbContext.Studios.AsNoTracking().Where(s => s.IsActive && s.NameNormalized.Contains(name.ToLower())).ToListAsync();
     }
+
+    public async Task<IList<Guid>> GetStudiosInList(IList<Guid> studios)
+    {
+        if (studios is null || studios.Count == 0)
+            return [];
+        
+        return await _dbContext.Studios
+            .Where(s => studios.Contains(s.Id))
+            .Where(s => s.DeletedOn == null && s.IsActive)
+            .Select(s => s.Id)
+            .ToListAsync();
+    }
 }

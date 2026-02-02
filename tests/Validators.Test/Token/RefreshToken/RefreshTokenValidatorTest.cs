@@ -27,7 +27,7 @@ public class RefreshTokenValidatorTest
     {
         var validator = new RefreshTokenValidator();
         
-        UserAnimeList.Domain.Entities.RefreshToken refreshToken = null;
+        UserAnimeList.Domain.Entities.RefreshToken refreshToken = null!;
 
         var act = () => validator.Validate(refreshToken);
 

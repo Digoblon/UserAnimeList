@@ -41,7 +41,7 @@ public class GenreController : UserAnimeListBaseController
         [ProducesResponseType(typeof(ResponseGenresJson), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> GetGenreByName([FromServices] IGetGenreByNameUseCase useCase,
-            [FromBody]RequestGenreGetByName request)
+            [FromBody]RequestGenreGetByNameJson request)
         {
             var response = await useCase.Execute(request);
             if(response.Genres.Any())   

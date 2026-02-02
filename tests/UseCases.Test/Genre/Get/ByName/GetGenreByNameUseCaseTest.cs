@@ -14,13 +14,13 @@ public class GetGenreByNameUseCaseTest
 
         var useCase = CreateUseCase(genre);
 
-        var request = new RequestGenreGetByName
+        var request = new RequestGenreGetByNameJson
         {
             Name = genre.Name
         };
         var result = await useCase.Execute(request);
         
-        Assert.NotNull(result.Genres);
+        Assert.NotEmpty(result.Genres);
         Assert.Single(result.Genres);
         Assert.Equal(genre.Name, result.Genres.First().Name);
         Assert.Equal(genre.Description, result.Genres.First().Description);
@@ -33,7 +33,7 @@ public class GetGenreByNameUseCaseTest
 
         var useCase = CreateUseCase(genre);
 
-        var request = new RequestGenreGetByName
+        var request = new RequestGenreGetByNameJson
         {
             Name = "aaaaaaaaaa"
         };

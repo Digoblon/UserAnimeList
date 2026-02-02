@@ -15,7 +15,7 @@ public class GetGenreByNameUseCase :  IGetGenreByNameUseCase
         _repository = repository;
         _mapper = mapper;
     }
-    public async Task<ResponseGenresJson> Execute(RequestGenreGetByName request)
+    public async Task<ResponseGenresJson> Execute(RequestGenreGetByNameJson request)
     {
         var genres = await _repository.SearchByName(request.Name);
         

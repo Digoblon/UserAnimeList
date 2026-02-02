@@ -5,5 +5,5 @@ namespace UserAnimeList.Application.UseCases.Genre.Get.ByName;
 
 public interface IGetGenreByNameUseCase
 {
-    public Task<ResponseGenresJson> Execute (RequestGenreGetByName  request);
+    public Task<ResponseGenresJson> Execute (RequestGenreGetByNameJson  request);
 }

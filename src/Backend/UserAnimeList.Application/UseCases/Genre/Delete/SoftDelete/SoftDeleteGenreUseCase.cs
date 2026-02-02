@@ -22,7 +22,7 @@ public class SoftDeleteGenreUseCase : ISoftDeleteGenreUseCase
         var genre = await _genreRepository.GetById(id);
         
         if (genre is null)
-            throw new NotFoundException(ResourceMessagesException.STUDIO_NOT_FOUND);
+            throw new NotFoundException(ResourceMessagesException.GENRE_NOT_FOUND);
         
         if (!genre.IsActive || genre.DeletedOn is not null)
             return;

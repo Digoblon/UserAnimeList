@@ -22,6 +22,93 @@ namespace UserAnimeList.Infrastructure.Data.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("UserAnimeList.Domain.Entities.Anime", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateOnly?>("AiredFrom")
+                        .HasColumnType("date");
+
+                    b.Property<DateOnly?>("AiredUntil")
+                        .HasColumnType("date");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("Episodes")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NameNormalized")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<int>("Source")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Synopsis")
+                        .IsRequired()
+                        .HasMaxLength(5000)
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NameNormalized")
+                        .IsUnique();
+
+                    b.ToTable("Animes", (string)null);
+                });
+
+            modelBuilder.Entity("UserAnimeList.Domain.Entities.AnimeGenre", b =>
+                {
+                    b.Property<Guid>("AnimeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("GenreId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("AnimeId", "GenreId");
+
+                    b.HasIndex("GenreId");
+
+                    b.ToTable("AnimeGenres", (string)null);
+                });
+
+            modelBuilder.Entity("UserAnimeList.Domain.Entities.AnimeStudio", b =>
+                {
+                    b.Property<Guid>("AnimeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("StudioId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("AnimeId", "StudioId");
+
+                    b.HasIndex("StudioId");
+
+                    b.ToTable("AnimeStudios", (string)null);
+                });
+
             modelBuilder.Entity("UserAnimeList.Domain.Entities.Genre", b =>
                 {
                     b.Property<Guid>("Id")
@@ -56,7 +143,8 @@ namespace UserAnimeList.Infrastructure.Data.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("NameNormalized")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[DeletedOn] IS NULL");
 
                     b.ToTable("Genres", (string)null);
                 });
@@ -132,7 +220,8 @@ namespace UserAnimeList.Infrastructure.Data.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("NameNormalized")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[DeletedOn] IS NULL");
 
                     b.ToTable("Studios", (string)null);
                 });
@@ -182,6 +271,44 @@ namespace UserAnimeList.Infrastructure.Data.Persistence.Migrations
                     b.ToTable("Users", (string)null);
                 });
 
+            modelBuilder.Entity("UserAnimeList.Domain.Entities.AnimeGenre", b =>
+                {
+                    b.HasOne("UserAnimeList.Domain.Entities.Anime", "Anime")
+                        .WithMany("Genres")
+                        .HasForeignKey("AnimeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("UserAnimeList.Domain.Entities.Genre", "Genre")
+                        .WithMany("Animes")
+                        .HasForeignKey("GenreId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Anime");
+
+                    b.Navigation("Genre");
+                });
+
+            modelBuilder.Entity("UserAnimeList.Domain.Entities.AnimeStudio", b =>
+                {
+                    b.HasOne("UserAnimeList.Domain.Entities.Anime", "Anime")
+                        .WithMany("Studios")
+                        .HasForeignKey("AnimeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("UserAnimeList.Domain.Entities.Studio", "Studio")
+                        .WithMany("Animes")
+                        .HasForeignKey("StudioId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Anime");
+
+                    b.Navigation("Studio");
+                });
+
             modelBuilder.Entity("UserAnimeList.Domain.Entities.RefreshToken", b =>
                 {
                     b.HasOne("UserAnimeList.Domain.Entities.User", "User")
@@ -191,6 +318,23 @@ namespace UserAnimeList.Infrastructure.Data.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("UserAnimeList.Domain.Entities.Anime", b =>
+                {
+                    b.Navigation("Genres");
+
+                    b.Navigation("Studios");
+                });
+
+            modelBuilder.Entity("UserAnimeList.Domain.Entities.Genre", b =>
+                {
+                    b.Navigation("Animes");
+                });
+
+            modelBuilder.Entity("UserAnimeList.Domain.Entities.Studio", b =>
+                {
+                    b.Navigation("Animes");
                 });
 
             modelBuilder.Entity("UserAnimeList.Domain.Entities.User", b =>

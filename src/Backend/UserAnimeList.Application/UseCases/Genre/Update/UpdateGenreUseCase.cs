@@ -9,30 +9,30 @@ namespace UserAnimeList.Application.UseCases.Genre.Update;
 
 public class UpdateGenreUseCase : IUpdateGenreUseCase
 {
-    private readonly IGenreRepository _senreRepository;
+    private readonly IGenreRepository _genreRepository;
     private readonly IUnitOfWork _unitOfWork;
     
     public UpdateGenreUseCase(IGenreRepository repository, 
         IUnitOfWork unitOfWork)
     {
-        _senreRepository = repository;
+        _genreRepository = repository;
         _unitOfWork = unitOfWork;
     }
     
     public async Task Execute(RequestUpdateGenreJson request, string id)
     {
-        var senre = await _senreRepository.GetById(id);
+        var genre = await _genreRepository.GetById(id);
         
-        if (senre is null)
-                    throw new NotFoundException(ResourceMessagesException.STUDIO_NOT_FOUND);
+        if (genre is null)
+                    throw new NotFoundException(ResourceMessagesException.GENRE_NOT_FOUND);
         
-        await Validate(request, senre.NameNormalized);
+        await Validate(request, genre.NameNormalized);
         
-        senre.Name = request.Name;
-        senre.NameNormalized = senre.Name.ToLower();
-        senre.Description = request.Description;
+        genre.Name = request.Name;
+        genre.NameNormalized = genre.Name.ToLower();
+        genre.Description = request.Description;
         
-        _senreRepository.Update(senre);
+        _genreRepository.Update(genre);
         
         await _unitOfWork.Commit();
 
@@ -46,7 +46,7 @@ public class UpdateGenreUseCase : IUpdateGenreUseCase
         
         if(!request.Name.ToLower().Equals(currentName))
         {
-            var newNameExist = await _senreRepository.ExistsActiveGenreWithName(request.Name);
+            var newNameExist = await _genreRepository.ExistsActiveGenreWithName(request.Name);
 
             if (newNameExist)
                 result.Errors.Add(new ValidationFailure(string.Empty,

@@ -18,7 +18,7 @@ public class GetGenreByNameTest : UserAnimeListClassFixture
     [Fact]
     public async Task Success()
     {
-        var request = new RequestGenreGetByName
+        var request = new RequestGenreGetByNameJson
         {
             Name = _genreName
         };
@@ -37,7 +37,7 @@ public class GetGenreByNameTest : UserAnimeListClassFixture
     [Fact]
     public async Task Success_NoContent()
     {
-        var request = new RequestGenreGetByName
+        var request = new RequestGenreGetByNameJson
         {
             Name = "aaaaaaaa"
         };

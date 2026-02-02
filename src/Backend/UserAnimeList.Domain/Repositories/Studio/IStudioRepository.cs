@@ -8,4 +8,5 @@ public interface IStudioRepository
     Task<Entities.Studio?> GetById (string id);
     Task<Entities.Studio?> GetByName (string name);
     Task<IList<Entities.Studio>> SearchByName (string name);
+    Task<IList<Guid>> GetStudiosInList (IList<Guid> studios);
 }

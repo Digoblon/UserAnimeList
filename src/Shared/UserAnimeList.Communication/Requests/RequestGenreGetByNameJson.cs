@@ -1,6 +1,6 @@
 namespace UserAnimeList.Communication.Requests;
 
-public class RequestStudioGetByName
+public class RequestGenreGetByNameJson
 {
     public string Name { get; set; } =  string.Empty;
 }

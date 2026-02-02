@@ -20,10 +20,15 @@ public class GenreConfiguration : BaseEntityConfiguration<Genre>
             .IsRequired()
             .HasMaxLength(50);
         
-        builder.HasIndex(u => u.NameNormalized).IsUnique();
+        builder.HasIndex(u => u.NameNormalized).IsUnique().HasFilter("[DeletedOn] IS NULL");
         
         builder.Property(s => s.Description)
             .HasMaxLength(2000);
         
+        builder.HasQueryFilter(s => s.IsActive && s.DeletedOn == null);
+        
+        builder.HasMany(g => g.Animes)
+            .WithOne(a => a.Genre)
+            .HasForeignKey(a => a.GenreId);
     }
 }
