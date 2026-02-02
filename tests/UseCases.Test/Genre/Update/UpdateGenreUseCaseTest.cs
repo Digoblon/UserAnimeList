@@ -65,6 +65,25 @@ public class UpdateGenreUseCaseTest
         Assert.NotEqual(request.Description,genre.Description);
     }
 
+    [Fact]
+    public async Task Error_Genre_Not_Found()
+    {
+        var genre = GenreBuilder.Build();
+
+        var request = RequestUpdateGenreJsonBuilder.Build();
+
+        var useCase = CreateUseCase(genre,request.Name);
+        
+        Func<Task> act = async () => await useCase.Execute(request,Guid.NewGuid().ToString());
+        
+        var exception = await Assert.ThrowsAsync<NotFoundException>(act);
+        Assert.Single(exception.GetErrorMessages());
+        Assert.Equal(ResourceMessagesException.GENRE_NOT_FOUND, exception.GetErrorMessages().FirstOrDefault());
+        
+        Assert.NotEqual(request.Name,genre.Name);
+        Assert.NotEqual(request.Description,genre.Description);
+    }
+    
 
     private static UpdateGenreUseCase CreateUseCase(UserAnimeList.Domain.Entities.Genre genre, string? name = null)
     {

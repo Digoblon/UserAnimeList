@@ -60,6 +60,78 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to When the anime status is airing the aired from must be specified..
+        /// </summary>
+        public static string ANIME_AIRED_FROM_REQUIRED_WHEN_AIRING {
+            get {
+                return ResourceManager.GetString("ANIME_AIRED_FROM_REQUIRED_WHEN_AIRING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to When the anime status is finished the aired from must be specified..
+        /// </summary>
+        public static string ANIME_AIRED_FROM_REQUIRED_WHEN_FINISHED {
+            get {
+                return ResourceManager.GetString("ANIME_AIRED_FROM_REQUIRED_WHEN_FINISHED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The anime aired until cannot be earlier than aired from.
+        /// </summary>
+        public static string ANIME_AIRED_UNTIL_EARLY_FROM {
+            get {
+                return ResourceManager.GetString("ANIME_AIRED_UNTIL_EARLY_FROM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to When aired until is specified aired from must also be provided..
+        /// </summary>
+        public static string ANIME_AIRED_UNTIL_FILLED_AIRED_FROM_NOT_FILLED {
+            get {
+                return ResourceManager.GetString("ANIME_AIRED_UNTIL_FILLED_AIRED_FROM_NOT_FILLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to When the anime status is finished the aired until must be specified..
+        /// </summary>
+        public static string ANIME_AIRED_UNTIL_REQUIRED_WHEN_FINISHED {
+            get {
+                return ResourceManager.GetString("ANIME_AIRED_UNTIL_REQUIRED_WHEN_FINISHED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An anime with this name is already registered..
+        /// </summary>
+        public static string ANIME_ALREADY_REGISTERED {
+            get {
+                return ResourceManager.GetString("ANIME_ALREADY_REGISTERED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The anime name exceeds the limit of 256 characters.
+        /// </summary>
+        public static string ANIME_EXCEEDS_LIMIT {
+            get {
+                return ResourceManager.GetString("ANIME_EXCEEDS_LIMIT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified anime is not found..
+        /// </summary>
+        public static string ANIME_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("ANIME_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid code..
         /// </summary>
         public static string CODE_INVALID {
@@ -74,6 +146,24 @@ namespace UserAnimeList.Exception {
         public static string CODE_RESET_PASSWORD_REQUIRED {
             get {
                 return ResourceManager.GetString("CODE_RESET_PASSWORD_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to One or more genre is duplicated..
+        /// </summary>
+        public static string DUPLICATED_GENRES {
+            get {
+                return ResourceManager.GetString("DUPLICATED_GENRES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to One or more studio is duplicated..
+        /// </summary>
+        public static string DUPLICATED_STUDIOS {
+            get {
+                return ResourceManager.GetString("DUPLICATED_STUDIOS", resourceCulture);
             }
         }
         
@@ -114,6 +204,33 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The search query cannot be empty..
+        /// </summary>
+        public static string EMPTY_QUERY {
+            get {
+                return ResourceManager.GetString("EMPTY_QUERY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid episode count..
+        /// </summary>
+        public static string EPISODE_COUNT_INVALID {
+            get {
+                return ResourceManager.GetString("EPISODE_COUNT_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to When anime is finished the anime episodes must be specified..
+        /// </summary>
+        public static string EPISODE_MUST_BE_SPECIFIED {
+            get {
+                return ResourceManager.GetString("EPISODE_MUST_BE_SPECIFIED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The code is expired..
         /// </summary>
         public static string EXPIRED_CODE {
@@ -137,6 +254,33 @@ namespace UserAnimeList.Exception {
         public static string GENRE_ALREADY_REGISTERED {
             get {
                 return ResourceManager.GetString("GENRE_ALREADY_REGISTERED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified genre was not found..
+        /// </summary>
+        public static string GENRE_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("GENRE_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Genres for the anime cannot be null..
+        /// </summary>
+        public static string GENRES_CANNOT_BE_NULL {
+            get {
+                return ResourceManager.GetString("GENRES_CANNOT_BE_NULL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The following genres entered are invalid: .
+        /// </summary>
+        public static string INVALID_GENRES_IN_REQUEST {
+            get {
+                return ResourceManager.GetString("INVALID_GENRES_IN_REQUEST", resourceCulture);
             }
         }
         
@@ -195,6 +339,15 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The following studios entered are invalid: .
+        /// </summary>
+        public static string INVALID_STUDIOS_IN_REQUEST {
+            get {
+                return ResourceManager.GetString("INVALID_STUDIOS_IN_REQUEST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Authentication token is invalid..
         /// </summary>
         public static string INVALID_TOKEN {
@@ -218,6 +371,15 @@ namespace UserAnimeList.Exception {
         public static string NAME_EMPTY {
             get {
                 return ResourceManager.GetString("NAME_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The name entered exceeds .
+        /// </summary>
+        public static string NAME_EXCEEDS {
+            get {
+                return ResourceManager.GetString("NAME_EXCEEDS", resourceCulture);
             }
         }
         
@@ -303,6 +465,33 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The search query must be at least three characters long..
+        /// </summary>
+        public static string QUERY_TOO_SHORT {
+            get {
+                return ResourceManager.GetString("QUERY_TOO_SHORT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anime source type entered is not valid..
+        /// </summary>
+        public static string SOURCE_NOT_SUPPORTED {
+            get {
+                return ResourceManager.GetString("SOURCE_NOT_SUPPORTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anime status entered is not valid..
+        /// </summary>
+        public static string STATUS_NOT_SUPPORTED {
+            get {
+                return ResourceManager.GetString("STATUS_NOT_SUPPORTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The Studio is already registered..
         /// </summary>
         public static string STUDIO_ALREADY_REGISTERED {
@@ -321,11 +510,38 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Studios for the anime cannot be null..
+        /// </summary>
+        public static string STUDIOS_CANNOT_BE_NULL {
+            get {
+                return ResourceManager.GetString("STUDIOS_CANNOT_BE_NULL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified synopsis exceeds the maximum character length of 5000..
+        /// </summary>
+        public static string SYNOPSIS_EXCEEDS_LIMIT {
+            get {
+                return ResourceManager.GetString("SYNOPSIS_EXCEEDS_LIMIT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Token expired..
         /// </summary>
         public static string TOKEN_EXPIRED {
             get {
                 return ResourceManager.GetString("TOKEN_EXPIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anime type entered is not valid..
+        /// </summary>
+        public static string TYPE_NOT_SUPPORTED {
+            get {
+                return ResourceManager.GetString("TYPE_NOT_SUPPORTED", resourceCulture);
             }
         }
         

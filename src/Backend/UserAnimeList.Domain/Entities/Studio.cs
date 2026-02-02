@@ -5,4 +5,7 @@ public class Studio : EntityBase
     public string Name { get; set; } = string.Empty;
     public string NameNormalized { get; set; } = string.Empty;
     public string Description { get; set; } =  string.Empty;
+    
+    
+    public ICollection<AnimeStudio> Animes { get; set; } = new List<AnimeStudio>();
 }

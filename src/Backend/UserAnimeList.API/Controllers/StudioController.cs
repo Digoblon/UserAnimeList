@@ -41,7 +41,7 @@ public class StudioController : UserAnimeListBaseController
         [ProducesResponseType(typeof(ResponseStudiosJson), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> GetStudioByName([FromServices] IGetStudioByNameUseCase useCase,
-            [FromBody]RequestStudioGetByName request)
+            [FromBody]RequestStudioGetByNameJson request)
         {
             var response = await useCase.Execute(request);
             if(response.Studios.Any())   

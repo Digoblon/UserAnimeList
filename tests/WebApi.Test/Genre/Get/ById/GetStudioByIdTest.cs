@@ -51,7 +51,7 @@ public class GetGenreByIdTest : UserAnimeListClassFixture
 
         var errors = responseData.RootElement.GetProperty("errors").EnumerateArray();
         
-        var expectedMessage = ResourceMessagesException.ResourceManager.GetString("STUDIO_NOT_FOUND",new  CultureInfo(culture));
+        var expectedMessage = ResourceMessagesException.ResourceManager.GetString("GENRE_NOT_FOUND",new  CultureInfo(culture));
         
         Assert.Single(errors);
         Assert.Equal(expectedMessage,errors.First().GetString());

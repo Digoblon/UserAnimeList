@@ -1,5 +1,4 @@
 using Mapster;
-using MapsterMapper;
 using UserAnimeList.Communication.Requests;
 using UserAnimeList.Domain.Entities;
 
@@ -17,5 +16,10 @@ public class MapsterMapper : IAppMapper
     public TDestination Map<TDestination>(object source)
     {
         return source.Adapt<TDestination>(_config);
+    }
+
+    public Anime UpdateToAnime(Anime anime, RequestAnimeJson request)
+    {
+        return request.Adapt(anime, AnimeMapping.UpdateConfig());
     }
 }

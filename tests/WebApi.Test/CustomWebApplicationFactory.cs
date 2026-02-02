@@ -18,6 +18,7 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
     private UserAnimeList.Domain.Entities.User _user = null!;
     private UserAnimeList.Domain.Entities.Studio _studio = null!;
     private UserAnimeList.Domain.Entities.Genre _genre = null!;
+    private UserAnimeList.Domain.Entities.Anime _anime = null!;
     
     private RefreshToken _refreshToken = null!;
     
@@ -64,7 +65,9 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
 
     public Guid GetGenreId() => _genre.Id;
     public string GetGenreName() => _genre.Name;
-    
+
+    public Guid GetAnimeId() => _anime.Id;
+    public string GetAnimeName() => _anime.Name;
 
 
     private void StartDatabase(UserAnimeListDbContext dbContext)
@@ -73,14 +76,35 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
         _user.Role = UserRole.Admin;
         _studio = StudioBuilder.Build();
         _genre  = GenreBuilder.Build();
+        _anime = AnimeBuilder.Build();
+        AddAnimeStudioGenre();
 
         _refreshToken = RefreshTokenBuilder.Build(_user);
 
         dbContext.Users.Add(_user);
         dbContext.Studios.Add(_studio);
         dbContext.Genres.Add(_genre);
+        dbContext.Animes.Add(_anime);
         dbContext.RefreshTokens.Add(_refreshToken);
 
         dbContext.SaveChanges();
+    }
+
+    private void AddAnimeStudioGenre()
+    {
+        _anime.Genres.Clear();
+        var genres = new AnimeGenre()
+        {
+            AnimeId = _anime.Id,
+            GenreId = _genre.Id
+        };
+        _anime.Genres.Add(genres);
+        _anime.Studios.Clear();
+        var studios = new AnimeStudio
+        {
+            StudioId = _studio.Id,
+            AnimeId = _anime.Id,
+        };
+        _anime.Studios.Add(studios);
     }
 }

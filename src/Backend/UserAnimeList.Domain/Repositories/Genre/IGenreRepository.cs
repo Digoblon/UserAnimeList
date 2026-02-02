@@ -8,4 +8,5 @@ public interface IGenreRepository
     Task<Entities.Genre?> GetById (string id);
     Task<Entities.Genre?> GetByName (string name);
     Task<IList<Entities.Genre>> SearchByName (string name);
+    Task<IList<Guid>> GetGenresInList(IList<Guid> genres);
 }

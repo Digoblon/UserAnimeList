@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Http;
 using UserAnimeList.Domain.Repositories;
+using UserAnimeList.Domain.Repositories.Anime;
 using UserAnimeList.Domain.Repositories.Genre;
 using UserAnimeList.Domain.Repositories.Studio;
 using UserAnimeList.Domain.Repositories.Token;
@@ -61,6 +62,7 @@ public static class DependencyInjectionExtension
         services.AddScoped<IRefreshTokenValidator, RefreshTokenValidator>();
         services.AddScoped<IStudioRepository, StudioRepository>();
         services.AddScoped<IGenreRepository, GenreRepository>();
+        services.AddScoped<IAnimeRepository, AnimeRepository>();
 
     } 
 

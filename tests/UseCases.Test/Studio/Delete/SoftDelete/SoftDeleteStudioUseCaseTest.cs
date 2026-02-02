@@ -1,6 +1,8 @@
 using CommonTestUtilities.Entities;
 using CommonTestUtilities.Repositories;
 using UserAnimeList.Application.UseCases.Studio.Delete.SoftDelete;
+using UserAnimeList.Exception;
+using UserAnimeList.Exception.Exceptions;
 
 namespace UseCases.Test.Studio.Delete.SoftDelete;
 
@@ -19,7 +21,7 @@ public class SoftDeleteStudioUseCaseTest
     }
     
     [Fact]
-    public async Task Error_User_Not_Active()
+    public async Task Error_Genre_Not_Active()
     {
         var studio = StudioBuilder.Build();
         studio.IsActive = false;
@@ -29,6 +31,22 @@ public class SoftDeleteStudioUseCaseTest
         Func<Task> act = async () => await useCase.Execute(studio.Id.ToString());
 
         await act();
+    }
+    
+    [Fact]
+    public async Task Error_Studio_Not_Found()
+    {
+        var studio = StudioBuilder.Build();
+
+        var useCase = CreateUseCase(studio);
+        
+        Func<Task> act = async () => await useCase.Execute(Guid.NewGuid().ToString());
+
+
+        var exception = await Assert.ThrowsAsync<NotFoundException>(act);
+        
+        Assert.Single(exception.GetErrorMessages());
+        Assert.Equal(ResourceMessagesException.STUDIO_NOT_FOUND, exception.GetErrorMessages().FirstOrDefault());
     }
     
     

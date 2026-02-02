@@ -15,13 +15,13 @@ public class GetStudioByNameUseCaseTest
 
         var useCase = CreateUseCase(studio);
 
-        var request = new RequestStudioGetByName
+        var request = new RequestStudioGetByNameJson
         {
             Name = studio.Name
         };
         var result = await useCase.Execute(request);
         
-        Assert.NotNull(result.Studios);
+        Assert.NotEmpty(result.Studios);
         Assert.Single(result.Studios);
         Assert.Equal(studio.Name, result.Studios.First().Name);
         Assert.Equal(studio.Description, result.Studios.First().Description);
@@ -34,7 +34,7 @@ public class GetStudioByNameUseCaseTest
 
         var useCase = CreateUseCase(studio);
 
-        var request = new RequestStudioGetByName
+        var request = new RequestStudioGetByNameJson
         {
             Name = "aaaaaaaaaa"
         };

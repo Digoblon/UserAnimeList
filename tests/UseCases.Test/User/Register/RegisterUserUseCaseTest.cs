@@ -24,11 +24,6 @@ public class RegisterUserUseCaseTest
         Assert.NotNull(result);
         Assert.Equal(request.UserName, result.UserName);
         Assert.Equal(request.Password,request.ConfirmPassword);
-        
-        //result.Should().NotBeNull();
-        //result.Tokens.Should().NotBeNull();
-        //result.Name.Should().Be(request.Name);
-        //result.Tokens.AccessToken.Should().NotBeNullOrEmpty();
     }
     
     [Fact]
@@ -46,11 +41,7 @@ public class RegisterUserUseCaseTest
         var errors = exception.GetErrorMessages();
 
         Assert.Single(errors);
-        Assert.Contains(ResourceMessagesException.EMAIL_ALREADY_REGISTERED, errors);
-
-        
-        //(await act.Should().ThrowAsync<ErrorOnValidationException>()).Where(e => e.GetErrorMessages().Count == 1 && e.GetErrorMessages().Contains(ResourceMessagesException.EMAIL_ALREADY_REGISTERED));
-        
+        Assert.Contains(ResourceMessagesException.EMAIL_ALREADY_REGISTERED, errors); 
     }
     
     [Fact]

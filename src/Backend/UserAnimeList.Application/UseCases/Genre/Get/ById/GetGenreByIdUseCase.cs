@@ -22,7 +22,7 @@ public class GetGenreByIdUseCase : IGetGenreByIdUseCase
         var genre = await _repository.GetById(id);
 
         if (genre is null || !genre.IsActive)
-            throw new NotFoundException(ResourceMessagesException.STUDIO_NOT_FOUND);
+            throw new NotFoundException(ResourceMessagesException.GENRE_NOT_FOUND);
         
         var response = _mapper.Map<ResponseGenreJson>(genre);
         

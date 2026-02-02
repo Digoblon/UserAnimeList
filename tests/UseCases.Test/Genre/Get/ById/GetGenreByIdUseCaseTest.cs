@@ -36,7 +36,7 @@ public class GetGenreByIdUseCaseTest
         var exception = await Assert.ThrowsAsync<NotFoundException>(act);
 
         Assert.Single(exception.GetErrorMessages());
-        Assert.Equal(ResourceMessagesException.STUDIO_NOT_FOUND, exception.GetErrorMessages().FirstOrDefault());
+        Assert.Equal(ResourceMessagesException.GENRE_NOT_FOUND, exception.GetErrorMessages().FirstOrDefault());
     }
 
     private static GetGenreByIdUseCase CreateUseCase(UserAnimeList.Domain.Entities.Genre genre)
