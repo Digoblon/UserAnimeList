@@ -10,6 +10,7 @@ public class User : EntityBase
     public int TokenVersion { get; private set; } = 1;
     public UserRole Role { get; set; } = UserRole.User;
     public ICollection<RefreshToken> RefreshTokens { get; set; } = new List<RefreshToken>();
+    public ICollection<UserAnimeList> AnimeList { get; set; } = [];
     
     public void IncrementTokenVersion()
     {

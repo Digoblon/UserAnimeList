@@ -14,6 +14,7 @@ public class Anime : EntityBase
     public AnimeType Type { get; set; }
     public DateOnly? AiredFrom { get; set; }
     public DateOnly? AiredUntil { get; set; }
+    public ICollection<UserAnimeList> UserEntries = [];
     public (Season Season, int Year)? Premiered
     {
         get
