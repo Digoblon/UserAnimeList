@@ -10,7 +10,7 @@ using UserAnimeList.Domain.Services.LoggedUser;
 using UserAnimeList.Exception;
 using UserAnimeList.Exception.Exceptions;
 
-namespace UserAnimeList.Application.UseCases.UserAnimeList.AddEntry;
+namespace UserAnimeList.Application.UseCases.AnimeList.AddEntry;
 
 public class AddAnimeListEntryUseCase : IAddAnimeListEntryUseCase
 {
@@ -43,7 +43,7 @@ public class AddAnimeListEntryUseCase : IAddAnimeListEntryUseCase
         
         await Validate(request, user, anime);
         
-        var animeList = _mapper.Map<Domain.Entities.UserAnimeList>(request);
+        var animeList = _mapper.Map<Domain.Entities.AnimeList>(request);
         animeList.UserId = user.Id;
         animeList.AnimeId = anime.Id;
 

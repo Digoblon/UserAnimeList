@@ -7,6 +7,12 @@ using UserAnimeList.Application.UseCases.Anime.Get.ById;
 using UserAnimeList.Application.UseCases.Anime.Register;
 using UserAnimeList.Application.UseCases.Anime.Search;
 using UserAnimeList.Application.UseCases.Anime.Update;
+using UserAnimeList.Application.UseCases.AnimeList.AddEntry;
+using UserAnimeList.Application.UseCases.AnimeList.Delete;
+using UserAnimeList.Application.UseCases.AnimeList.Get.ById;
+using UserAnimeList.Application.UseCases.AnimeList.List.ByUserId;
+using UserAnimeList.Application.UseCases.AnimeList.List.Me;
+using UserAnimeList.Application.UseCases.AnimeList.Update;
 using UserAnimeList.Application.UseCases.Genre.Delete.SoftDelete;
 using UserAnimeList.Application.UseCases.Genre.Get.ById;
 using UserAnimeList.Application.UseCases.Genre.Get.ByName;
@@ -24,12 +30,6 @@ using UserAnimeList.Application.UseCases.User.Delete.SoftDelete;
 using UserAnimeList.Application.UseCases.User.Profile;
 using UserAnimeList.Application.UseCases.User.Register;
 using UserAnimeList.Application.UseCases.User.Update;
-using UserAnimeList.Application.UseCases.UserAnimeList.AddEntry;
-using UserAnimeList.Application.UseCases.UserAnimeList.Delete;
-using UserAnimeList.Application.UseCases.UserAnimeList.Get.ById;
-using UserAnimeList.Application.UseCases.UserAnimeList.List;
-using UserAnimeList.Application.UseCases.UserAnimeList.List.Me;
-using UserAnimeList.Application.UseCases.UserAnimeList.Update;
 
 namespace UserAnimeList.Application;
 

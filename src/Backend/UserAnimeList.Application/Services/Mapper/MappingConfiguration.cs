@@ -23,13 +23,13 @@ public class MappingConfiguration : IMappingConfiguration
         config.NewConfig<Anime, ResponseShortAnimeJson>()
             .IgnoreNullValues(true);
 
-        config.NewConfig<RequestUpdateAnimeListEntryJson, Domain.Entities.UserAnimeList>()
+        config.NewConfig<RequestUpdateAnimeListEntryJson, Domain.Entities.AnimeList>()
             .IgnoreNullValues(true)
             .Ignore(dest => dest.Id)
             .Ignore(dest => dest.UserId)
             .Ignore(dest => dest.AnimeId);
         
-        config.NewConfig<Domain.Entities.UserAnimeList, ResponseShortAnimeListEntryJson>()
+        config.NewConfig<Domain.Entities.AnimeList, ResponseShortAnimeListEntryJson>()
             .Map(dest => dest.Name, src => src.Anime.Name);
     }
 }

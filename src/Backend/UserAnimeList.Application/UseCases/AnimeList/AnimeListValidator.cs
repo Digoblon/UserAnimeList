@@ -2,7 +2,7 @@ using FluentValidation;
 using UserAnimeList.Communication.Requests;
 using UserAnimeList.Exception;
 
-namespace UserAnimeList.Application.UseCases.UserAnimeList;
+namespace UserAnimeList.Application.UseCases.AnimeList;
 
 public class AnimeListValidator : AbstractValidator<RequestAnimeListEntryJson>
 {

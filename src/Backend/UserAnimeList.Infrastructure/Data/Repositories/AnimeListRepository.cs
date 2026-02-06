@@ -8,38 +8,38 @@ using AnimeEntryStatus = UserAnimeList.Domain.Enums.AnimeEntryStatus;
 
 namespace UserAnimeList.Infrastructure.Data.Repositories;
 
-public class UserAnimeListRepository : IUserAnimeListRepository
+public class AnimeListRepository : IUserAnimeListRepository
 {
     private readonly UserAnimeListDbContext _dbContext;
     
-    public UserAnimeListRepository(UserAnimeListDbContext dbContext)
+    public AnimeListRepository(UserAnimeListDbContext dbContext)
     {
         _dbContext = dbContext;
     }
     
-    public async Task Add(Domain.Entities.UserAnimeList animeList) => await _dbContext.UserAnimeLists.AddAsync(animeList);
-    public void Update(Domain.Entities.UserAnimeList animeList) => _dbContext.UserAnimeLists.Update(animeList);
-    public void Delete(Domain.Entities.UserAnimeList animeList) =>  _dbContext.UserAnimeLists.Remove(animeList);
+    public async Task Add(Domain.Entities.AnimeList animeList) => await _dbContext.AnimeLists.AddAsync(animeList);
+    public void Update(Domain.Entities.AnimeList animeList) => _dbContext.AnimeLists.Update(animeList);
+    public void Delete(Domain.Entities.AnimeList animeList) =>  _dbContext.AnimeLists.Remove(animeList);
     
 
     public async Task<bool> ExistsEntry(Guid userId, Guid animeId)
-        => await _dbContext.UserAnimeLists.AnyAsync(l => l.UserId == userId && l.AnimeId == animeId);
+        => await _dbContext.AnimeLists.AnyAsync(l => l.UserId == userId && l.AnimeId == animeId);
 
-    public async Task<Domain.Entities.UserAnimeList?> GetById(string id, Guid userId)
+    public async Task<Domain.Entities.AnimeList?> GetById(string id, Guid userId)
     {
         if(!Guid.TryParse(id, out var animeListId))
             throw new InvalidIdException(ResourceMessagesException.INVALID_ID);
 
-        return await _dbContext.UserAnimeLists
+        return await _dbContext.AnimeLists
             .AsNoTracking()
             .Include(l => l.User)
             .Include(l => l.Anime)
             .FirstOrDefaultAsync(l =>  l.IsActive && l.UserId == userId && (l.Id == animeListId || l.AnimeId == animeListId));
     }
 
-    public async Task<IList<Domain.Entities.UserAnimeList>> List(Guid userId, RequestAnimeListEntryFilterJson filter)
+    public async Task<IList<Domain.Entities.AnimeList>> List(Guid userId, RequestAnimeListEntryFilterJson filter)
     {
-        var query = _dbContext.UserAnimeLists
+        var query = _dbContext.AnimeLists
             .AsNoTracking()
             .Include(l => l.Anime)
             .Where(l => l.UserId == userId);

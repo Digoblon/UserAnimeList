@@ -23,11 +23,11 @@ public class AnimeValidatorTest
     [InlineData(null)]
     [InlineData("       ")]
     [InlineData("")]
-    public void Error_Name_Empty(string name)
+    public void Error_Name_Empty(string? name)
     {
         var validator = new AnimeValidator();
         var request = RequestAnimeJsonBuilder.Build();
-        request.Name = name;
+        request.Name = name!;
         
         var result = validator.Validate(request);
         

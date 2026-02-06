@@ -1,10 +1,11 @@
 using CommonTestUtilities.Entities;
+using UserAnimeList.Domain.Entities;
 using UserAnimeList.Domain.ValueObjects;
 using UserAnimeList.Exception;
 using UserAnimeList.Exception.Exceptions;
 using UserAnimeList.Infrastructure.Security.Tokens.Refresh;
 
-namespace Validators.Test.Token.RefreshToken;
+namespace Validators.Test.Token.RefreshTokenTest;
 
 public class RefreshTokenValidatorTest
 {
@@ -27,7 +28,7 @@ public class RefreshTokenValidatorTest
     {
         var validator = new RefreshTokenValidator();
         
-        UserAnimeList.Domain.Entities.RefreshToken refreshToken = null!;
+        RefreshToken refreshToken = null!;
 
         var act = () => validator.Validate(refreshToken);
 

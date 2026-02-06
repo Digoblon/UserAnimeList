@@ -20,8 +20,4 @@
       <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.11" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="UseCases\UserAnimeList\List\ByUserId\" />
-    </ItemGroup>
-
 </Project>

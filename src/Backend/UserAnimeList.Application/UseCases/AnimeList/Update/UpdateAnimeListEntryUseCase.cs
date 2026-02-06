@@ -8,7 +8,7 @@ using UserAnimeList.Domain.Services.LoggedUser;
 using UserAnimeList.Exception;
 using UserAnimeList.Exception.Exceptions;
 
-namespace UserAnimeList.Application.UseCases.UserAnimeList.Update;
+namespace UserAnimeList.Application.UseCases.AnimeList.Update;
 
 public class UpdateAnimeListEntryUseCase : IUpdateAnimeListEntryUseCase
 {
@@ -44,7 +44,7 @@ public class UpdateAnimeListEntryUseCase : IUpdateAnimeListEntryUseCase
         
         await Validate(request, anime);
 
-        animeList = _mapper.Map<Domain.Entities.UserAnimeList>(request);
+        animeList = _mapper.Map<Domain.Entities.AnimeList>(request);
 
         animeList.Id = animeListId;
         animeList.AnimeId = anime.Id;

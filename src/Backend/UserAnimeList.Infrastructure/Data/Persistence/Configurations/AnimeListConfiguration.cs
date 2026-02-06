@@ -3,13 +3,13 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace UserAnimeList.Infrastructure.Data.Persistence.Configurations;
 
-public class UserAnimeListConfiguration : BaseEntityConfiguration<Domain.Entities.UserAnimeList>
+public class AnimeListConfiguration : BaseEntityConfiguration<Domain.Entities.AnimeList>
 {
-    public override void Configure(EntityTypeBuilder<Domain.Entities.UserAnimeList> builder)
+    public override void Configure(EntityTypeBuilder<Domain.Entities.AnimeList> builder)
     {
         base.Configure(builder);
         
-        builder.ToTable("UserAnimeLists");
+        builder.ToTable("AnimeLists");
         
         builder.HasIndex(x => new  { x.UserId, x.AnimeId })
             .IsUnique();

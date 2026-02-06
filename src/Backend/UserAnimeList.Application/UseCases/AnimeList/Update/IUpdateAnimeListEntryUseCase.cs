@@ -1,6 +1,6 @@
 using UserAnimeList.Communication.Requests;
 
-namespace UserAnimeList.Application.UseCases.UserAnimeList.Update;
+namespace UserAnimeList.Application.UseCases.AnimeList.Update;
 
 public interface IUpdateAnimeListEntryUseCase
 {

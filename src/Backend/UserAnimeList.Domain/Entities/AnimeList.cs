@@ -2,7 +2,7 @@ using UserAnimeList.Domain.Enums;
 
 namespace UserAnimeList.Domain.Entities;
 
-public class UserAnimeList : EntityBase
+public class AnimeList : EntityBase
 {
     public Guid AnimeId { get; set; }
     public Guid UserId { get; set; }

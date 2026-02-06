@@ -1,27 +1,28 @@
-using UserAnimeList.Domain.Repositories;
+using UserAnimeList.Application.Services.Mapper;
+using UserAnimeList.Communication.Responses;
 using UserAnimeList.Domain.Repositories.UserAnimeList;
 using UserAnimeList.Domain.Services.LoggedUser;
 using UserAnimeList.Exception;
 using UserAnimeList.Exception.Exceptions;
 
-namespace UserAnimeList.Application.UseCases.UserAnimeList.Delete;
-
-public class DeleteAnimeListEntryUseCase : IDeleteAnimeListEntryUseCase
+namespace UserAnimeList.Application.UseCases.AnimeList.Get.ById;
+ 
+public class GetAnimeListEntryByIdUseCase : IGetAnimeListEntryByIdUseCase
 {
+    private readonly IAppMapper _mapper;
     private readonly ILoggedUser _loggedUser;
     private readonly IUserAnimeListRepository _animeListRepository;
-    private readonly IUnitOfWork _unitOfWork;
     
-    public DeleteAnimeListEntryUseCase(ILoggedUser loggedUser,
-    IUserAnimeListRepository animeListRepository,
-        IUnitOfWork unitOfWork)
+    public GetAnimeListEntryByIdUseCase(IAppMapper mapper, 
+        ILoggedUser loggedUser,
+        IUserAnimeListRepository animeListRepository)
     {
+        _mapper = mapper;
         _loggedUser = loggedUser;
         _animeListRepository = animeListRepository;
-        _unitOfWork = unitOfWork;
     }
     
-    public async Task Execute(string id)
+    public async Task<ResponseAnimeListEntryJson> Execute(string id)
     {
         var loggedUser = await _loggedUser.User();
 
@@ -30,8 +31,7 @@ public class DeleteAnimeListEntryUseCase : IDeleteAnimeListEntryUseCase
         if (animeList is null)
             throw new NotFoundException(ResourceMessagesException.ANIME_LIST_INVALID);
         
-        _animeListRepository.Delete(animeList);
-        
-        await _unitOfWork.Commit();
+        var response = _mapper.Map<ResponseAnimeListEntryJson>(animeList);
+        return response;
     }
 }

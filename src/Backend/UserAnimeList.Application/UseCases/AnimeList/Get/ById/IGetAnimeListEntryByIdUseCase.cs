@@ -1,6 +1,6 @@
 using UserAnimeList.Communication.Responses;
 
-namespace UserAnimeList.Application.UseCases.UserAnimeList.Get.ById;
+namespace UserAnimeList.Application.UseCases.AnimeList.Get.ById;
 
 public interface IGetAnimeListEntryByIdUseCase
 {

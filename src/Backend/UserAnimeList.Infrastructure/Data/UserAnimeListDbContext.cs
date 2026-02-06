@@ -12,7 +12,7 @@ public class UserAnimeListDbContext(DbContextOptions<UserAnimeListDbContext> opt
     public DbSet<Anime> Animes { get; set; }
     public DbSet<AnimeStudio> AnimeStudios { get; set; }
     public DbSet<AnimeGenre> AnimeGenres { get; set; }
-    public DbSet<Domain.Entities.UserAnimeList>  UserAnimeLists { get; set; }
+    public DbSet<AnimeList>  AnimeLists { get; set; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

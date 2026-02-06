@@ -1,4 +1,4 @@
-namespace UserAnimeList.Application.UseCases.UserAnimeList.Delete;
+namespace UserAnimeList.Application.UseCases.AnimeList.Delete;
 
 public interface IDeleteAnimeListEntryUseCase
 {

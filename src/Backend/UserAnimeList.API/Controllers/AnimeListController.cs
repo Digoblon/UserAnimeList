@@ -1,17 +1,17 @@
 using Microsoft.AspNetCore.Mvc;
-using UserAnimeList.Application.UseCases.UserAnimeList.AddEntry;
-using UserAnimeList.Application.UseCases.UserAnimeList.Delete;
-using UserAnimeList.Application.UseCases.UserAnimeList.Get.ById;
-using UserAnimeList.Application.UseCases.UserAnimeList.List;
-using UserAnimeList.Application.UseCases.UserAnimeList.List.Me;
-using UserAnimeList.Application.UseCases.UserAnimeList.Update;
+using UserAnimeList.Application.UseCases.AnimeList.AddEntry;
+using UserAnimeList.Application.UseCases.AnimeList.Delete;
+using UserAnimeList.Application.UseCases.AnimeList.Get.ById;
+using UserAnimeList.Application.UseCases.AnimeList.List.ByUserId;
+using UserAnimeList.Application.UseCases.AnimeList.List.Me;
+using UserAnimeList.Application.UseCases.AnimeList.Update;
 using UserAnimeList.Attributes;
 using UserAnimeList.Communication.Requests;
 using UserAnimeList.Communication.Responses;
 
 namespace UserAnimeList.Controllers;
 
-public class UserAnimeListController : UserAnimeListBaseController
+public class AnimeListController : UserAnimeListBaseController
 {
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
@@ -38,35 +38,6 @@ public class UserAnimeListController : UserAnimeListBaseController
         
         return Ok(result);
     }
-    
-    /*
-    [HttpPost("me/filter")]
-    [ProducesResponseType(typeof(ResponseAnimeListsJson), StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status204NoContent)]
-    public async Task<IActionResult> Search([FromServices] IFilterAnimeListEntryUseCase useCase,
-        [FromBody]RequestAnimeListEntryFilterJson request)
-    {
-        var response = await useCase.Execute(request);
-        if(response.Lists.Any())   
-            return Ok(response);
-
-        return NoContent();
-    }
-    
-    [HttpPost("filter/{userId}")]
-    [ProducesResponseType(typeof(ResponseAnimeListsJson), StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status204NoContent)]
-    public async Task<IActionResult> Search([FromServices] IFilterAnimeListEntryByUserIdUseCase useCase,
-        [FromBody]RequestAnimeListEntryFilterJson request,
-        [FromRoute]string userId)
-    {
-        var response = await useCase.Execute(request,userId);
-        if(response.Lists.Any())   
-            return Ok(response);
-
-        return NoContent();
-    }
-    */
     
     [HttpGet("list/{userId}")]
     [ProducesResponseType(typeof(ResponseAnimeListsJson), StatusCodes.Status200OK)]
