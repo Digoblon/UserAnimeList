@@ -24,6 +24,12 @@ using UserAnimeList.Application.UseCases.User.Delete.SoftDelete;
 using UserAnimeList.Application.UseCases.User.Profile;
 using UserAnimeList.Application.UseCases.User.Register;
 using UserAnimeList.Application.UseCases.User.Update;
+using UserAnimeList.Application.UseCases.UserAnimeList.AddEntry;
+using UserAnimeList.Application.UseCases.UserAnimeList.Delete;
+using UserAnimeList.Application.UseCases.UserAnimeList.Get.ById;
+using UserAnimeList.Application.UseCases.UserAnimeList.List;
+using UserAnimeList.Application.UseCases.UserAnimeList.List.Me;
+using UserAnimeList.Application.UseCases.UserAnimeList.Update;
 
 namespace UserAnimeList.Application;
 
@@ -69,5 +75,11 @@ public static class DependencyInjectionExtension
         services.AddScoped<IGetAnimeByIdUseCase, GetAnimeByIdUseCase>();
         services.AddScoped<ISoftDeleteAnimeUseCase, SoftDeleteAnimeUseCase>();
         services.AddScoped<ISearchAnimeUseCase, SearchAnimeUseCase>();
+        services.AddScoped<IAddAnimeListEntryUseCase, AddAnimeListEntryUseCase>();
+        services.AddScoped<IUpdateAnimeListEntryUseCase, UpdateAnimeListEntryUseCase>();
+        services.AddScoped<IDeleteAnimeListEntryUseCase, DeleteAnimeListEntryUseCase>();
+        services.AddScoped<IGetAnimeListEntryByIdUseCase, GetAnimeListEntryByIdUseCase>();
+        services.AddScoped<IListAnimeByUserIdUseCase, ListAnimeByUserIdUseCase>();
+        services.AddScoped<IListAnimeUseCase, ListAnimeUseCase>();
     }
 }

@@ -78,7 +78,6 @@ public class AnimeValidator : AbstractValidator<RequestAnimeJson>
             RuleFor(a => a.Episodes)
                 .Cascade(CascadeMode.Stop)
                 .NotNull().WithMessage(ResourceMessagesException.EPISODE_MUST_BE_SPECIFIED);
-            //.GreaterThan(0).WithMessage(ResourceMessagesException.EPISODE_COUNT_INVALID);
         });
 
         When(a => a.Status == AnimeStatus.Airing, () =>
