@@ -144,9 +144,6 @@
   <data name="DUPLICATED_STUDIOS" xml:space="preserve">
     <value>One or more studio is duplicated.</value>
   </data>
-  <data name="NAME_EXCEEDS" xml:space="preserve">
-    <value>The name entered exceeds </value>
-  </data>
   <data name="ANIME_EXCEEDS_LIMIT" xml:space="preserve">
     <value>The anime name exceeds the limit of 256 characters</value>
   </data>
@@ -197,5 +194,20 @@
   </data>
   <data name="SYNOPSIS_EXCEEDS_LIMIT" xml:space="preserve">
     <value>The specified synopsis exceeds the maximum character length of 5000.</value>
+  </data>
+  <data name="ANIME_LIST_DATE_FINISHED_EARLIER_DATE_STARTED" xml:space="preserve">
+    <value>The date finished cannot be earlier than date started.</value>
+  </data>
+  <data name="ANIME_LIST_SCORE_INVALID" xml:space="preserve">
+    <value>The anime score must be between 1 and 10.</value>
+  </data>
+  <data name="ANIME_LIST_INVALID_STATUS" xml:space="preserve">
+    <value>The status for the anime is invalid.</value>
+  </data>
+  <data name="ANIME_LIST_ENTRY_ALREADY_EXISTS" xml:space="preserve">
+    <value>This anime list entry already exists.</value>
+  </data>
+  <data name="ANIME_LIST_INVALID" xml:space="preserve">
+    <value>Anime list invalid or not found.</value>
   </data>
 </root>

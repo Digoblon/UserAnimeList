@@ -123,6 +123,51 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The date finished cannot be earlier than date started..
+        /// </summary>
+        public static string ANIME_LIST_DATE_FINISHED_EARLIER_DATE_STARTED {
+            get {
+                return ResourceManager.GetString("ANIME_LIST_DATE_FINISHED_EARLIER_DATE_STARTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This anime list entry already exists..
+        /// </summary>
+        public static string ANIME_LIST_ENTRY_ALREADY_EXISTS {
+            get {
+                return ResourceManager.GetString("ANIME_LIST_ENTRY_ALREADY_EXISTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anime list invalid or not found..
+        /// </summary>
+        public static string ANIME_LIST_INVALID {
+            get {
+                return ResourceManager.GetString("ANIME_LIST_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The status for the anime is invalid..
+        /// </summary>
+        public static string ANIME_LIST_INVALID_STATUS {
+            get {
+                return ResourceManager.GetString("ANIME_LIST_INVALID_STATUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The anime score must be between 1 and 10..
+        /// </summary>
+        public static string ANIME_LIST_SCORE_INVALID {
+            get {
+                return ResourceManager.GetString("ANIME_LIST_SCORE_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The specified anime is not found..
         /// </summary>
         public static string ANIME_NOT_FOUND {
@@ -371,15 +416,6 @@ namespace UserAnimeList.Exception {
         public static string NAME_EMPTY {
             get {
                 return ResourceManager.GetString("NAME_EMPTY", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The name entered exceeds .
-        /// </summary>
-        public static string NAME_EXCEEDS {
-            get {
-                return ResourceManager.GetString("NAME_EXCEEDS", resourceCulture);
             }
         }
         
