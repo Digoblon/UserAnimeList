@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using UserAnimeList.Communication.Enums;
 using UserAnimeList.Communication.Requests;
-using UserAnimeList.Domain.Repositories.UserAnimeList;
+using UserAnimeList.Domain.Repositories.AnimeList;
 using UserAnimeList.Exception;
 using UserAnimeList.Exception.Exceptions;
 using AnimeEntryStatus = UserAnimeList.Domain.Enums.AnimeEntryStatus;

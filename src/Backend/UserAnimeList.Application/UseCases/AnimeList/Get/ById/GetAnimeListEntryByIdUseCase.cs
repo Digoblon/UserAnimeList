@@ -1,6 +1,6 @@
 using UserAnimeList.Application.Services.Mapper;
 using UserAnimeList.Communication.Responses;
-using UserAnimeList.Domain.Repositories.UserAnimeList;
+using UserAnimeList.Domain.Repositories.AnimeList;
 using UserAnimeList.Domain.Services.LoggedUser;
 using UserAnimeList.Exception;
 using UserAnimeList.Exception.Exceptions;

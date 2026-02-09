@@ -1,5 +1,5 @@
 using UserAnimeList.Domain.Repositories;
-using UserAnimeList.Domain.Repositories.UserAnimeList;
+using UserAnimeList.Domain.Repositories.AnimeList;
 using UserAnimeList.Domain.Services.LoggedUser;
 using UserAnimeList.Exception;
 using UserAnimeList.Exception.Exceptions;

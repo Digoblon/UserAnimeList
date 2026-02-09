@@ -1,6 +1,6 @@
 using UserAnimeList.Communication.Requests;
 
-namespace UserAnimeList.Domain.Repositories.UserAnimeList;
+namespace UserAnimeList.Domain.Repositories.AnimeList;
 
 public interface IAnimeListRepository
 {

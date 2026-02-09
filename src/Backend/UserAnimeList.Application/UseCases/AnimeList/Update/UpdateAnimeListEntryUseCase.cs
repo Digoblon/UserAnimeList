@@ -3,7 +3,7 @@ using UserAnimeList.Application.Services.Mapper;
 using UserAnimeList.Communication.Requests;
 using UserAnimeList.Domain.Repositories;
 using UserAnimeList.Domain.Repositories.Anime;
-using UserAnimeList.Domain.Repositories.UserAnimeList;
+using UserAnimeList.Domain.Repositories.AnimeList;
 using UserAnimeList.Domain.Services.LoggedUser;
 using UserAnimeList.Exception;
 using UserAnimeList.Exception.Exceptions;

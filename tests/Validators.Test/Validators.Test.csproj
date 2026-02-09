@@ -27,8 +27,4 @@
       <ProjectReference Include="..\CommonTestUtilities\CommonTestUtilities.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="UserAnimeList\Update\" />
-    </ItemGroup>
-
 </Project>

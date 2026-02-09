@@ -160,7 +160,7 @@ public class AnimeValidatorTest
     }
     
     [Fact]
-    public void Error_AiredUntil_Earlied_AiredFrom()
+    public void Error_AiredUntil_Earlier_AiredFrom()
     {
         var validator = new AnimeValidator();
         var request = RequestAnimeJsonBuilder.Build();

@@ -6,23 +6,23 @@ using UserAnimeList.Enums;
 using UserAnimeList.Exception;
 using WebApi.Test.InlineData;
 
-namespace WebApi.Test.Anime.Delete.SoftDelete;
+namespace WebApi.Test.AnimeList.Delete;
 
-public class AnimeSoftDeleteTest : UserAnimeListClassFixture
+public class DeleteAnimeListEntryTest : UserAnimeListClassFixture
 {
-    private const string Method = "anime";
+    private const string Method = "animelist";
     
     private readonly Guid _id;
     private readonly int _tokenVersion;
     private readonly UserRole _userRole;
-    private readonly Guid _animeId;
+    private readonly Guid _animeListId;
     
-    public AnimeSoftDeleteTest(CustomWebApplicationFactory factory) : base(factory)
+    public DeleteAnimeListEntryTest(CustomWebApplicationFactory factory) : base(factory)
     {
         _id = factory.GetId();
         _tokenVersion = factory.GetTokenVersion();
         _userRole = factory.GetRole();
-        _animeId = factory.GetAnimeId();
+        _animeListId = factory.GetAnimeListId();
     }
     
     [Fact]
@@ -30,14 +30,14 @@ public class AnimeSoftDeleteTest : UserAnimeListClassFixture
     {
         var token = JwtTokenGeneratorBuilder.Build().Generate(_id, _tokenVersion,_userRole);
         
-        var response = await DoDelete($"{Method}/{_animeId}",token);
+        var response = await DoDelete($"{Method}/{_animeListId}",token);
 
         Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
     }
     
     [Theory]
     [ClassData(typeof(CultureInlineDataTest))]
-    public async Task Error_Anime_Not_Found(string culture)
+    public async Task Error_List_Not_Found(string culture)
     {
         var id = Guid.NewGuid();
         
@@ -53,7 +53,7 @@ public class AnimeSoftDeleteTest : UserAnimeListClassFixture
 
         var errors = responseData.RootElement.GetProperty("errors").EnumerateArray();
         
-        var expectedMessage = ResourceMessagesException.ResourceManager.GetString("ANIME_NOT_FOUND",new  CultureInfo(culture));
+        var expectedMessage = ResourceMessagesException.ResourceManager.GetString("ANIME_LIST_INVALID",new  CultureInfo(culture));
         
         Assert.Single(errors);
         Assert.Equal(expectedMessage,errors.First().GetString());
