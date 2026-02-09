@@ -11,11 +11,11 @@ public class GetAnimeListEntryByIdUseCase : IGetAnimeListEntryByIdUseCase
 {
     private readonly IAppMapper _mapper;
     private readonly ILoggedUser _loggedUser;
-    private readonly IUserAnimeListRepository _animeListRepository;
+    private readonly IAnimeListRepository _animeListRepository;
     
     public GetAnimeListEntryByIdUseCase(IAppMapper mapper, 
         ILoggedUser loggedUser,
-        IUserAnimeListRepository animeListRepository)
+        IAnimeListRepository animeListRepository)
     {
         _mapper = mapper;
         _loggedUser = loggedUser;

@@ -17,13 +17,13 @@ public class AddAnimeListEntryUseCase : IAddAnimeListEntryUseCase
     private readonly IAppMapper _mapper;
     private readonly ILoggedUser _loggedUser;
     private readonly IAnimeRepository _animeRepository;
-    private readonly IUserAnimeListRepository _animeListRepository;
+    private readonly IAnimeListRepository _animeListRepository;
     private readonly IUnitOfWork _unitOfWork;
     
     public AddAnimeListEntryUseCase(IAppMapper mapper,
         ILoggedUser loggedUser,
         IAnimeRepository animeRepository,
-        IUserAnimeListRepository animeListRepository,
+        IAnimeListRepository animeListRepository,
         IUnitOfWork unitOfWork)
     {
         _mapper = mapper;

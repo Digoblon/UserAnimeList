@@ -13,18 +13,17 @@ namespace UserAnimeList.Application.UseCases.AnimeList.Update;
 public class UpdateAnimeListEntryUseCase : IUpdateAnimeListEntryUseCase
 {
     private readonly IAppMapper _mapper;
-    private readonly IUserAnimeListRepository _animeListRepository;
+    private readonly IAnimeListRepository _animeListRepository;
     private readonly ILoggedUser _loggedUser;
     private readonly IUnitOfWork _unitOfWork;
     
     public UpdateAnimeListEntryUseCase(IAppMapper mapper,
-        IUserAnimeListRepository userAnimeListRepository,
+        IAnimeListRepository animeListRepository,
         ILoggedUser loggedUser,
-        IAnimeRepository animeRepository,
         IUnitOfWork unitOfWork)
     {
         _mapper = mapper;
-        _animeListRepository = userAnimeListRepository;
+        _animeListRepository = animeListRepository;
         _loggedUser = loggedUser;
         _unitOfWork = unitOfWork;
     }

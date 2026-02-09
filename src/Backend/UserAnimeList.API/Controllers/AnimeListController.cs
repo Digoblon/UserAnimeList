@@ -31,7 +31,7 @@ public class AnimeListController : UserAnimeListBaseController
     [AuthenticatedUser]
     [ProducesResponseType(typeof(ResponseAnimeJson), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> GetAnimeById([FromServices] IGetAnimeListEntryByIdUseCase useCase,
+    public async Task<IActionResult> GetAnimeListEntryById([FromServices] IGetAnimeListEntryByIdUseCase useCase,
         [FromRoute]string id)
     {
         var result = await useCase.Execute(id);
@@ -81,7 +81,7 @@ public class AnimeListController : UserAnimeListBaseController
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [AuthenticatedUser]
-    public async Task<IActionResult> SoftDelete([FromServices] IDeleteAnimeListEntryUseCase userUseCase,
+    public async Task<IActionResult> Delete([FromServices] IDeleteAnimeListEntryUseCase userUseCase,
         [FromRoute]string id)
     {
         await userUseCase.Execute(id);

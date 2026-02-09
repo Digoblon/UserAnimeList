@@ -2,7 +2,7 @@ using UserAnimeList.Communication.Requests;
 
 namespace UserAnimeList.Domain.Repositories.UserAnimeList;
 
-public interface IUserAnimeListRepository
+public interface IAnimeListRepository
 {
     Task Add (Entities.AnimeList animeList);
     public void Update (Entities.AnimeList animeList);

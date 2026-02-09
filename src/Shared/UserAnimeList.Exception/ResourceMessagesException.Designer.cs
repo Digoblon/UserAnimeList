@@ -150,11 +150,38 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid sorting direction..
+        /// </summary>
+        public static string ANIME_LIST_INVALID_SORT_DIR {
+            get {
+                return ResourceManager.GetString("ANIME_LIST_INVALID_SORT_DIR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid sorting criteria..
+        /// </summary>
+        public static string ANIME_LIST_INVALID_SORT_FIELD {
+            get {
+                return ResourceManager.GetString("ANIME_LIST_INVALID_SORT_FIELD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The status for the anime is invalid..
         /// </summary>
         public static string ANIME_LIST_INVALID_STATUS {
             get {
                 return ResourceManager.GetString("ANIME_LIST_INVALID_STATUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The filter for name exceeds the maximum length of 256 characters..
+        /// </summary>
+        public static string ANIME_LIST_QUERY_EXCEEDED {
+            get {
+                return ResourceManager.GetString("ANIME_LIST_QUERY_EXCEEDED", resourceCulture);
             }
         }
         

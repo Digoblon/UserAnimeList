@@ -64,7 +64,7 @@ public static class DependencyInjectionExtension
         services.AddScoped<IStudioRepository, StudioRepository>();
         services.AddScoped<IGenreRepository, GenreRepository>();
         services.AddScoped<IAnimeRepository, AnimeRepository>();
-        services.AddScoped<IUserAnimeListRepository, AnimeListRepository>();
+        services.AddScoped<IAnimeListRepository, AnimeListRepository>();
 
     } 
 

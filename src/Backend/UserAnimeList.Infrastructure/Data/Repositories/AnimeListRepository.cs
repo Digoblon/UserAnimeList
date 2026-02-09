@@ -8,7 +8,7 @@ using AnimeEntryStatus = UserAnimeList.Domain.Enums.AnimeEntryStatus;
 
 namespace UserAnimeList.Infrastructure.Data.Repositories;
 
-public class AnimeListRepository : IUserAnimeListRepository
+public class AnimeListRepository : IAnimeListRepository
 {
     private readonly UserAnimeListDbContext _dbContext;
     

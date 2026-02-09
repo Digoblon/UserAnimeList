@@ -12,11 +12,11 @@ public class ListAnimeByUserIdUseCase : IListAnimeByUserIdUseCase
 {
     private readonly IAppMapper _mapper;
     private readonly IUserRepository _userRepository;
-    private readonly IUserAnimeListRepository _animeListRepository;
+    private readonly IAnimeListRepository _animeListRepository;
 
     public ListAnimeByUserIdUseCase(IAppMapper mapper,
         IUserRepository userRepository,
-        IUserAnimeListRepository animeListRepository)
+        IAnimeListRepository animeListRepository)
     {
         _mapper = mapper;
         _userRepository = userRepository;
@@ -25,6 +25,8 @@ public class ListAnimeByUserIdUseCase : IListAnimeByUserIdUseCase
     
     public async Task<ResponseAnimeListsJson> Execute(string id, RequestAnimeListEntryFilterJson request)
     {
+        Validate(request);
+        
         if(!Guid.TryParse(id, out var userId))
             throw new InvalidIdException(ResourceMessagesException.INVALID_ID);
         
@@ -41,5 +43,18 @@ public class ListAnimeByUserIdUseCase : IListAnimeByUserIdUseCase
         {
             Lists = animeListsDto
         };
+    }
+    
+    private static void Validate(RequestAnimeListEntryFilterJson request)
+    {
+        var validator = new AnimeListFilterValidator();
+        var result = validator.Validate(request);
+        
+        if (!result.IsValid)
+        {
+            var errorMessages = result.Errors.Select(error => error.ErrorMessage).Distinct().ToList();
+
+            throw new ErrorOnValidationException(errorMessages);
+        }
     }
 }

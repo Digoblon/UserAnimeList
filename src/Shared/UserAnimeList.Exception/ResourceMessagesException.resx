@@ -210,4 +210,13 @@
   <data name="ANIME_LIST_INVALID" xml:space="preserve">
     <value>Anime list invalid or not found.</value>
   </data>
+  <data name="ANIME_LIST_QUERY_EXCEEDED" xml:space="preserve">
+    <value>The filter for name exceeds the maximum length of 256 characters.</value>
+  </data>
+  <data name="ANIME_LIST_INVALID_SORT_FIELD" xml:space="preserve">
+    <value>Invalid sorting criteria.</value>
+  </data>
+  <data name="ANIME_LIST_INVALID_SORT_DIR" xml:space="preserve">
+    <value>Invalid sorting direction.</value>
+  </data>
 </root>

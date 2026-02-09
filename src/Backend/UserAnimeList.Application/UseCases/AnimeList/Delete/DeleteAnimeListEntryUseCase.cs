@@ -9,11 +9,11 @@ namespace UserAnimeList.Application.UseCases.AnimeList.Delete;
 public class DeleteAnimeListEntryUseCase : IDeleteAnimeListEntryUseCase
 {
     private readonly ILoggedUser _loggedUser;
-    private readonly IUserAnimeListRepository _animeListRepository;
+    private readonly IAnimeListRepository _animeListRepository;
     private readonly IUnitOfWork _unitOfWork;
     
     public DeleteAnimeListEntryUseCase(ILoggedUser loggedUser,
-    IUserAnimeListRepository animeListRepository,
+    IAnimeListRepository animeListRepository,
         IUnitOfWork unitOfWork)
     {
         _loggedUser = loggedUser;
