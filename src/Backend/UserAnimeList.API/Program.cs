@@ -4,6 +4,7 @@ using Scalar.AspNetCore;
 using UserAnimeList.Application;
 using UserAnimeList.Communication.Responses;
 using UserAnimeList.Domain.Security.Tokens;
+using UserAnimeList.Domain.Services.DataSeed;
 using UserAnimeList.Exception;
 using UserAnimeList.Filters;
 using UserAnimeList.Infrastructure;
@@ -79,6 +80,10 @@ if (app.Environment.IsDevelopment())
     app.MapSwagger("/openapi/{documentName}.json");
     //app.MapOpenApi();
     app.MapScalarApiReference();
+    
+    using var scope = app.Services.CreateScope();
+    var seeder = scope.ServiceProvider.GetRequiredService<IDatabaseSeeder>();
+    await seeder.SeedAsync();
 }
 
 app.UseMiddleware<CultureMiddleware>();
