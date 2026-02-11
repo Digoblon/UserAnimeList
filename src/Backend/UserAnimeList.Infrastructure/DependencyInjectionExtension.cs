@@ -11,9 +11,11 @@ using UserAnimeList.Domain.Repositories.Token;
 using UserAnimeList.Domain.Repositories.User;
 using UserAnimeList.Domain.Security.Cryptography;
 using UserAnimeList.Domain.Security.Tokens;
+using UserAnimeList.Domain.Services.DataSeed;
 using UserAnimeList.Domain.Services.LoggedUser;
 using UserAnimeList.Infrastructure.Data;
 using UserAnimeList.Infrastructure.Data.Repositories;
+using UserAnimeList.Infrastructure.Data.Seed;
 using UserAnimeList.Infrastructure.Extensions;
 using UserAnimeList.Infrastructure.Security.Cryptography;
 using UserAnimeList.Infrastructure.Security.Tokens.Access.Generator;
@@ -65,6 +67,7 @@ public static class DependencyInjectionExtension
         services.AddScoped<IGenreRepository, GenreRepository>();
         services.AddScoped<IAnimeRepository, AnimeRepository>();
         services.AddScoped<IAnimeListRepository, AnimeListRepository>();
+        services.AddScoped<IDatabaseSeeder, DatabaseSeeder>();
 
     } 
 

@@ -25,9 +25,16 @@ public class GetAnimeByIdUseCase : IGetAnimeByIdUseCase
         if (anime is null)
             throw new NotFoundException(ResourceMessagesException.ANIME_NOT_FOUND);
         
+        var score = await _animeRepository.AverageScore(anime.Id);
+
+        if(score is not null)
+            score = Math.Round(score.Value, 2, MidpointRounding.AwayFromZero);
+        
         var response = _mapper.Map<ResponseAnimeJson>(anime);
         response.Genres = anime.Genres.Select(g => g.GenreId).ToList();
         response.Studios = anime.Studios.Select(s => s.StudioId).ToList();
+        response.Score = score;
+        
         if(anime.Premiered.HasValue)
         {
             response.Premiered = $"{anime.Premiered.Value.Season} {anime.Premiered.Value.Year}";

@@ -21,6 +21,7 @@ public class UserConfiguration : BaseEntityConfiguration<User>
         builder.Property(u => u.Email)
             .IsRequired()
             .HasMaxLength(150);
+        builder.HasIndex(u => u.Email).IsUnique();
 
         builder.Property(u => u.Password)
             .IsRequired()

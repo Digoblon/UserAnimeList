@@ -6,6 +6,7 @@ out/
 ## Rider / IntelliJ
 .idea/
 *.sln.docstates
+qodana.yaml
 
 ## User-specific files
 *.user

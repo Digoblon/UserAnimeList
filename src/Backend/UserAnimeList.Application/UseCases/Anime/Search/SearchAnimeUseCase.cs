@@ -25,9 +25,21 @@ public class SearchAnimeUseCase : ISearchAnimeUseCase
         
         var animes = await _animeRepository.Search(request.Query);
 
+        var animesList = _mapper.Map<IList<ResponseShortAnimeJson>>(animes);
+
+        foreach (var anime in animesList)
+        {
+            var score = await _animeRepository.AverageScore(anime.Id);
+
+            if(score is not null)
+                score = Math.Round(score.Value, 2, MidpointRounding.AwayFromZero);
+            
+            anime.Score = score;
+        }
+
         return new ResponseAnimesJson
         {
-            Animes = _mapper.Map<IList<ResponseShortAnimeJson>>(animes)
+            Animes = animesList
         };
     }
 

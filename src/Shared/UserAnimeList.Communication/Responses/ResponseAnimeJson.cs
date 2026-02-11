@@ -6,6 +6,7 @@ public class ResponseAnimeJson
 {
     public Guid Id { get; set; }
     public string Name { get; set; } =  string.Empty;
+    public double? Score { get; set; }
     public string? Synopsis { get; set; } =  string.Empty;
     public int? Episodes { get; set; }
     public IList<Guid> Genres { get; set; } = [];

@@ -17,6 +17,17 @@ public class AnimeRepository : IAnimeRepository
 
     public async Task Add(Anime anime) => await _dbContext.Animes.AddAsync(anime);
     public void Update(Anime anime) => _dbContext.Animes.Update(anime);
+    public async Task<double?> AverageScore(Guid animeId)
+    {
+        var score = await _dbContext
+            .AnimeLists
+            .Where(l => l.AnimeId == animeId)
+            .Where(l => l.IsActive && l.Score != null)
+            .AsNoTracking()
+            .AverageAsync(l => l.Score);
+        
+        return score;
+    }
 
     public async Task<bool> ExistsActiveAnimeWithName(string name)
         => await _dbContext.Animes.AnyAsync(anime => anime.NameNormalized == name.ToLower());

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UserAnimeList.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using UserAnimeList.Infrastructure.Data;
 namespace UserAnimeList.Infrastructure.Data.Persistence.Migrations
 {
     [DbContext(typeof(UserAnimeListDbContext))]
-    partial class UserAnimeListDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260211061127_Adding Index to User email")]
+    partial class AddingIndextoUseremail
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

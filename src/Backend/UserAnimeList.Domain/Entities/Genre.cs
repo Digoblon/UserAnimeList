@@ -1,6 +1,6 @@
 namespace UserAnimeList.Domain.Entities;
 
-    public class Genre : EntityBase
+public class Genre : EntityBase
     {
         public string Name { get; set; } = string.Empty;
         public string NameNormalized { get; set; } = string.Empty;

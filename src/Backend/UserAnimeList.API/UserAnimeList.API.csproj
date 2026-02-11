@@ -28,14 +28,21 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Services\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\..\Shared\UserAnimeList.Communication\UserAnimeList.Communication.csproj" />
       <ProjectReference Include="..\..\Shared\UserAnimeList.Exception\UserAnimeList.Exception.csproj" />
       <ProjectReference Include="..\UserAnimeList.Application\UserAnimeList.Application.csproj" />
       <ProjectReference Include="..\UserAnimeList.Infrastructure\UserAnimeList.Infrastructure.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Data\Seed\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="Data\Seed\SeedData\animes.json" />
+      <None Include="Data\Seed\SeedData\genres.json" />
+      <None Include="Data\Seed\SeedData\studios.json" />
+      <None Include="Data\Seed\SeedData\users.json" />
     </ItemGroup>
 
 </Project>
