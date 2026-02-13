@@ -15,6 +15,14 @@ public class UserRepository : IUserRepository
     
     public async Task Add(User user) => await _dbContext.Users.AddAsync(user);
     public void Update(User user) => _dbContext.Users.Update(user);
+    public void Delete(User user)
+    {
+        user.DeletedOn = DateTime.UtcNow;
+        user.IsActive = false;
+        user.IncrementTokenVersion();
+        
+        Update(user);
+    }
 
     public async Task<User?> GetById(Guid id)
     {

@@ -11,6 +11,7 @@ public class User : EntityBase
     public UserRole Role { get; set; } = UserRole.User;
     public ICollection<RefreshToken> RefreshTokens { get; set; } = new List<RefreshToken>();
     public ICollection<AnimeList> AnimeList { get; set; } = [];
+    public string? ImagePath { get; set; } = string.Empty;
     
     public void IncrementTokenVersion()
     {

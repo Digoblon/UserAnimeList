@@ -36,6 +36,8 @@
 
     <ItemGroup>
       <Folder Include="Data\Seed\" />
+      <Folder Include="wwwroot\uploads\animes\" />
+      <Folder Include="wwwroot\uploads\users\" />
     </ItemGroup>
 
     <ItemGroup>

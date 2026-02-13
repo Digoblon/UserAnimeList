@@ -39,6 +39,9 @@ public class AnimeConfiguration : BaseEntityConfiguration<Anime>
         
         builder.Property(a => a.AiredFrom)
             .IsRequired(false);
+
+        builder.Property(a => a.ImagePath)
+            .IsRequired(false);
         
         builder.Property(a => a.AiredUntil)
             .IsRequired(false);

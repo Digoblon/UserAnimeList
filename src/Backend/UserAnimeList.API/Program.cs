@@ -51,6 +51,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddApplication(builder.Configuration);
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddScoped<AuthenticatedUserFilter>();
+builder.Services.AddScoped<AbsoluteImageUrlFilter>();
 
 
 builder.Services.AddScoped<ITokenProvider, HttpContextTokenValue>();
@@ -88,6 +89,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseMiddleware<CultureMiddleware>();
 app.UseMiddleware<ExceptionMiddleware>();
+
+app.UseStaticFiles();
 
 app.UseHttpsRedirection();
 app.MapControllers();

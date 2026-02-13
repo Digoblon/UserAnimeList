@@ -49,7 +49,12 @@ appsettings.Development.json
 appsettings.Local.json
 appsettings.*.json
 
+## wwwroot contents
+src/Backend/UserAnimeList.API/wwwroot/uploads/*
+!src/Backend/UserAnimeList.API/wwwroot/uploads/.gitkeep
+
 ## Others
 .env
 *.publishsettings
 Doc Planning.docx
+

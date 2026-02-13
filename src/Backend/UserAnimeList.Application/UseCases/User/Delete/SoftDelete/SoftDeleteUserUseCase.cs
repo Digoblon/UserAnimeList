@@ -30,12 +30,9 @@ public class SoftDeleteUserUseCase : ISoftDeleteUserUseCase
         if (!user.IsActive || user.DeletedOn is not null)
             return;
         
-        user.DeletedOn = DateTime.UtcNow;
-        user.IsActive = false;
-        user.IncrementTokenVersion();
+        _userRepository.Delete(user);
         await _tokenRepository.RevokeAllForUser(user.Id);
         
-        _userRepository.Update(user);
         await _unitOfWork.Commit();
         
         

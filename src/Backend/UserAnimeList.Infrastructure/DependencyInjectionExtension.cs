@@ -12,6 +12,7 @@ using UserAnimeList.Domain.Repositories.User;
 using UserAnimeList.Domain.Security.Cryptography;
 using UserAnimeList.Domain.Security.Tokens;
 using UserAnimeList.Domain.Services.DataSeed;
+using UserAnimeList.Domain.Services.FileStorage;
 using UserAnimeList.Domain.Services.LoggedUser;
 using UserAnimeList.Infrastructure.Data;
 using UserAnimeList.Infrastructure.Data.Repositories;
@@ -21,6 +22,7 @@ using UserAnimeList.Infrastructure.Security.Cryptography;
 using UserAnimeList.Infrastructure.Security.Tokens.Access.Generator;
 using UserAnimeList.Infrastructure.Security.Tokens.Access.Validator;
 using UserAnimeList.Infrastructure.Security.Tokens.Refresh;
+using UserAnimeList.Infrastructure.Services.LocalFileStorage;
 using UserAnimeList.Infrastructure.Services.LoggedUser;
 
 namespace UserAnimeList.Infrastructure;
@@ -68,6 +70,7 @@ public static class DependencyInjectionExtension
         services.AddScoped<IAnimeRepository, AnimeRepository>();
         services.AddScoped<IAnimeListRepository, AnimeListRepository>();
         services.AddScoped<IDatabaseSeeder, DatabaseSeeder>();
+        services.AddScoped<IFileStorage, LocalFileStorage>();
 
     } 
 
