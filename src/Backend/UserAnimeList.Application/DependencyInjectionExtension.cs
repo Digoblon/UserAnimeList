@@ -4,6 +4,9 @@ using Microsoft.Extensions.Configuration;
 using UserAnimeList.Application.Services.Mapper;
 using UserAnimeList.Application.UseCases.Anime.Delete.SoftDelete;
 using UserAnimeList.Application.UseCases.Anime.Get.ById;
+using UserAnimeList.Application.UseCases.Anime.Image;
+using UserAnimeList.Application.UseCases.Anime.Image.Delete;
+using UserAnimeList.Application.UseCases.Anime.Image.Update;
 using UserAnimeList.Application.UseCases.Anime.Register;
 using UserAnimeList.Application.UseCases.Anime.Search;
 using UserAnimeList.Application.UseCases.Anime.Update;
@@ -27,6 +30,9 @@ using UserAnimeList.Application.UseCases.Studio.Update;
 using UserAnimeList.Application.UseCases.Token.RefreshToken;
 using UserAnimeList.Application.UseCases.User.ChangePassword;
 using UserAnimeList.Application.UseCases.User.Delete.SoftDelete;
+using UserAnimeList.Application.UseCases.User.Image;
+using UserAnimeList.Application.UseCases.User.Image.Delete;
+using UserAnimeList.Application.UseCases.User.Image.Update;
 using UserAnimeList.Application.UseCases.User.Profile;
 using UserAnimeList.Application.UseCases.User.Register;
 using UserAnimeList.Application.UseCases.User.Update;
@@ -53,28 +59,39 @@ public static class DependencyInjectionExtension
 
     private static void AddUseCases(IServiceCollection services)
     {
+        //user
         services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
-        services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
         services.AddScoped<IGetUserProfileUseCase, GetUserProfileUseCase>();
         services.AddScoped<IUpdateUserUseCase, UpdateUserUseCase>();
         services.AddScoped<IChangePasswordUseCase, ChangePasswordUseCase>();
-        services.AddScoped<IUseRefreshTokenUseCase, UseRefreshTokenUseCase>();
         services.AddScoped<ISoftDeleteUserUseCase, SoftDeleteUserUseCase>();
+        services.AddScoped<IUpdateUserImageUseCase, UpdateUserImageUseCase>();
+        services.AddScoped<IDeleteUserImageUseCase, DeleteUserImageUseCase>();
+        //login
+        services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
+        //RefreshToken
+        services.AddScoped<IUseRefreshTokenUseCase, UseRefreshTokenUseCase>();
+        //Studio
         services.AddScoped<IRegisterStudioUseCase, RegisterStudioUseCase>();
         services.AddScoped<IGetStudioByIdUseCase, GetStudioByIdUseCase>();
         services.AddScoped<IGetStudioByNameUseCase, GetStudioByNameUseCase>();
         services.AddScoped<IUpdateStudioUseCase, UpdateStudioUseCase>();
         services.AddScoped<ISoftDeleteStudioUseCase, SoftDeleteStudioUseCase>();
+        //Genre
         services.AddScoped<IRegisterGenreUseCase, RegisterGenreUseCase>();
         services.AddScoped<IGetGenreByIdUseCase, GetGenreByIdUseCase>();
         services.AddScoped<IGetGenreByNameUseCase, GetGenreByNameUseCase>();
         services.AddScoped<IUpdateGenreUseCase, UpdateGenreUseCase>();
         services.AddScoped<ISoftDeleteGenreUseCase, SoftDeleteGenreUseCase>();
+        //Anime
         services.AddScoped<IRegisterAnimeUseCase, RegisterAnimeUseCase>();
         services.AddScoped<IUpdateAnimeUseCase, UpdateAnimeUseCase>();
         services.AddScoped<IGetAnimeByIdUseCase, GetAnimeByIdUseCase>();
         services.AddScoped<ISoftDeleteAnimeUseCase, SoftDeleteAnimeUseCase>();
         services.AddScoped<ISearchAnimeUseCase, SearchAnimeUseCase>();
+        services.AddScoped<IUpdateAnimeImageUseCase, UpdateAnimeImageUseCase>();
+        services.AddScoped<IDeleteAnimeImageUseCase, DeleteAnimeImageUseCase>();
+        //AnimeList
         services.AddScoped<IAddAnimeListEntryUseCase, AddAnimeListEntryUseCase>();
         services.AddScoped<IUpdateAnimeListEntryUseCase, UpdateAnimeListEntryUseCase>();
         services.AddScoped<IDeleteAnimeListEntryUseCase, DeleteAnimeListEntryUseCase>();

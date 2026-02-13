@@ -348,6 +348,24 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The provided image exceeds the maximum size (5 MB)..
+        /// </summary>
+        public static string IMAGE_EXCEEDS_FILE_SIZE {
+            get {
+                return ResourceManager.GetString("IMAGE_EXCEEDS_FILE_SIZE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No image was provided..
+        /// </summary>
+        public static string IMAGE_NULL {
+            get {
+                return ResourceManager.GetString("IMAGE_NULL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The following genres entered are invalid: .
         /// </summary>
         public static string INVALID_GENRES_IN_REQUEST {
@@ -492,7 +510,7 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Only images (PNG, JPG, JPEG) are accepted..
+        ///   Looks up a localized string similar to Only images (PNG, JPG, JPEG and WEBP) are accepted..
         /// </summary>
         public static string ONLY_IMAGES_ACCEPTED {
             get {

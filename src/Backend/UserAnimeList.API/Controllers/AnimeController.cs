@@ -1,12 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
 using UserAnimeList.Application.UseCases.Anime.Delete.SoftDelete;
 using UserAnimeList.Application.UseCases.Anime.Get.ById;
+using UserAnimeList.Application.UseCases.Anime.Image.Delete;
+using UserAnimeList.Application.UseCases.Anime.Image.Update;
 using UserAnimeList.Application.UseCases.Anime.Register;
 using UserAnimeList.Application.UseCases.Anime.Search;
 using UserAnimeList.Application.UseCases.Anime.Update;
 using UserAnimeList.Attributes;
 using UserAnimeList.Communication.Requests;
 using UserAnimeList.Communication.Responses;
+using UserAnimeList.Filters;
 
 namespace UserAnimeList.Controllers;
 
@@ -25,7 +28,37 @@ public class AnimeController : UserAnimeListBaseController
             return Created(string.Empty, result);
         }
         
+        [ServiceFilter(typeof(AbsoluteImageUrlFilter))]
+        [HttpPost("{id}/image")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        [AdminOnly]
+        public async Task<IActionResult> UpdateImage(
+            [FromServices]IUpdateAnimeImageUseCase useCase,
+            [FromForm]RequestUpdateImageFormData request,
+            [FromRoute]string id)
+        {
+            var response = await useCase.Execute(request, id);
+            
+            return Ok(response);
+        }
         
+        [ServiceFilter(typeof(AbsoluteImageUrlFilter))]
+        [HttpDelete("{id}/image")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        [AdminOnly]
+        public async Task<IActionResult> DeleteImage(
+            [FromServices]IDeleteAnimeImageUseCase useCase,
+            [FromRoute]string id)
+        {
+            await useCase.Execute(id);
+            
+            return NoContent();
+        }
+        
+        
+        [ServiceFilter(typeof(AbsoluteImageUrlFilter))]
         [HttpGet]
         [Route("{id}")]
         [ProducesResponseType(typeof(ResponseAnimeJson), StatusCodes.Status200OK)]
@@ -38,7 +71,7 @@ public class AnimeController : UserAnimeListBaseController
             return Ok(result);
         }
         
-        
+        [ServiceFilter(typeof(AbsoluteImageUrlFilter))]
         [HttpPost("search")]
         [ProducesResponseType(typeof(ResponseAnimesJson), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -77,5 +110,4 @@ public class AnimeController : UserAnimeListBaseController
             
             return NoContent();
         }
-        
 }

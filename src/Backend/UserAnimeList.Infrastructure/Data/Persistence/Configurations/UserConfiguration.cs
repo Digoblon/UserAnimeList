@@ -33,6 +33,9 @@ public class UserConfiguration : BaseEntityConfiguration<User>
         builder.Property(u => u.Role)
             .IsRequired();
 
+        builder.Property(u => u.ImagePath)
+            .IsRequired(false);
+        
         builder.HasMany(u => u.RefreshTokens)
             .WithOne(rt => rt.User)
             .HasForeignKey(rt => rt.UserId);
