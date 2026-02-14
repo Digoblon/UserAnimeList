@@ -1,3 +1,4 @@
+using FileTypeChecker.Exceptions;
 using UserAnimeList.Application.Extensions;
 using UserAnimeList.Communication.Requests;
 using UserAnimeList.Communication.Responses;
@@ -62,9 +63,17 @@ public class UpdateUserImageUseCase : IUpdateUserImageUseCase
             throw new ErrorOnValidationException([ResourceMessagesException.IMAGE_EXCEEDS_FILE_SIZE]);
         
         var fileStream = request.Image.OpenReadStream();
-
-        if (!fileStream.Validate())
+        try
+        {
+            if (!fileStream.Validate())
+                throw new ErrorOnValidationException([ResourceMessagesException.ONLY_IMAGES_ACCEPTED]);
+        }
+        
+        catch (TypeNotFoundException e)
+        {
             throw new ErrorOnValidationException([ResourceMessagesException.ONLY_IMAGES_ACCEPTED]);
+        }
+        
 
         return fileStream;
     }

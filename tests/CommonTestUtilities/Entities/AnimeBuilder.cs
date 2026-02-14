@@ -29,6 +29,7 @@ public class AnimeBuilder
             .RuleFor(a => a.Id, f=> Guid.NewGuid())
             .RuleFor(a => a.Name, f => f.Lorem.Word())
             .RuleFor(a => a.NameNormalized, (_, a) => a.Name.ToLower())
+            .RuleFor(a => a.ImagePath, f => f.Image.PicsumUrl())
             .RuleFor(a => a.Synopsis, f => f.Lorem.Paragraph())
             .RuleFor(a => a.Episodes, f => f.Random.Int(1, 100))
             .RuleFor(a => a.Status, f => f.PickRandom<AnimeStatus>())
