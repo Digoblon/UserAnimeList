@@ -15,6 +15,7 @@ public partial class UserBuilder
         var user =  new Faker<User>()
             .RuleFor(user => user.Id, Guid.NewGuid)
             .RuleFor(user => user.UserName, (f) => SanitizeUserName(f.Internet.UserName()))
+            .RuleFor(user => user.ImagePath, f => f.Image.PicsumUrl())
             .RuleFor(user => user.Email, (f, user) => f.Internet.Email(user.UserName))
             .RuleFor(user => user.Password, _ => passwordEncrypter.Encrypt(password));
         return (user, password);

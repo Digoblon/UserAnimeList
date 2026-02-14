@@ -29,7 +29,7 @@ public class AnimeController : UserAnimeListBaseController
         }
         
         [ServiceFilter(typeof(AbsoluteImageUrlFilter))]
-        [HttpPost("{id}/image")]
+        [HttpPut("{id}/image")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         [AdminOnly]

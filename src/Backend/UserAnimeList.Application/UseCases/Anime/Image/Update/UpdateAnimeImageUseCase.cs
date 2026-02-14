@@ -1,3 +1,4 @@
+using FileTypeChecker.Exceptions;
 using UserAnimeList.Application.Extensions;
 using UserAnimeList.Communication.Requests;
 using UserAnimeList.Communication.Responses;
@@ -16,8 +17,7 @@ public class UpdateAnimeImageUseCase : IUpdateAnimeImageUseCase
     private readonly IAnimeRepository _animeRepository;
     private readonly IFileStorage _fileStorage;
     private readonly IUnitOfWork _unitOfWork;
-    public UpdateAnimeImageUseCase(ILoggedUser loggedUser,
-        IAnimeRepository animeRepository,
+    public UpdateAnimeImageUseCase(IAnimeRepository animeRepository,
         IFileStorage fileStorage,
         IUnitOfWork unitOfWork)
     {
@@ -63,8 +63,16 @@ public class UpdateAnimeImageUseCase : IUpdateAnimeImageUseCase
         
         var fileStream = request.Image.OpenReadStream();
 
-        if (!fileStream.Validate())
+        try
+        {
+            if (!fileStream.Validate())
+                throw new ErrorOnValidationException([ResourceMessagesException.ONLY_IMAGES_ACCEPTED]);
+        }
+        catch (TypeNotFoundException)
+        {
             throw new ErrorOnValidationException([ResourceMessagesException.ONLY_IMAGES_ACCEPTED]);
+        }
+        
 
         return fileStream;
     }
