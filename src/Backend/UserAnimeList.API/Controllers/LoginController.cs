@@ -8,7 +8,8 @@ namespace UserAnimeList.Controllers;
 public class LoginController : UserAnimeListBaseController
 {
     [HttpPost]
-    [ProducesResponseType(typeof(ResponseRegisteredUserJson),StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(ResponseRegisteredUserJson),StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResponseErrorJson),StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ResponseErrorJson),StatusCodes.Status401Unauthorized)]
     public async  Task<IActionResult> Login(
         [FromServices] IDoLoginUseCase useCase,

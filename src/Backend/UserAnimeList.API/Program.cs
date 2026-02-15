@@ -79,7 +79,6 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapSwagger("/openapi/{documentName}.json");
-    //app.MapOpenApi();
     app.MapScalarApiReference();
     
     using var scope = app.Services.CreateScope();

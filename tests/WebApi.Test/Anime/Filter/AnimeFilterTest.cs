@@ -1,17 +1,18 @@
 using System.Net;
 using System.Text.Json;
+using UserAnimeList.Communication.Enums;
 using UserAnimeList.Communication.Requests;
 
-namespace WebApi.Test.Anime.Search;
+namespace WebApi.Test.Anime.Filter;
 
-public class SearchAnimeTest : UserAnimeListClassFixture
+public class AnimeFilterTest : UserAnimeListClassFixture
 {
-    private const string Method = "anime/search";
+    private const string Method = "anime/filter";
 
     private readonly string _animeName;
     private readonly Guid _animeId;
     
-    public SearchAnimeTest(CustomWebApplicationFactory factory) : base(factory)
+    public AnimeFilterTest(CustomWebApplicationFactory factory) : base(factory)
     {
         _animeName = factory.GetAnimeName();
         _animeId = factory.GetAnimeId();
@@ -20,10 +21,11 @@ public class SearchAnimeTest : UserAnimeListClassFixture
     [Fact]
     public async Task Success()
     {
-        var request = new RequestAnimeSearchJson
+        var request = new RequestAnimeFilterJson
         {
             Query = _animeName
         };
+
         var response = await DoGetQuery($"{Method}", request);
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -34,18 +36,30 @@ public class SearchAnimeTest : UserAnimeListClassFixture
 
         Assert.NotEmpty(responseData.RootElement.GetProperty("animes").EnumerateArray());
     }
-
     
     [Fact]
-    public async Task Success_Empty_Query()
+    public async Task Success_No_Content()
     {
-        var request = new RequestAnimeSearchJson
+        var request = new RequestAnimeFilterJson
         {
-            Query = string.Empty
+            Query = "NoMatchAnime"
         };
+
         var response = await DoGetQuery($"{Method}", request);
 
         Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
     }
 
+    [Fact]
+    public async Task Error_Status_Invalid()
+    {
+        var request = new RequestAnimeFilterJson
+        {
+            Status = (AnimeStatus)100
+        };
+
+        var response = await DoGetQuery($"{Method}", request);
+
+        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+    }
 }

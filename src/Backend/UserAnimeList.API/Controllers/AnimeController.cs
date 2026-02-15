@@ -18,7 +18,8 @@ public class AnimeController : UserAnimeListBaseController
 {
     
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ResponseRegisteredAnimeJson),StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         [AdminOnly]
         public async Task<IActionResult> Register(
             [FromServices]IRegisterAnimeUseCase useCase,
@@ -31,7 +32,7 @@ public class AnimeController : UserAnimeListBaseController
         
         [ServiceFilter(typeof(AbsoluteImageUrlFilter))]
         [HttpPut("{id}/image")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseUpdateImageJson),StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         [AdminOnly]
         public async Task<IActionResult> UpdateImage(
@@ -46,7 +47,7 @@ public class AnimeController : UserAnimeListBaseController
         
         [ServiceFilter(typeof(AbsoluteImageUrlFilter))]
         [HttpDelete("{id}/image")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         [AdminOnly]
         public async Task<IActionResult> DeleteImage(
@@ -87,7 +88,7 @@ public class AnimeController : UserAnimeListBaseController
         }
         
         [ServiceFilter(typeof(AbsoluteImageUrlFilter))]
-        [HttpPost("filter")]
+        [HttpGet("filter")]
         [ProducesResponseType(typeof(ResponseAnimesJson), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> Filter([FromServices] IFilterAnimeUseCase useCase,

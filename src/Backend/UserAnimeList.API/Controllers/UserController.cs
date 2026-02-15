@@ -17,7 +17,8 @@ namespace UserAnimeList.Controllers;
 public class UserController : UserAnimeListBaseController
 {
     [HttpPost]
-    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(ResponseRegisteredUserJson), StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Register(
         [FromServices]IRegisterUserUseCase useCase,
         [FromBody]RequestRegisterUserJson request)
@@ -29,8 +30,9 @@ public class UserController : UserAnimeListBaseController
         
     [ServiceFilter(typeof(AbsoluteImageUrlFilter))]
     [HttpPut("me/image")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResponseUpdateImageJson), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status401Unauthorized)]
     [AuthenticatedUser]
     public async Task<IActionResult> UpdateImage(
         [FromServices]IUpdateUserImageUseCase useCase,
@@ -43,6 +45,7 @@ public class UserController : UserAnimeListBaseController
     
     [HttpDelete("me/image")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status401Unauthorized)]
     [AuthenticatedUser]
     public async Task<IActionResult> DeleteImage(
         [FromServices]IDeleteUserImageUseCase useCase)
@@ -55,6 +58,7 @@ public class UserController : UserAnimeListBaseController
     [ServiceFilter(typeof(AbsoluteImageUrlFilter))]
     [HttpGet]
     [ProducesResponseType(typeof(ResponseUserProfileJson), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status401Unauthorized)]
     [AuthenticatedUser]
     public async Task<IActionResult> GetUserProfile([FromServices] IGetUserProfileUseCase useCase)
     {
@@ -66,6 +70,7 @@ public class UserController : UserAnimeListBaseController
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status401Unauthorized)]
     [AuthenticatedUser]
     public async Task<IActionResult> Update([FromServices] IUpdateUserUseCase useCase,
         [FromBody] RequestUpdateUserJson request)
@@ -76,8 +81,9 @@ public class UserController : UserAnimeListBaseController
     }
         
     [HttpPut("change-password")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResponseChangePasswordJson), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status401Unauthorized)]
     [AuthenticatedUser]
     public async Task<IActionResult> ChangePassword([FromServices] IChangePasswordUseCase useCase,
         [FromBody] RequestChangePasswordJson request)
@@ -89,6 +95,7 @@ public class UserController : UserAnimeListBaseController
         
     [HttpDelete("me")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status401Unauthorized)]
     [AuthenticatedUser]
     public async Task<IActionResult> SoftDelete([FromServices] ISoftDeleteUserUseCase userUseCase)
     {
