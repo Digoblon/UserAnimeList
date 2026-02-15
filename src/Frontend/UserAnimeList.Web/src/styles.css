@@ -1,0 +1,21 @@
+:root { color-scheme: dark; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Arial, sans-serif; background: #0f1624; color: #ecf2ff; }
+.app { max-width: 1200px; margin: 0 auto; padding: 1rem; }
+header { display: flex; gap: 1rem; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+nav { display: flex; gap: .5rem; flex-wrap: wrap; }
+button { background: #2e51a2; border: 0; color: white; padding: .5rem .7rem; border-radius: .4rem; cursor: pointer; }
+button.active { background: #4f78d7; }
+input, textarea { width: 100%; background: #131e31; color: #fff; border: 1px solid #2f436d; border-radius: .4rem; padding: .45rem; }
+section { background: #121b2b; padding: 1rem; border-radius: .75rem; margin-top: 1rem; }
+.msg { background: #273752; padding: .6rem; border-radius: .4rem; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(190px,1fr)); gap: 1rem; margin-top: 1rem; }
+.card { background: #0f1624; border: 1px solid #2e4066; border-radius: .6rem; padding: .6rem; }
+.card img { width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: .4rem; background: #081020; }
+.profile { display: flex; gap: 1rem; align-items: center; }
+.profile img { width: 84px; height: 84px; border-radius: 50%; object-fit: cover; }
+.row { display: flex; gap: .5rem; margin-top: .6rem; align-items: center; }
+.row.wrap { flex-wrap: wrap; }
+.modal { position: fixed; inset: 0; background: #0007; display: grid; place-items: center; }
+.modal-content { width: min(600px,90vw); background: #1a2740; border-radius: .8rem; padding: 1rem; }
+pre { max-height: 300px; overflow: auto; background: #0f1624; border: 1px solid #324973; padding: .7rem; border-radius: .5rem; }
