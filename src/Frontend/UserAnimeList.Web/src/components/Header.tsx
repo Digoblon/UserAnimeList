@@ -1,40 +1,24 @@
 interface HeaderProps {
   userName?: string;
-  onHome: () => void;
-  onProfile: () => void;
-  onAuth: () => void;
-  onLogout: () => void;
+  onLogout?: () => void;
 }
 
-export function Header({ userName, onHome, onProfile, onAuth, onLogout }: HeaderProps) {
+export function Header({ userName, onLogout }: HeaderProps) {
   return (
-    <header className="header card">
+    <header className="header">
       <div>
         <h1>UserAnimeList</h1>
-        <p>Frontend de portfólio para demonstrar fluxos da API.</p>
+        <p>Frontend alinhado aos módulos da API: Auth, Anime, AnimeList e User.</p>
       </div>
 
-      <nav className="header-actions">
-        <button type="button" className="btn-ghost" onClick={onHome}>
-          Home
-        </button>
-
-        {userName ? (
-          <>
-            <button type="button" className="btn-ghost" onClick={onProfile}>
-              Perfil
-            </button>
-            <button type="button" className="btn-ghost" onClick={onLogout}>
-              Sair
-            </button>
-            <span className="badge">{userName}</span>
-          </>
-        ) : (
-          <button type="button" onClick={onAuth}>
-            Entrar / Cadastrar
+      <div className="header-actions">
+        <div className="badge">{userName ? `Olá, ${userName}` : 'Visitante'}</div>
+        {userName && (
+          <button className="btn-ghost" onClick={onLogout} type="button">
+            Sair
           </button>
         )}
-      </nav>
+      </div>
     </header>
   );
 }
