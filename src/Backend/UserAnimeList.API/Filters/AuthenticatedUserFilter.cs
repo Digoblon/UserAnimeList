@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using UserAnimeList.Communication.Responses;
 using UserAnimeList.Domain.Repositories.User;
 using UserAnimeList.Domain.Security.Tokens;
+using UserAnimeList.Errors;
 using UserAnimeList.Exception;
 using UserAnimeList.Exception.Exceptions;
 
@@ -41,24 +42,33 @@ public class AuthenticatedUserFilter : IAsyncAuthorizationFilter
         }
         catch (SecurityTokenExpiredException)
         {
-            context.Result = new UnauthorizedObjectResult(new ResponseErrorJson(ResourceMessagesException.TOKEN_EXPIRED)
-            {
-                TokenIsExpired = true
-            });
+            var response = ErrorResponseFactory.FromStatusCode(
+                context.HttpContext,
+                StatusCodes.Status401Unauthorized,
+                [ResourceMessagesException.TOKEN_EXPIRED],
+                tokenIsExpired: true);
+            context.Result = new UnauthorizedObjectResult(response);
         }
         catch (SecurityTokenException)
         {
-            context.Result =
-                new UnauthorizedObjectResult(new ResponseErrorJson(ResourceMessagesException.INVALID_TOKEN));
+            var response = ErrorResponseFactory.FromStatusCode(
+                context.HttpContext,
+                StatusCodes.Status401Unauthorized,
+                [ResourceMessagesException.INVALID_TOKEN]);
+            context.Result = new UnauthorizedObjectResult(response);
         }
         catch (SecurityTokenMalformedException)
         {
-            context.Result =
-                new UnauthorizedObjectResult(new ResponseErrorJson(ResourceMessagesException.INVALID_TOKEN));
+            var response = ErrorResponseFactory.FromStatusCode(
+                context.HttpContext,
+                StatusCodes.Status401Unauthorized,
+                [ResourceMessagesException.INVALID_TOKEN]);
+            context.Result = new UnauthorizedObjectResult(response);
         }
         catch (UserAnimeListException ex)
         {
-            context.Result = new UnauthorizedObjectResult(new ResponseErrorJson(ex.Message))
+            var response = ErrorResponseFactory.FromException(context.HttpContext, ex);
+            context.Result = new ObjectResult(response)
             {
                 StatusCode = (int)ex.GetStatusCode()
             };

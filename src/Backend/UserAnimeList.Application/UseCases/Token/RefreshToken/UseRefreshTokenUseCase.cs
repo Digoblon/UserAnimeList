@@ -35,7 +35,7 @@ public class UseRefreshTokenUseCase : IUseRefreshTokenUseCase
 
         _refreshTokenValidator.Validate(refreshToken);
         
-        if (!refreshToken.User.IsActive)
+        if (!refreshToken!.User.IsActive)
             throw new UserHasNoAccessException();
         
         var newRefreshToken = new Domain.Entities.RefreshToken

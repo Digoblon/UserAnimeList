@@ -69,7 +69,7 @@ public class UpdateUserImageUseCase : IUpdateUserImageUseCase
                 throw new ErrorOnValidationException([ResourceMessagesException.ONLY_IMAGES_ACCEPTED]);
         }
         
-        catch (TypeNotFoundException e)
+        catch (TypeNotFoundException)
         {
             throw new ErrorOnValidationException([ResourceMessagesException.ONLY_IMAGES_ACCEPTED]);
         }

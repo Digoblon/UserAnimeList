@@ -1,3 +1,5 @@
+using UserAnimeList.Communication.Requests;
+
 namespace UserAnimeList.Domain.Repositories.Anime;
 
 public interface IAnimeRepository
@@ -8,4 +10,5 @@ public interface IAnimeRepository
     Task<bool> ExistsActiveAnimeWithName(string name);
     Task<Entities.Anime?> GetById (string id);
     Task<IList<Entities.Anime>> Search(string query);
+    Task<IList<Entities.Anime>> Filter(RequestAnimeFilterJson filter);
 }

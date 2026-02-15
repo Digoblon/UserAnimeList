@@ -9,6 +9,8 @@ public class TokenController : UserAnimeListBaseController
 {
     [HttpPost("refresh-token")]
     [ProducesResponseType(typeof(ResponseTokensJson), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status401Unauthorized)]
     public async Task<IActionResult> RefreshToken(
         [FromServices] IUseRefreshTokenUseCase useCase,
         [FromBody] RequestNewTokenJson request)

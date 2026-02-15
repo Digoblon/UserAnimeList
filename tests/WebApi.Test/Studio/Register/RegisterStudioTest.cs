@@ -54,7 +54,7 @@ public class RegisterStudioTest : UserAnimeListClassFixture
 
         var token = JwtTokenGeneratorBuilder.Build().Generate(_id, _tokenVersion, _userRole);
 
-        var response = await DoPost(method: method, request: request, token: token);
+        var response = await DoPost(method: method, request: request, token: token, culture);
 
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
 

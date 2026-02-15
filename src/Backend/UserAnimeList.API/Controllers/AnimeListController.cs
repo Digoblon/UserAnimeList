@@ -14,7 +14,7 @@ namespace UserAnimeList.Controllers;
 public class AnimeListController : UserAnimeListBaseController
 {
     [HttpPost]
-    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(ResponseAnimeListEntryJson),StatusCodes.Status201Created)]
     [AuthenticatedUser]
     public async Task<IActionResult> AddEntry(
         [FromServices]IAddAnimeListEntryUseCase useCase,
@@ -29,7 +29,7 @@ public class AnimeListController : UserAnimeListBaseController
     [HttpGet]
     [Route("{id}")]
     [AuthenticatedUser]
-    [ProducesResponseType(typeof(ResponseAnimeJson), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResponseAnimeListEntryJson), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetAnimeListEntryById([FromServices] IGetAnimeListEntryByIdUseCase useCase,
         [FromRoute]string id)
@@ -41,7 +41,7 @@ public class AnimeListController : UserAnimeListBaseController
     
     [HttpGet("list/{userId}")]
     [ProducesResponseType(typeof(ResponseAnimeListsJson), StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> Search([FromServices] IListAnimeByUserIdUseCase useCase,
         [FromRoute]string userId,
         [FromQuery]RequestAnimeListEntryFilterJson request)
@@ -53,7 +53,6 @@ public class AnimeListController : UserAnimeListBaseController
     
     [HttpGet("me/list")]
     [ProducesResponseType(typeof(ResponseAnimeListsJson), StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status204NoContent)]
     [AuthenticatedUser]
     public async Task<IActionResult> Search([FromServices] IListAnimeUseCase useCase,
         [FromQuery]RequestAnimeListEntryFilterJson request)

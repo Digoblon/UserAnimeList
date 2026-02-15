@@ -16,7 +16,6 @@ public class UseRefreshTokenUseCaseTest
     {
         (var user, _) = UserBuilder.Build();
         var refreshToken = RefreshTokenBuilder.Build(user);
-        //refreshToken.CreatedOn = DateTime.UtcNow.AddDays(- UserAnimeListConstants.RefreshTokenExpirationDays + 2);
         
         var useCase = CreateUseCase(refreshToken);
 
