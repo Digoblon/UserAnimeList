@@ -1,7 +1,6 @@
 using CommonTestUtilities.Entities;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestPlatform.TestHost;
@@ -13,7 +12,7 @@ namespace WebApi.Test;
 
 public class CustomWebApplicationFactory : WebApplicationFactory<Program>
 {
-    //private SqliteConnection _connection = null!;
+    private readonly string _databaseName = $"InMemoryDbForTesting_{Guid.NewGuid():N}";
     
     private UserAnimeList.Domain.Entities.User _user = null!;
     private UserAnimeList.Domain.Entities.Studio _studio = null!;
@@ -39,7 +38,7 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
 
                 services.AddDbContext<UserAnimeListDbContext>(options =>
                 {
-                    options.UseInMemoryDatabase("InMemoryDbForTesting");
+                    options.UseInMemoryDatabase(_databaseName);
                     options.UseInternalServiceProvider(provider);
                 });
 

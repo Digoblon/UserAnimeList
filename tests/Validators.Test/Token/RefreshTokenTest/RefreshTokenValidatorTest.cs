@@ -13,8 +13,6 @@ public class RefreshTokenValidatorTest
     public void Success()
     {
         (var user, _) = UserBuilder.Build(); var refreshToken = RefreshTokenBuilder.Build(user);
-        
-        //refreshToken.CreatedOn = DateTime.UtcNow.AddDays(- UserAnimeListConstants.RefreshTokenExpirationDays + 2);
 
         var validator = new RefreshTokenValidator();
 
@@ -57,8 +55,6 @@ public class RefreshTokenValidatorTest
     {
         (var user, _) = UserBuilder.Build(); 
         var refreshToken = RefreshTokenBuilder.Build(user);
-        
-        //refreshToken.CreatedOn = DateTime.UtcNow.AddDays(- UserAnimeListConstants.RefreshTokenExpirationDays + 2);
         refreshToken.RevokedOn = refreshToken.CreatedOn.AddDays(2);
 
         var validator = new RefreshTokenValidator();

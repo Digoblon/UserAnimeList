@@ -7,7 +7,7 @@ namespace UserAnimeList.Infrastructure.Security.Tokens.Refresh;
 
 public class RefreshTokenValidator : IRefreshTokenValidator
 {
-    public void Validate(RefreshToken refreshToken)
+    public void Validate(RefreshToken? refreshToken)
     {
         if (refreshToken is null)
             throw new RefreshTokenNotFoundException();

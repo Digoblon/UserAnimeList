@@ -1,3 +1,5 @@
+using System.Globalization;
+using System.Reflection;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using UserAnimeList.Communication.Requests;
@@ -29,9 +31,13 @@ public class UserAnimeListClassFixture: IClassFixture<CustomWebApplicationFactor
     {
         ChangeRequestCulture(culture);
         AuthorizeRequest(token);
-        
-        return await _httpClient.GetAsync(method);
+
+        var query = BuildQueryString(request);
+        var url = string.IsNullOrWhiteSpace(query) ? method : $"{method}?{query}";
+
+        return await _httpClient.GetAsync(url);
     }
+    
     protected async Task<HttpResponseMessage> DoDelete(string method, string token = "", string culture = "en")
     {
         ChangeRequestCulture(culture);
@@ -82,7 +88,31 @@ public class UserAnimeListClassFixture: IClassFixture<CustomWebApplicationFactor
     
     
     
-    
+
+    private static string BuildQueryString(object request)
+    {
+        var properties = request
+            .GetType()
+            .GetProperties(BindingFlags.Instance | BindingFlags.Public)
+            .Where(p => p.CanRead)
+            .Select(p => (Name: p.Name, Value: p.GetValue(request)))
+            .Where(p => p.Value is not null)
+            .Select(p => $"{Uri.EscapeDataString(p.Name)}={Uri.EscapeDataString(FormatQueryValue(p.Value!))}");
+
+        return string.Join("&", properties);
+    }
+
+    private static string FormatQueryValue(object value)
+    {
+        return value switch
+        {
+            DateOnly dateOnly => dateOnly.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture),
+            DateTime dateTime => dateTime.ToString("O", CultureInfo.InvariantCulture),
+            IFormattable formattable => formattable.ToString(null, CultureInfo.InvariantCulture),
+            _ => value.ToString() ?? string.Empty
+        };
+    }
+
     private void ChangeRequestCulture(string culture)
     {
         if(_httpClient.DefaultRequestHeaders.Contains("Accept-Language"))

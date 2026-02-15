@@ -77,8 +77,6 @@ public class DoLoginUseCaseTest
 
         var exception = await Assert.ThrowsAsync<InvalidLoginException>(act);
         Assert.Equal(exception.GetErrorMessages().FirstOrDefault(),ResourceMessagesException.LOGIN_OR_PASSWORD_INVALID);
-        
-        //await act.Should().ThrowAsync<InvalidLoginException>().Where(e => e.Message.Equals(ResourceMessagesException.EMAIL_OR_PASSWORD_INVALID));
     }
 
     private static DoLoginUseCase CreateUseCase(string login,UserAnimeList.Domain.Entities.User? user = null)

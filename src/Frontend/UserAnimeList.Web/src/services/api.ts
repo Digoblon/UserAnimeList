@@ -1,147 +1,128 @@
-import {
-  ApiResult,
-  RequestAnimeJson,
-  RequestAnimeListEntryFilterJson,
-  RequestAnimeListEntryJson,
-  RequestAnimeSearchJson,
-  RequestChangePasswordJson,
-  RequestGenreGetByNameJson,
-  RequestLoginJson,
-  RequestNewTokenJson,
-  RequestRegisterGenreJson,
-  RequestRegisterStudioJson,
-  RequestRegisterUserJson,
-  RequestStudioGetByNameJson,
-  RequestUpdateAnimeListEntryJson,
-  RequestUpdateGenreJson,
-  RequestUpdateStudioJson,
-  RequestUpdateUserJson,
-  ResponseAnimeJson,
-  ResponseAnimeListEntryJson,
-  ResponseAnimeListsJson,
-  ResponseAnimesJson,
-  ResponseChangePasswordJson,
-  ResponseErrorJson,
-  ResponseGenreJson,
-  ResponseGenresJson,
-  ResponseRegisteredAnimeJson,
-  ResponseRegisteredGenreJson,
-  ResponseRegisteredStudioJson,
-  ResponseRegisteredUserJson,
-  ResponseStudioJson,
-  ResponseStudiosJson,
-  ResponseTokensJson,
-  ResponseUpdateImageJson,
-  ResponseUserProfileJson
-} from '../types/contracts';
+import type {
+  AddAnimeListEntryRequest,
+  AnimeListResponse,
+  AnimeSearchResponse,
+  ApiErrorPayload,
+  ListFilter,
+  RegisterUserRequest,
+  Tokens,
+  UpdateAnimeListEntryRequest,
+  UserProfile
+} from '../types/api';
 
-const API_BASE = '/api';
+const API_BASE = import.meta.env.VITE_API_BASE_URL ?? '/api';
 
 export class ApiError extends Error {
   status: number;
-  payload?: ResponseErrorJson;
+  tokenIsExpired: boolean;
 
-  constructor(status: number, message: string, payload?: ResponseErrorJson) {
+  constructor(message: string, status: number, tokenIsExpired = false) {
     super(message);
+    this.name = 'ApiError';
     this.status = status;
-    this.payload = payload;
+    this.tokenIsExpired = tokenIsExpired;
   }
 }
 
-function toQuery(filters: RequestAnimeListEntryFilterJson): string {
-  const params = new URLSearchParams();
-  Object.entries(filters).forEach(([k, v]) => {
-    if (v !== undefined && v !== null && v !== '') params.set(k, String(v));
+function toQueryString(filters: ListFilter): string {
+  const query = new URLSearchParams();
+
+  Object.entries(filters).forEach(([key, value]) => {
+    if (value !== undefined && value !== null && value !== '') {
+      query.set(key, String(value));
+    }
   });
-  const s = params.toString();
-  return s ? `?${s}` : '';
+
+  const serialized = query.toString();
+  return serialized.length ? `?${serialized}` : '';
 }
 
-async function request<T>(path: string, init: RequestInit = {}): Promise<ApiResult<T>> {
-  const res = await fetch(`${API_BASE}${path}`, init);
-  if (res.status === 204) return { data: {} as T, status: 204 };
-  const isJson = res.headers.get('content-type')?.includes('application/json');
-  const body = isJson ? await res.json() : undefined;
-  if (!res.ok) {
-    throw new ApiError(res.status, body?.errors?.join(' | ') ?? res.statusText, body as ResponseErrorJson | undefined);
+function parseError(payload: unknown, fallback: string): { message: string; tokenIsExpired: boolean } {
+  if (payload && typeof payload === 'object') {
+    const parsed = payload as ApiErrorPayload;
+    if (Array.isArray(parsed.errors) && parsed.errors.length) {
+      return { message: parsed.errors[0], tokenIsExpired: !!parsed.tokenIsExpired };
+    }
+    if (typeof parsed.message === 'string') {
+      return { message: parsed.message, tokenIsExpired: !!parsed.tokenIsExpired };
+    }
+
+    return { message: fallback, tokenIsExpired: !!parsed.tokenIsExpired };
   }
-  return { data: body as T, status: res.status };
+
+  if (typeof payload === 'string' && payload.length) {
+    return { message: payload, tokenIsExpired: false };
+  }
+
+  return { message: fallback, tokenIsExpired: false };
 }
 
-export class ApiClient {
-  token: string | null = null;
+async function request<T>(path: string, init?: RequestInit, token?: string): Promise<T> {
+  const headers = new Headers(init?.headers);
 
-  setToken(token: string | null) { this.token = token; }
+  if (token) headers.set('Authorization', `Bearer ${token}`);
+  if (init?.body && !(init.body instanceof FormData)) headers.set('Content-Type', 'application/json');
 
-  private authHeaders(extra?: HeadersInit): HeadersInit {
-    return { ...(extra ?? {}), ...(this.token ? { Authorization: `Bearer ${this.token}` } : {}) };
+  const response = await fetch(`${API_BASE}${path}`, { ...init, headers });
+
+  if (response.status === 204) return {} as T;
+
+  const contentType = response.headers.get('content-type') ?? '';
+  const isJson = contentType.includes('application/json');
+  const payload = isJson ? await response.json() : await response.text();
+
+  if (!response.ok) {
+    const parsed = parseError(payload, 'Erro ao processar a requisição.');
+    throw new ApiError(parsed.message, response.status, parsed.tokenIsExpired);
   }
 
-  login(payload: RequestLoginJson) {
-    return request<ResponseRegisteredUserJson>('/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-  }
-
-  refreshToken(payload: RequestNewTokenJson) {
-    return request<ResponseTokensJson>('/token/refresh-token', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-  }
-
-  registerUser(payload: RequestRegisterUserJson) {
-    return request<ResponseRegisteredUserJson>('/user', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-  }
-
-  getUserProfile() {
-    return request<ResponseUserProfileJson>('/user', { headers: this.authHeaders() });
-  }
-
-  updateUser(payload: RequestUpdateUserJson) {
-    return request<void>('/user', { method: 'PUT', headers: this.authHeaders({ 'Content-Type': 'application/json' }), body: JSON.stringify(payload) });
-  }
-
-  changePassword(payload: RequestChangePasswordJson) {
-    return request<ResponseChangePasswordJson>('/user/change-password', { method: 'PUT', headers: this.authHeaders({ 'Content-Type': 'application/json' }), body: JSON.stringify(payload) });
-  }
-
-  updateUserImage(file: File) {
-    const form = new FormData();
-    form.append('image', file);
-    return request<ResponseUpdateImageJson>('/user/me/image', { method: 'PUT', headers: this.authHeaders(), body: form });
-  }
-
-  deleteUserImage() { return request<void>('/user/me/image', { method: 'DELETE', headers: this.authHeaders() }); }
-  deleteMe() { return request<void>('/user/me', { method: 'DELETE', headers: this.authHeaders() }); }
-
-  searchAnime(payload: RequestAnimeSearchJson) {
-    return request<ResponseAnimesJson>('/anime/search', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-  }
-
-  getAnimeById(id: string) { return request<ResponseAnimeJson>(`/anime/${id}`); }
-  registerAnime(payload: RequestAnimeJson) { return request<ResponseRegisteredAnimeJson>('/anime', { method: 'POST', headers: this.authHeaders({ 'Content-Type': 'application/json' }), body: JSON.stringify(payload) }); }
-  updateAnime(id: string, payload: RequestAnimeJson) { return request<void>(`/anime/${id}`, { method: 'PUT', headers: this.authHeaders({ 'Content-Type': 'application/json' }), body: JSON.stringify(payload) }); }
-  deleteAnime(id: string) { return request<void>(`/anime/${id}`, { method: 'DELETE', headers: this.authHeaders() }); }
-  updateAnimeImage(id: string, file: File) {
-    const form = new FormData(); form.append('image', file);
-    return request<ResponseUpdateImageJson>(`/anime/${id}/image`, { method: 'PUT', headers: this.authHeaders(), body: form });
-  }
-  deleteAnimeImage(id: string) { return request<void>(`/anime/${id}/image`, { method: 'DELETE', headers: this.authHeaders() }); }
-
-  addAnimeListEntry(payload: RequestAnimeListEntryJson) { return request<ResponseAnimeListEntryJson>('/animelist', { method: 'POST', headers: this.authHeaders({ 'Content-Type': 'application/json' }), body: JSON.stringify(payload) }); }
-  getAnimeListEntryById(id: string) { return request<ResponseAnimeListEntryJson>(`/animelist/${id}`, { headers: this.authHeaders() }); }
-  listMyAnimeList(filters: RequestAnimeListEntryFilterJson) { return request<ResponseAnimeListsJson>(`/animelist/me/list${toQuery(filters)}`, { headers: this.authHeaders() }); }
-  listUserAnimeList(userId: string, filters: RequestAnimeListEntryFilterJson) { return request<ResponseAnimeListsJson>(`/animelist/list/${userId}${toQuery(filters)}`); }
-  updateAnimeListEntry(id: string, payload: RequestUpdateAnimeListEntryJson) { return request<void>(`/animelist/${id}`, { method: 'PUT', headers: this.authHeaders({ 'Content-Type': 'application/json' }), body: JSON.stringify(payload) }); }
-  deleteAnimeListEntry(id: string) { return request<void>(`/animelist/${id}`, { method: 'DELETE', headers: this.authHeaders() }); }
-
-  registerGenre(payload: RequestRegisterGenreJson) { return request<ResponseRegisteredGenreJson>('/genre', { method: 'POST', headers: this.authHeaders({ 'Content-Type': 'application/json' }), body: JSON.stringify(payload) }); }
-  getGenreById(id: string) { return request<ResponseGenreJson>(`/genre/${id}`); }
-  searchGenre(payload: RequestGenreGetByNameJson) { return request<ResponseGenresJson>('/genre/search', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }); }
-  updateGenre(id: string, payload: RequestUpdateGenreJson) { return request<void>(`/genre/${id}`, { method: 'PUT', headers: this.authHeaders({ 'Content-Type': 'application/json' }), body: JSON.stringify(payload) }); }
-  deleteGenre(id: string) { return request<void>(`/genre/${id}`, { method: 'DELETE', headers: this.authHeaders() }); }
-
-  registerStudio(payload: RequestRegisterStudioJson) { return request<ResponseRegisteredStudioJson>('/studio', { method: 'POST', headers: this.authHeaders({ 'Content-Type': 'application/json' }), body: JSON.stringify(payload) }); }
-  getStudioById(id: string) { return request<ResponseStudioJson>(`/studio/${id}`); }
-  searchStudio(payload: RequestStudioGetByNameJson) { return request<ResponseStudiosJson>('/studio/search', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }); }
-  updateStudio(id: string, payload: RequestUpdateStudioJson) { return request<void>(`/studio/${id}`, { method: 'PUT', headers: this.authHeaders({ 'Content-Type': 'application/json' }), body: JSON.stringify(payload) }); }
-  deleteStudio(id: string) { return request<void>(`/studio/${id}`, { method: 'DELETE', headers: this.authHeaders() }); }
+  return payload as T;
 }
 
-export const api = new ApiClient();
+export const api = {
+  login: (login: string, password: string) =>
+    request<Tokens>('/login', {
+      method: 'POST',
+      body: JSON.stringify({ login, password })
+    }),
+
+  register: (input: RegisterUserRequest) =>
+    request('/user', {
+      method: 'POST',
+      body: JSON.stringify(input)
+    }),
+
+  refreshToken: (refreshToken: string) =>
+    request<Tokens>('/token/refresh-token', {
+      method: 'POST',
+      body: JSON.stringify({ refreshToken })
+    }),
+
+  getProfile: (token: string) => request<UserProfile>('/user', { method: 'GET' }, token),
+
+  searchAnime: (query: string) =>
+    request<AnimeSearchResponse>('/anime/search', {
+      method: 'POST',
+      body: JSON.stringify({ query })
+    }),
+
+  getMyList: (token: string, filters: ListFilter = {}) =>
+    request<AnimeListResponse>(`/animelist/me/list${toQueryString(filters)}`, { method: 'GET' }, token),
+
+  addToList: (token: string, input: AddAnimeListEntryRequest) =>
+    request('/animelist', {
+      method: 'POST',
+      body: JSON.stringify(input)
+    }, token),
+
+  updateListEntry: (token: string, entryId: string, input: UpdateAnimeListEntryRequest) =>
+    request(`/animelist/${entryId}`, {
+      method: 'PUT',
+      body: JSON.stringify(input)
+    }, token),
+
+  deleteListEntry: (token: string, entryId: string) =>
+    request(`/animelist/${entryId}`, {
+      method: 'DELETE'
+    }, token)
+};

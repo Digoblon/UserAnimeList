@@ -5,7 +5,6 @@ using CommonTestUtilities.Repositories;
 using CommonTestUtilities.Requests;
 using UserAnimeList.Application.UseCases.AnimeList.List.Me;
 using UserAnimeList.Communication.Enums;
-using UserAnimeList.Communication.Requests;
 using UserAnimeList.Exception;
 using UserAnimeList.Exception.Exceptions;
 

@@ -13,7 +13,10 @@ namespace UserAnimeList.Controllers;
 public class StudioController : UserAnimeListBaseController
 {
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ResponseRegisteredStudioJson), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status403Forbidden)]
         [AdminOnly]
         public async Task<IActionResult> Register(
             [FromServices]IRegisterStudioUseCase useCase,
@@ -28,6 +31,7 @@ public class StudioController : UserAnimeListBaseController
         [HttpGet]
         [Route("{id}")]
         [ProducesResponseType(typeof(ResponseStudioJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetStudioById([FromServices] IGetStudioByIdUseCase useCase,
             [FromRoute]string id)
@@ -40,6 +44,7 @@ public class StudioController : UserAnimeListBaseController
         [HttpPost("search")]
         [ProducesResponseType(typeof(ResponseStudiosJson), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetStudioByName([FromServices] IGetStudioByNameUseCase useCase,
             [FromBody]RequestStudioGetByNameJson request)
         {
@@ -53,6 +58,9 @@ public class StudioController : UserAnimeListBaseController
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         [AdminOnly]
         public async Task<IActionResult> Update([FromServices] IUpdateStudioUseCase useCase,
             [FromBody] RequestUpdateStudioJson request,
@@ -66,6 +74,10 @@ public class StudioController : UserAnimeListBaseController
         
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         [AdminOnly]
         public async Task<IActionResult> SoftDelete([FromServices] ISoftDeleteStudioUseCase userUseCase,
             [FromRoute]string id)
