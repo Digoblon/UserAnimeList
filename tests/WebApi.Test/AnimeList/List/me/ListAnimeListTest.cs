@@ -56,9 +56,9 @@ public class ListAnimeListTest : UserAnimeListClassFixture
             Query = _animeName
         };
 
-        await DoDelete($"animelist/{_animeListId}", token);
+        await DoDelete($"animelist/{_animeListId}", token, culture);
         
-        var response = await DoGetQuery(Method,request,token);
+        var response = await DoGetQuery(Method,request,token,culture);
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         

@@ -50,7 +50,7 @@ public class UpdateAnimeEntryTest : UserAnimeListClassFixture
 
         var token = JwtTokenGeneratorBuilder.Build().Generate(_id, _tokenVersion, _userRole);
 
-        var response = await DoPut(method: $"{method}/{_animeListId}", request: request, token: token);
+        var response = await DoPut(method: $"{method}/{_animeListId}", request: request, token: token, culture: culture);
 
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
 
