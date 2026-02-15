@@ -1,5 +1,6 @@
 using System.Net;
 using System.Text.Json;
+using CommonTestUtilities.Requests;
 using CommonTestUtilities.Tokens;
 using UserAnimeList.Communication.Requests;
 using UserAnimeList.Enums;
@@ -14,6 +15,7 @@ public class ListAnimeListByIdTest : UserAnimeListClassFixture
     private readonly Guid _id;
     private readonly int _tokenVersion;
     private readonly UserRole _userRole;
+    private readonly Guid _animeId;
     private readonly Guid _animeListId;
     private readonly string _animeName;
     
@@ -22,6 +24,7 @@ public class ListAnimeListByIdTest : UserAnimeListClassFixture
         _id = factory.GetId();
         _tokenVersion = factory.GetTokenVersion();
         _userRole = factory.GetRole();
+        _animeId = factory.GetAnimeId();
         _animeListId = factory.GetAnimeListId();
         _animeName = factory.GetAnimeName();
     }
@@ -30,6 +33,15 @@ public class ListAnimeListByIdTest : UserAnimeListClassFixture
     public async Task Success()
     {
         var token = JwtTokenGeneratorBuilder.Build().Generate(_id, _tokenVersion,_userRole);
+
+        await DoDelete($"animelist/{_animeListId}", token);
+
+        var addRequest = RequestAnimeListEntryJsonBuilder.Build();
+        addRequest.AnimeId = _animeId;
+
+        var addResponse = await DoPost("animelist", addRequest, token);
+        Assert.Equal(HttpStatusCode.Created, addResponse.StatusCode);
+
         var request = new RequestAnimeListEntryFilterJson
         {
             Query = _animeName

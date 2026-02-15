@@ -37,6 +37,7 @@ public class UserAnimeListClassFixture: IClassFixture<CustomWebApplicationFactor
 
         return await _httpClient.GetAsync(url);
     }
+    
     protected async Task<HttpResponseMessage> DoDelete(string method, string token = "", string culture = "en")
     {
         ChangeRequestCulture(culture);

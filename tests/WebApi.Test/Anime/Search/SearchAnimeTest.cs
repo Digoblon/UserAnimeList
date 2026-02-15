@@ -25,7 +25,7 @@ public class SearchAnimeTest : UserAnimeListClassFixture
         {
             Query = _animeName
         };
-        var response = await DoPost($"{Method}",request);
+        var response = await DoGetQuery($"{Method}", request);
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
@@ -45,7 +45,7 @@ public class SearchAnimeTest : UserAnimeListClassFixture
         {
             Query = string.Empty
         };
-        var response = await DoPost($"{Method}",request, culture: culture);
+        var response = await DoGetQuery($"{Method}", request, culture: culture);
 
         Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
     }

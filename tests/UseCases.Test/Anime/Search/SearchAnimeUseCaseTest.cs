@@ -1,6 +1,7 @@
 using CommonTestUtilities.Entities;
 using CommonTestUtilities.Mapper;
 using CommonTestUtilities.Repositories;
+using Bogus;
 using UserAnimeList.Application.UseCases.Anime.Search;
 using UserAnimeList.Communication.Requests;
 
@@ -26,7 +27,7 @@ public class SearchAnimeUseCaseTest
         Assert.Contains(anime.Name, result.Animes.Select(a => a.Name));
     }
     [Fact]
-    public async Task Success_Query_All()
+    public async Task Success_Empty_Query()
     {
         var anime = AnimeBuilder.Build();
         var animeList = AnimeBuilder.Collection();
@@ -35,24 +36,23 @@ public class SearchAnimeUseCaseTest
     
         var request = new RequestAnimeSearchJson
         {
-            Query = "*"
+            Query = string.Empty
         };
         var result = await useCase.Execute(request);
         
         
-        Assert.NotEmpty(result.Animes);
-        Assert.Equal(animeList.Count +  1, result.Animes.Count);
+        Assert.Empty(result.Animes);
     }
         
-    [Theory]
-    [InlineData("")]
-    [InlineData("aa")]
-    public async Task Error_Query_Invalid(string query)
+    [Fact]
+    public async Task Success_Query_Too_Short()
     {
         var anime = AnimeBuilder.Build();
         var animeList = AnimeBuilder.Collection();
 
         var useCase = CreateUseCase(anime, animeList);
+        var faker = new Faker();
+        var query = faker.Random.String2(faker.Random.Int(1, 2), "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ");
 
         var request = new RequestAnimeSearchJson
         {
