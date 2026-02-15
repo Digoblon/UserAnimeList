@@ -28,7 +28,7 @@ public class UserController : UserAnimeListBaseController
     }
         
     [ServiceFilter(typeof(AbsoluteImageUrlFilter))]
-    [HttpPost("me/image")]
+    [HttpPut("me/image")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
     [AuthenticatedUser]

@@ -2,6 +2,7 @@ using System.Globalization;
 using System.Reflection;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
+using UserAnimeList.Communication.Requests;
 
 namespace WebApi.Test;
 
@@ -43,7 +44,7 @@ public class UserAnimeListClassFixture: IClassFixture<CustomWebApplicationFactor
         
         return await _httpClient.DeleteAsync(method);
     }
-    
+ 
     protected async Task<HttpResponseMessage> DoPut(string method,object request, string token = "", string culture = "en")
     {
         ChangeRequestCulture(culture);
@@ -51,6 +52,39 @@ public class UserAnimeListClassFixture: IClassFixture<CustomWebApplicationFactor
         
         return await _httpClient.PutAsJsonAsync(method, request);
     }
+    
+    protected async Task<HttpResponseMessage> DoPutMultipart(string method, RequestUpdateImageFormData request, string token = "", string culture = "en")
+    {
+        ChangeRequestCulture(culture);
+        AuthorizeRequest(token);
+
+        var content = new MultipartFormDataContent();
+
+        var file = request.Image;
+
+        if (file is not null)
+        {
+            byte[] bytes;
+            await using (var memoryStream = new MemoryStream())
+            {
+                await request.Image!.CopyToAsync(memoryStream);
+                bytes = memoryStream.ToArray();
+            }
+
+            var fileContent = new ByteArrayContent(bytes);
+            fileContent.Headers.ContentType = new MediaTypeHeaderValue(request.Image.ContentType);
+
+            content.Add(fileContent, "Image", request.Image.FileName);
+        }
+        else
+        {
+            content.Add(new StringContent(string.Empty), "Image");
+        }
+        
+        return await _httpClient.PutAsync(method, content);
+    }
+    
+    
     
     
 

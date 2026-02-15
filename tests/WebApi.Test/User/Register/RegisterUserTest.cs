@@ -20,7 +20,6 @@ public class RegisterUserTest : UserAnimeListClassFixture
         var response = await DoPost(method:method, request:request);
 
         Assert.Equal(HttpStatusCode.Created, response.StatusCode);
-        //response.StatusCode.Should().Be(HttpStatusCode.Created);
         
         await using var responseBody = await response.Content.ReadAsStreamAsync();
         
@@ -29,9 +28,6 @@ public class RegisterUserTest : UserAnimeListClassFixture
         Assert.NotNull(responseData.RootElement.GetProperty("userName").GetString());
         Assert.NotEmpty(responseData.RootElement.GetProperty("userName").GetString()!);
         Assert.Equal(request.UserName, responseData.RootElement.GetProperty("userName").GetString());
-        
-        //responseData.RootElement.GetProperty("name").GetString().Should().NotBeNullOrWhiteSpace().And.Be(request.Name);
-        //responseData.RootElement.GetProperty("tokens").GetProperty("accessToken").GetString().Should().NotBeNullOrEmpty();
     }
 
     [Theory]
@@ -44,7 +40,6 @@ public class RegisterUserTest : UserAnimeListClassFixture
         var response = await DoPost(method:method, request:request, culture:culture);
         
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
-        //response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
         
         await using var responseBody = await response.Content.ReadAsStreamAsync();
         var responseData = await JsonDocument.ParseAsync(responseBody);
@@ -55,6 +50,5 @@ public class RegisterUserTest : UserAnimeListClassFixture
         
         Assert.Single(errors);
         Assert.Equal(expectedMessage,errors.First().ToString());
-        //errors.Should().ContainSingle().And.Contain(error => error.GetString()!.Equals(expectedMessage));
     }
 }

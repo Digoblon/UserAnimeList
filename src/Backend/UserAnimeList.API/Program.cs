@@ -48,7 +48,7 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddApplication(builder.Configuration);
+builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddScoped<AuthenticatedUserFilter>();
 builder.Services.AddScoped<AbsoluteImageUrlFilter>();
