@@ -23,11 +23,20 @@ body {
   gap: 16px;
 }
 
-.header {
+.card {
+  background: rgba(10, 20, 44, 0.84);
+  border: 1px solid rgba(97, 132, 216, 0.35);
+  border-radius: 12px;
+  padding: 16px;
   display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.header {
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  gap: 12px;
 }
 
 .header p {
@@ -39,6 +48,7 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-wrap: wrap;
 }
 
 .badge {
@@ -46,25 +56,6 @@ body {
   border-radius: 999px;
   padding: 8px 12px;
   font-size: 14px;
-}
-
-.grid {
-  display: grid;
-  gap: 16px;
-}
-
-.two-columns {
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-}
-
-.card {
-  background: rgba(10, 20, 44, 0.8);
-  border: 1px solid rgba(97, 132, 216, 0.35);
-  border-radius: 12px;
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
 }
 
 .stack {
@@ -108,19 +99,6 @@ button:disabled {
   border-color: #cb4f63;
 }
 
-.profile-box {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.profile-box img {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
 .anime-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
@@ -152,6 +130,19 @@ button:disabled {
 
 .anime-card button {
   margin: 10px;
+}
+
+.profile-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.profile-box img {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .list {
@@ -188,11 +179,6 @@ button:disabled {
   min-width: 110px;
 }
 
-small {
-  display: block;
-  opacity: 0.75;
-}
-
 .score {
   min-width: 28px;
   text-align: center;
@@ -200,6 +186,26 @@ small {
   background: #1f3b7f;
   border-radius: 6px;
   padding: 6px;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal {
+  width: min(520px, 100%);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .toast {

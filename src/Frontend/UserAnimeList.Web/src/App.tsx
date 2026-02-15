@@ -1,11 +1,10 @@
 import { useEffect, useMemo, useState, type FormEvent } from 'react';
-import { AuthPanel } from './components/AuthPanel';
+import { AuthModal } from './components/AuthModal';
 import { Header } from './components/Header';
-import { MyListPanel } from './components/MyListPanel';
-import { ProfilePanel } from './components/ProfilePanel';
-import { SearchPanel } from './components/SearchPanel';
+import { HomePage } from './components/HomePage';
+import { ProfilePage } from './components/ProfilePage';
 import { ApiError, api } from './services/api';
-import type { Anime, AnimeListEntry, ListFilter, RegisterUserRequest, UserProfile } from './types/api';
+import type { Anime, AnimeListEntry, RegisterUserRequest, UserProfile } from './types/api';
 
 const ACCESS_TOKEN_KEY = 'ual_access_token';
 const REFRESH_TOKEN_KEY = 'ual_refresh_token';
@@ -17,7 +16,12 @@ const emptyRegisterData: RegisterUserRequest = {
   confirmPassword: ''
 };
 
+type Page = 'home' | 'profile';
+
 export function App() {
+  const [page, setPage] = useState<Page>('home');
+  const [authOpen, setAuthOpen] = useState(false);
+
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [registerData, setRegisterData] = useState<RegisterUserRequest>(emptyRegisterData);
@@ -26,9 +30,8 @@ export function App() {
   const [refreshToken, setRefreshToken] = useState(localStorage.getItem(REFRESH_TOKEN_KEY) ?? '');
 
   const [query, setQuery] = useState('');
-  const [foundAnime, setFoundAnime] = useState<Anime[]>([]);
+  const [homeAnimes, setHomeAnimes] = useState<Anime[]>([]);
   const [myList, setMyList] = useState<AnimeListEntry[]>([]);
-  const [listFilter] = useState<ListFilter>({ sortField: 0, sortDirection: 0 });
   const [profile, setProfile] = useState<UserProfile | null>(null);
 
   const [loading, setLoading] = useState(false);
@@ -37,34 +40,14 @@ export function App() {
   const isLoggedIn = useMemo(() => accessToken.length > 10, [accessToken]);
 
   useEffect(() => {
-    if (!isLoggedIn) {
-      setProfile(null);
-      setMyList([]);
-      return;
+    void loadHomeInitialCatalog();
+  }, []);
+
+  useEffect(() => {
+    if (page === 'profile' && isLoggedIn) {
+      void loadProfileAndList();
     }
-
-    void bootstrapUserArea();
-  }, [isLoggedIn]);
-
-  async function bootstrapUserArea() {
-    setLoading(true);
-
-    try {
-      const token = await getValidToken();
-      const [profileResponse, listResponse] = await Promise.all([
-        api.getProfile(token),
-        api.getMyList(token, listFilter)
-      ]);
-
-      setProfile(profileResponse);
-      setMyList(listResponse.lists ?? []);
-    } catch (error) {
-      setMessage(handleApiFailure(error, 'Não foi possível carregar a área autenticada.'));
-      logout(false);
-    } finally {
-      setLoading(false);
-    }
-  }
+  }, [page, isLoggedIn]);
 
   function persistTokens(nextAccessToken: string, nextRefreshToken: string) {
     localStorage.setItem(ACCESS_TOKEN_KEY, nextAccessToken);
@@ -80,15 +63,14 @@ export function App() {
     setRefreshToken('');
     setProfile(null);
     setMyList([]);
+    setPage('home');
     if (showMessage) setMessage('Você saiu da sessão.');
   }
 
   async function getValidToken() {
     if (accessToken) return accessToken;
 
-    if (!refreshToken) {
-      throw new Error('Você precisa fazer login.');
-    }
+    if (!refreshToken) throw new Error('Você precisa fazer login.');
 
     const renewed = await api.refreshToken(refreshToken);
     persistTokens(renewed.accessToken, renewed.refreshToken);
@@ -110,20 +92,59 @@ export function App() {
     }
   }
 
+  async function loadHomeInitialCatalog() {
+    setLoading(true);
+    try {
+      const first = await api.searchAnime('');
+      let items = first.animes ?? [];
+      if (!items.length) {
+        const fallback = await api.searchAnime('a');
+        items = fallback.animes ?? [];
+      }
+      setHomeAnimes(items.slice(0, 12));
+    } catch {
+      setHomeAnimes([]);
+      setMessage('Não foi possível carregar catálogo inicial.');
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function loadProfileAndList() {
+    setLoading(true);
+    try {
+      await withAuth(async (token) => {
+        const [profileResponse, listResponse] = await Promise.all([
+          api.getProfile(token),
+          api.getMyList(token)
+        ]);
+
+        setProfile(profileResponse);
+        setMyList(listResponse.lists ?? []);
+      });
+    } catch (error) {
+      setMessage(resolveError(error, 'Não foi possível carregar perfil e lista.'));
+      logout(false);
+      setAuthOpen(true);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   async function handleLoginSubmit(event: FormEvent) {
     event.preventDefault();
     setLoading(true);
-    setMessage('Realizando login...');
-
     try {
       const tokens = await api.login(login, password);
       persistTokens(tokens.accessToken, tokens.refreshToken);
       setLogin('');
       setPassword('');
       setMessage('Login realizado com sucesso.');
-      await bootstrapUserArea();
+      setAuthOpen(false);
+      setPage('profile');
+      await loadProfileAndList();
     } catch (error) {
-      setMessage(handleApiFailure(error, 'Falha no login. Verifique usuário/senha.'));
+      setMessage(resolveError(error, 'Falha no login.'));
     } finally {
       setLoading(false);
     }
@@ -132,13 +153,12 @@ export function App() {
   async function handleRegisterSubmit(event: FormEvent) {
     event.preventDefault();
     setLoading(true);
-
     try {
       await api.register(registerData);
       setRegisterData(emptyRegisterData);
-      setMessage('Cadastro realizado. Agora faça login.');
+      setMessage('Cadastro concluído. Faça login para continuar.');
     } catch (error) {
-      setMessage(handleApiFailure(error, 'Não foi possível realizar cadastro.'));
+      setMessage(resolveError(error, 'Não foi possível realizar cadastro.'));
     } finally {
       setLoading(false);
     }
@@ -147,14 +167,13 @@ export function App() {
   async function handleSearchSubmit(event: FormEvent) {
     event.preventDefault();
     setLoading(true);
-
     try {
       const response = await api.searchAnime(query);
-      setFoundAnime(response.animes ?? []);
-      setMessage((response.animes ?? []).length ? 'Busca concluída com sucesso.' : 'Nenhum anime encontrado.');
+      const items = response.animes ?? [];
+      setHomeAnimes(items);
+      setMessage(items.length ? 'Busca concluída.' : 'Nenhum anime encontrado.');
     } catch (error) {
-      setFoundAnime([]);
-      setMessage(handleApiFailure(error, 'Busca indisponível no momento.'));
+      setMessage(resolveError(error, 'Busca indisponível.'));
     } finally {
       setLoading(false);
     }
@@ -162,23 +181,14 @@ export function App() {
 
   async function handleAddToList(animeId: string) {
     setLoading(true);
-
     try {
       await withAuth(async (token) => {
-        await api.addToList(token, {
-          animeId,
-          status: 0,
-          progress: 0,
-          score: null
-        });
-
-        const list = await api.getMyList(token, listFilter);
-        setMyList(list.lists ?? []);
+        await api.addToList(token, { animeId, status: 0, progress: 0, score: null });
       });
-
-      setMessage('Anime adicionado à sua lista.');
+      setMessage('Anime adicionado na sua lista.');
     } catch (error) {
-      setMessage(handleApiFailure(error, 'Não foi possível adicionar anime na lista.'));
+      setMessage(resolveError(error, 'Não foi possível adicionar anime.'));
+      if (!isLoggedIn) setAuthOpen(true);
     } finally {
       setLoading(false);
     }
@@ -186,22 +196,20 @@ export function App() {
 
   async function handleUpdateEntry(entry: AnimeListEntry) {
     setLoading(true);
-
     try {
       await withAuth(async (token) => {
         await api.updateListEntry(token, entry.id, {
           status: entry.status,
-          progress: entry.progress,
-          score: entry.score
+          score: entry.score,
+          progress: entry.progress
         });
 
-        const list = await api.getMyList(token, listFilter);
+        const list = await api.getMyList(token);
         setMyList(list.lists ?? []);
       });
-
-      setMessage('Item da lista atualizado.');
+      setMessage('Item atualizado.');
     } catch (error) {
-      setMessage(handleApiFailure(error, 'Não foi possível atualizar item da lista.'));
+      setMessage(resolveError(error, 'Não foi possível atualizar item.'));
     } finally {
       setLoading(false);
     }
@@ -209,31 +217,63 @@ export function App() {
 
   async function handleDeleteEntry(entryId: string) {
     setLoading(true);
-
     try {
       await withAuth(async (token) => {
         await api.deleteListEntry(token, entryId);
-        const list = await api.getMyList(token, listFilter);
+        const list = await api.getMyList(token);
         setMyList(list.lists ?? []);
       });
-
-      setMessage('Item removido da sua lista.');
+      setMessage('Item removido da lista.');
     } catch (error) {
-      setMessage(handleApiFailure(error, 'Não foi possível remover item da lista.'));
+      setMessage(resolveError(error, 'Não foi possível remover item.'));
     } finally {
       setLoading(false);
     }
   }
 
+  function openProfile() {
+    if (!isLoggedIn) {
+      setAuthOpen(true);
+      setMessage('Faça login para acessar o perfil.');
+      return;
+    }
+
+    setPage('profile');
+  }
+
   return (
     <main className="page">
-      <Header userName={profile?.userName} onLogout={() => logout(true)} />
+      <Header
+        userName={profile?.userName}
+        onHome={() => setPage('home')}
+        onProfile={openProfile}
+        onAuth={() => setAuthOpen(true)}
+        onLogout={() => logout(true)}
+      />
 
-      <AuthPanel
+      {page === 'home' && (
+        <HomePage
+          query={query}
+          loading={loading}
+          animes={homeAnimes}
+          canAdd={isLoggedIn}
+          onQueryChange={setQuery}
+          onSearch={handleSearchSubmit}
+          onAdd={handleAddToList}
+        />
+      )}
+
+      {page === 'profile' && (
+        <ProfilePage profile={profile} entries={myList} loading={loading} onUpdate={handleUpdateEntry} onDelete={handleDeleteEntry} />
+      )}
+
+      <AuthModal
+        isOpen={authOpen}
+        loading={loading}
         login={login}
         password={password}
         registerData={registerData}
-        loading={loading}
+        onClose={() => setAuthOpen(false)}
         onLoginSubmit={handleLoginSubmit}
         onRegisterSubmit={handleRegisterSubmit}
         onLoginChange={setLogin}
@@ -241,29 +281,12 @@ export function App() {
         onRegisterChange={setRegisterData}
       />
 
-      <ProfilePanel profile={profile} />
-
-      <SearchPanel
-        query={query}
-        foundAnime={foundAnime}
-        loading={loading}
-        canAdd={isLoggedIn}
-        onQueryChange={setQuery}
-        onSearchSubmit={handleSearchSubmit}
-        onAdd={handleAddToList}
-      />
-
-      <MyListPanel entries={myList} loading={loading} onUpdate={handleUpdateEntry} onDelete={handleDeleteEntry} />
-
       {message && <footer className="toast">{message}</footer>}
     </main>
   );
 }
 
-function handleApiFailure(error: unknown, fallback: string): string {
-  if (error instanceof Error && error.message) {
-    return error.message;
-  }
-
+function resolveError(error: unknown, fallback: string) {
+  if (error instanceof Error && error.message) return error.message;
   return fallback;
 }

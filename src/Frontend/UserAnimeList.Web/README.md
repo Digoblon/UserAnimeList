@@ -2,30 +2,20 @@
 
 Frontend React + TypeScript + Vite para demonstrar a API do projeto UserAnimeList.
 
-## Arquitetura do frontend
+## Organização por páginas
 
-O frontend foi organizado por módulos de negócio, alinhando os contextos da API:
+- **Home**: catálogo inicial e busca de animes.
+- **Perfil**: dados do usuário autenticado e a lista pessoal (acessada ao clicar em **Perfil** no header).
+- **Modal de Autenticação**: login/cadastro aberto pelo botão **Entrar / Cadastrar**.
 
-- **Auth**: login, cadastro e persistência de sessão.
-- **User**: carregamento do perfil autenticado.
-- **Anime**: busca de animes.
-- **AnimeList**: adicionar, atualizar e remover entradas da lista pessoal.
+## Placeholders de imagem
 
-### Estrutura principal
+Os placeholders foram criados em:
 
-- `src/App.tsx`: orquestra estado global da UI e fluxo autenticado.
-- `src/services/api.ts`: cliente HTTP e funções de integração com endpoints da API.
-- `src/components/*`: componentes de apresentação por contexto (AuthPanel, SearchPanel, MyListPanel, ProfilePanel, Header).
-- `src/types/api.ts`: contratos e tipos dos payloads/respostas.
+- `public/placeholders/anime-no-image.svg`
+- `public/placeholders/profile-no-image.svg`
 
-## Fluxo de uso
-
-1. Cadastrar (`POST /user`) ou fazer login (`POST /login`)
-2. Carregar perfil (`GET /user`) e lista (`GET /animelist/me/list`)
-3. Buscar anime (`POST /anime/search`)
-4. Adicionar na lista (`POST /animelist`)
-5. Atualizar/remover item (`PUT/DELETE /animelist/{id}`)
-6. Renovar sessão quando necessário (`POST /token/refresh-token`)
+Você pode trocar esses arquivos diretamente para mudar as imagens padrão.
 
 ## Execução
 
@@ -41,3 +31,15 @@ App em `http://localhost:5173` com proxy `/api -> http://localhost:5103`.
 ```bash
 npm run build
 ```
+
+## Troubleshooting rápido
+
+Se o frontend subir “igual ao antigo”, rode:
+
+```bash
+cd src/Frontend/UserAnimeList.Web
+npm install
+npm run dev
+```
+
+E confirme que o backend está no ar em `http://localhost:5103` (o Vite usa proxy `/api`).
