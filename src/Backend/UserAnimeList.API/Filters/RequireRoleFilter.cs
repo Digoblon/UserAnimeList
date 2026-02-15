@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using UserAnimeList.Communication.Responses;
 using UserAnimeList.Domain.Security.Tokens;
+using UserAnimeList.Errors;
 using UserAnimeList.Enums;
 using UserAnimeList.Exception;
 
@@ -21,13 +21,21 @@ public class RequireRoleFilter: IAsyncAuthorizationFilter
     {
         if (!context.HttpContext.Items.TryGetValue(TokenDataKey, out var value) || value is not AccessTokenData tokenData)
         {
-            context.Result = new UnauthorizedObjectResult(new ResponseErrorJson(ResourceMessagesException.NO_TOKEN));
+            var response = ErrorResponseFactory.FromStatusCode(
+                context.HttpContext,
+                StatusCodes.Status401Unauthorized,
+                [ResourceMessagesException.NO_TOKEN]);
+            context.Result = new UnauthorizedObjectResult(response);
             return Task.CompletedTask;
         }
 
         if (tokenData.Role != _requiredRole)
         {
-            context.Result = new ObjectResult(new ResponseErrorJson(ResourceMessagesException.NO_ACCESS))
+            var response = ErrorResponseFactory.FromStatusCode(
+                context.HttpContext,
+                StatusCodes.Status403Forbidden,
+                [ResourceMessagesException.NO_ACCESS]);
+            context.Result = new ObjectResult(response)
             {
                 StatusCode = StatusCodes.Status403Forbidden
             };

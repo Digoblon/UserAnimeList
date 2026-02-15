@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.OpenApi.Models;
 using UserAnimeList.Communication.Responses;
+using UserAnimeList.Errors;
 using UserAnimeList.Domain.Security.Tokens;
 using UserAnimeList.Exception;
 using UserAnimeList.Filters;
@@ -85,7 +86,8 @@ public static class ApiServiceCollectionExtensions
         options.InvalidModelStateResponseFactory = context =>
         {
             var errors = NormalizeErrors(context);
-            return new BadRequestObjectResult(new ResponseErrorJson(errors));
+            var response = ErrorResponseFactory.FromStatusCode(context.HttpContext, StatusCodes.Status400BadRequest, errors);
+            return new BadRequestObjectResult(response);
         };
     }
 
