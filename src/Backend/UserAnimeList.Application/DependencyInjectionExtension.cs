@@ -41,7 +41,7 @@ namespace UserAnimeList.Application;
 
 public static class DependencyInjectionExtension
 {
-    public static void AddApplication(this IServiceCollection services, IConfiguration configuration)
+    public static void AddApplication(this IServiceCollection services)
     {
         AddUseCases(services);
         AddMapster(services);

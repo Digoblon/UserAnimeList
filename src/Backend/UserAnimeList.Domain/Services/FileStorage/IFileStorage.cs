@@ -1,5 +1,3 @@
-using Microsoft.VisualBasic.CompilerServices;
-
 namespace UserAnimeList.Domain.Services.FileStorage;
 
 public interface IFileStorage

@@ -43,8 +43,6 @@ public class TokenRepository : ITokenRepository
         }
         catch (InvalidOperationException)
         {
-            // Fallback para providers que não suportam ExecuteUpdate (ex: InMemory)
-            // Utilizado nos testes de integração
             var tokens = await _dbContext.RefreshTokens
                 .Where(t => t.UserId == userId && t.RevokedOn == null)
                 .ToListAsync();

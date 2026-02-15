@@ -11,7 +11,6 @@ namespace UserAnimeList.Filters;
 
 public class AuthenticatedUserFilter : IAsyncAuthorizationFilter
 {
-    //private const string UserIdKey = "UserId";
     private const string TokenDataKey = "TokenData";
     
     private readonly IAccessTokenValidator _accessTokenValidator;
@@ -38,7 +37,6 @@ public class AuthenticatedUserFilter : IAsyncAuthorizationFilter
             if (user.TokenVersion != tokenData.TokenVersion)
                 throw new SecurityTokenException(ResourceMessagesException.WRONG_TOKEN_VERSION);
 
-            //context.HttpContext.Items[UserIdKey] = user.Id;
             context.HttpContext.Items[TokenDataKey] = tokenData;
         }
         catch (SecurityTokenExpiredException)

@@ -37,11 +37,8 @@ public static class DependencyInjectionExtension
         AddDbContext(services, configuration);
     }
 
-    
-
     private static void AddDbContext(IServiceCollection services, IConfiguration configuration)
     {
-        //if(configuration.IsUnitTestEnvironment()) return;
         services.AddDbContext<UserAnimeListDbContext>(options =>
             options.UseSqlServer(configuration.ConnectionString()));
     }
@@ -53,8 +50,6 @@ public static class DependencyInjectionExtension
         
         services.AddScoped<IAccessTokenGenerator>(options => new JwtTokenGenerator(expirationTimeMinutes, signingKey!));
         services.AddScoped<IAccessTokenValidator>(options => new JwtTokenValidator(signingKey!));
-        
-        //services.AddScoped<IRefreshTokenGenerator, RefreshTokenGenerator>();
     }
 
     private static void AddRepositories(IServiceCollection services)
@@ -71,7 +66,6 @@ public static class DependencyInjectionExtension
         services.AddScoped<IAnimeListRepository, AnimeListRepository>();
         services.AddScoped<IDatabaseSeeder, DatabaseSeeder>();
         services.AddScoped<IFileStorage, LocalFileStorage>();
-
     } 
 
     private static void AddPasswordEncrypter(IServiceCollection services)
