@@ -87,7 +87,6 @@ public class UserAnimeListClassFixture: IClassFixture<CustomWebApplicationFactor
     
     
     
-    
 
     private static string BuildQueryString(object request)
     {
