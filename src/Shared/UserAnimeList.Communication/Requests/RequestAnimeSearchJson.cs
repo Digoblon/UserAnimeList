@@ -2,5 +2,5 @@ namespace UserAnimeList.Communication.Requests;
 
 public class RequestAnimeSearchJson
 {
-    public string Query { get; set; } = string.Empty;
+    public string? Query { get; set; }
 }

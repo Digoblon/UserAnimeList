@@ -58,5 +58,608 @@ namespace UserAnimeList.Exception {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quando o status do anime for &quot;em exibição&quot;, &quot;exibição de&quot; deve ser informado..
+        /// </summary>
+        public static string ANIME_AIRED_FROM_REQUIRED_WHEN_AIRING {
+            get {
+                return ResourceManager.GetString("ANIME_AIRED_FROM_REQUIRED_WHEN_AIRING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quando o status do anime for &quot;finalizado&quot;, &quot;exibição de&quot; deve ser informado..
+        /// </summary>
+        public static string ANIME_AIRED_FROM_REQUIRED_WHEN_FINISHED {
+            get {
+                return ResourceManager.GetString("ANIME_AIRED_FROM_REQUIRED_WHEN_FINISHED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A data de &quot;exibição até&quot; não pode ser anterior à data de &quot;exibição de&quot;..
+        /// </summary>
+        public static string ANIME_AIRED_UNTIL_EARLY_FROM {
+            get {
+                return ResourceManager.GetString("ANIME_AIRED_UNTIL_EARLY_FROM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quando &quot;exibição até&quot; for informado, &quot;exibição de&quot; também deve ser informado..
+        /// </summary>
+        public static string ANIME_AIRED_UNTIL_FILLED_AIRED_FROM_NOT_FILLED {
+            get {
+                return ResourceManager.GetString("ANIME_AIRED_UNTIL_FILLED_AIRED_FROM_NOT_FILLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quando o status do anime for &quot;finalizado&quot;, &quot;exibição até&quot; deve ser informado..
+        /// </summary>
+        public static string ANIME_AIRED_UNTIL_REQUIRED_WHEN_FINISHED {
+            get {
+                return ResourceManager.GetString("ANIME_AIRED_UNTIL_REQUIRED_WHEN_FINISHED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Já existe um anime cadastrado com este nome..
+        /// </summary>
+        public static string ANIME_ALREADY_REGISTERED {
+            get {
+                return ResourceManager.GetString("ANIME_ALREADY_REGISTERED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to O nome do anime excede o limite de 256 caracteres..
+        /// </summary>
+        public static string ANIME_EXCEEDS_LIMIT {
+            get {
+                return ResourceManager.GetString("ANIME_EXCEEDS_LIMIT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Direção de ordenação do anime inválida..
+        /// </summary>
+        public static string ANIME_INVALID_SORT_DIR {
+            get {
+                return ResourceManager.GetString("ANIME_INVALID_SORT_DIR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Critério de ordenação do anime inválido..
+        /// </summary>
+        public static string ANIME_INVALID_SORT_FIELD {
+            get {
+                return ResourceManager.GetString("ANIME_INVALID_SORT_FIELD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A data de término não pode ser anterior à data de início..
+        /// </summary>
+        public static string ANIME_LIST_DATE_FINISHED_EARLIER_DATE_STARTED {
+            get {
+                return ResourceManager.GetString("ANIME_LIST_DATE_FINISHED_EARLIER_DATE_STARTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Este item já existe na lista de animes..
+        /// </summary>
+        public static string ANIME_LIST_ENTRY_ALREADY_EXISTS {
+            get {
+                return ResourceManager.GetString("ANIME_LIST_ENTRY_ALREADY_EXISTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A lista de animes é inválida ou não foi encontrada..
+        /// </summary>
+        public static string ANIME_LIST_INVALID {
+            get {
+                return ResourceManager.GetString("ANIME_LIST_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Direção de ordenação inválida..
+        /// </summary>
+        public static string ANIME_LIST_INVALID_SORT_DIR {
+            get {
+                return ResourceManager.GetString("ANIME_LIST_INVALID_SORT_DIR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Critério de ordenação inválido..
+        /// </summary>
+        public static string ANIME_LIST_INVALID_SORT_FIELD {
+            get {
+                return ResourceManager.GetString("ANIME_LIST_INVALID_SORT_FIELD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to O status do anime é inválido..
+        /// </summary>
+        public static string ANIME_LIST_INVALID_STATUS {
+            get {
+                return ResourceManager.GetString("ANIME_LIST_INVALID_STATUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to O filtro de nome excede o tamanho máximo de 256 caracteres..
+        /// </summary>
+        public static string ANIME_LIST_QUERY_EXCEEDED {
+            get {
+                return ResourceManager.GetString("ANIME_LIST_QUERY_EXCEEDED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A pontuação do anime deve estar entre 1 e 10..
+        /// </summary>
+        public static string ANIME_LIST_SCORE_INVALID {
+            get {
+                return ResourceManager.GetString("ANIME_LIST_SCORE_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to O anime informado não foi encontrado..
+        /// </summary>
+        public static string ANIME_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("ANIME_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quando o ano de estreia for informado, a temporada de estreia também deve ser informada..
+        /// </summary>
+        public static string ANIME_PREMIERED_SEASON_REQUIRED {
+            get {
+                return ResourceManager.GetString("ANIME_PREMIERED_SEASON_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quando a temporada de estreia for informada, o ano de estreia também deve ser informado..
+        /// </summary>
+        public static string ANIME_PREMIERED_YEAR_REQUIRED {
+            get {
+                return ResourceManager.GetString("ANIME_PREMIERED_YEAR_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to O filtro de anime excede o tamanho máximo de 256 caracteres..
+        /// </summary>
+        public static string ANIME_QUERY_EXCEEDED {
+            get {
+                return ResourceManager.GetString("ANIME_QUERY_EXCEEDED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Um ou mais gêneros estão duplicados..
+        /// </summary>
+        public static string DUPLICATED_GENRES {
+            get {
+                return ResourceManager.GetString("DUPLICATED_GENRES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Um ou mais estúdios estão duplicados..
+        /// </summary>
+        public static string DUPLICATED_STUDIOS {
+            get {
+                return ResourceManager.GetString("DUPLICATED_STUDIOS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Este e-mail já está cadastrado na plataforma..
+        /// </summary>
+        public static string EMAIL_ALREADY_REGISTERED {
+            get {
+                return ResourceManager.GetString("EMAIL_ALREADY_REGISTERED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to O e-mail não pode estar vazio..
+        /// </summary>
+        public static string EMAIL_EMPTY {
+            get {
+                return ResourceManager.GetString("EMAIL_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Endereço de e-mail inválido..
+        /// </summary>
+        public static string EMAIL_INVALID {
+            get {
+                return ResourceManager.GetString("EMAIL_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to E-mail e/ou senha inválidos..
+        /// </summary>
+        public static string EMAIL_OR_PASSWORD_INVALID {
+            get {
+                return ResourceManager.GetString("EMAIL_OR_PASSWORD_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quantidade de episódios inválida..
+        /// </summary>
+        public static string EPISODE_COUNT_INVALID {
+            get {
+                return ResourceManager.GetString("EPISODE_COUNT_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quando o status do anime for &quot;finalizado&quot;, a quantidade de episódios deve ser informada..
+        /// </summary>
+        public static string EPISODE_MUST_BE_SPECIFIED {
+            get {
+                return ResourceManager.GetString("EPISODE_MUST_BE_SPECIFIED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sua sessão expirou. Faça login novamente para continuar..
+        /// </summary>
+        public static string EXPIRED_SESSION {
+            get {
+                return ResourceManager.GetString("EXPIRED_SESSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Este gênero já está cadastrado..
+        /// </summary>
+        public static string GENRE_ALREADY_REGISTERED {
+            get {
+                return ResourceManager.GetString("GENRE_ALREADY_REGISTERED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to O gênero informado não foi encontrado..
+        /// </summary>
+        public static string GENRE_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("GENRE_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Os gêneros do anime não podem ser nulos..
+        /// </summary>
+        public static string GENRES_CANNOT_BE_NULL {
+            get {
+                return ResourceManager.GetString("GENRES_CANNOT_BE_NULL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A imagem informada excede o tamanho máximo de 5 MB..
+        /// </summary>
+        public static string IMAGE_EXCEEDS_FILE_SIZE {
+            get {
+                return ResourceManager.GetString("IMAGE_EXCEEDS_FILE_SIZE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nenhuma imagem foi fornecida..
+        /// </summary>
+        public static string IMAGE_NULL {
+            get {
+                return ResourceManager.GetString("IMAGE_NULL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Os seguintes gêneros são inválidos:.
+        /// </summary>
+        public static string INVALID_GENRES_IN_REQUEST {
+            get {
+                return ResourceManager.GetString("INVALID_GENRES_IN_REQUEST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Formato de ID inválido..
+        /// </summary>
+        public static string INVALID_ID {
+            get {
+                return ResourceManager.GetString("INVALID_ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A temporada informada é inválida..
+        /// </summary>
+        public static string INVALID_SEASON {
+            get {
+                return ResourceManager.GetString("INVALID_SEASON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Formato JSON inválido..
+        /// </summary>
+        public static string INVALID_JSON {
+            get {
+                return ResourceManager.GetString("INVALID_JSON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A senha deve ter de 6 a 50 caracteres e conter ao menos três dos seguintes grupos: letras maiúsculas, letras minúsculas, números e símbolos..
+        /// </summary>
+        public static string INVALID_PASSWORD {
+            get {
+                return ResourceManager.GetString("INVALID_PASSWORD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to O corpo da requisição é inválido ou está ausente..
+        /// </summary>
+        public static string INVALID_REQUEST_BODY {
+            get {
+                return ResourceManager.GetString("INVALID_REQUEST_BODY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Claim de perfil inválida..
+        /// </summary>
+        public static string INVALID_ROLE_CLAIM {
+            get {
+                return ResourceManager.GetString("INVALID_ROLE_CLAIM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Não foi possível localizar uma sessão válida. Faça login para acessar este recurso..
+        /// </summary>
+        public static string INVALID_SESSION {
+            get {
+                return ResourceManager.GetString("INVALID_SESSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Os seguintes estúdios são inválidos:.
+        /// </summary>
+        public static string INVALID_STUDIOS_IN_REQUEST {
+            get {
+                return ResourceManager.GetString("INVALID_STUDIOS_IN_REQUEST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Token de autenticação inválido..
+        /// </summary>
+        public static string INVALID_TOKEN {
+            get {
+                return ResourceManager.GetString("INVALID_TOKEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nome de usuário ou senha incorretos..
+        /// </summary>
+        public static string LOGIN_OR_PASSWORD_INVALID {
+            get {
+                return ResourceManager.GetString("LOGIN_OR_PASSWORD_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to O nome não pode estar vazio..
+        /// </summary>
+        public static string NAME_EMPTY {
+            get {
+                return ResourceManager.GetString("NAME_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Informe um nome de usuário válido (apenas letras, números, sublinhados e hífens)..
+        /// </summary>
+        public static string NAME_INVALID_FORMAT {
+            get {
+                return ResourceManager.GetString("NAME_INVALID_FORMAT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to O usuário não possui acesso..
+        /// </summary>
+        public static string NO_ACCESS {
+            get {
+                return ResourceManager.GetString("NO_ACCESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to O token de autenticação não foi fornecido..
+        /// </summary>
+        public static string NO_TOKEN {
+            get {
+                return ResourceManager.GetString("NO_TOKEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Apenas imagens PNG, JPG, JPEG e WEBP são aceitas..
+        /// </summary>
+        public static string ONLY_IMAGES_ACCEPTED {
+            get {
+                return ResourceManager.GetString("ONLY_IMAGES_ACCEPTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A senha informada não corresponde à senha atual..
+        /// </summary>
+        public static string PASSWORD_DIFFERENT_CURRENT_PASSWORD {
+            get {
+                return ResourceManager.GetString("PASSWORD_DIFFERENT_CURRENT_PASSWORD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A senha não pode estar vazia..
+        /// </summary>
+        public static string PASSWORD_EMPTY {
+            get {
+                return ResourceManager.GetString("PASSWORD_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to As senhas não coincidem..
+        /// </summary>
+        public static string PASSWORDS_NOT_MATCH {
+            get {
+                return ResourceManager.GetString("PASSWORDS_NOT_MATCH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to O tipo de origem do anime informado é inválido..
+        /// </summary>
+        public static string SOURCE_NOT_SUPPORTED {
+            get {
+                return ResourceManager.GetString("SOURCE_NOT_SUPPORTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to O status de anime informado é inválido..
+        /// </summary>
+        public static string STATUS_NOT_SUPPORTED {
+            get {
+                return ResourceManager.GetString("STATUS_NOT_SUPPORTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Este estúdio já está cadastrado..
+        /// </summary>
+        public static string STUDIO_ALREADY_REGISTERED {
+            get {
+                return ResourceManager.GetString("STUDIO_ALREADY_REGISTERED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Estúdio não encontrado..
+        /// </summary>
+        public static string STUDIO_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("STUDIO_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Os estúdios do anime não podem ser nulos..
+        /// </summary>
+        public static string STUDIOS_CANNOT_BE_NULL {
+            get {
+                return ResourceManager.GetString("STUDIOS_CANNOT_BE_NULL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A sinopse excede o limite máximo de 5.000 caracteres..
+        /// </summary>
+        public static string SYNOPSIS_EXCEEDS_LIMIT {
+            get {
+                return ResourceManager.GetString("SYNOPSIS_EXCEEDS_LIMIT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to O token expirou..
+        /// </summary>
+        public static string TOKEN_EXPIRED {
+            get {
+                return ResourceManager.GetString("TOKEN_EXPIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to O tipo de anime informado é inválido..
+        /// </summary>
+        public static string TYPE_NOT_SUPPORTED {
+            get {
+                return ResourceManager.GetString("TYPE_NOT_SUPPORTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ocorreu um erro desconhecido..
+        /// </summary>
+        public static string UNKNOWN_ERROR {
+            get {
+                return ResourceManager.GetString("UNKNOWN_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to O usuário não possui acesso..
+        /// </summary>
+        public static string USER_HAS_NO_ACCESS {
+            get {
+                return ResourceManager.GetString("USER_HAS_NO_ACCESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Usuário não encontrado no banco de dados..
+        /// </summary>
+        public static string USER_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("USER_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Este nome de usuário já está cadastrado na plataforma..
+        /// </summary>
+        public static string USERNAME_ALREADY_REGISTERED {
+            get {
+                return ResourceManager.GetString("USERNAME_ALREADY_REGISTERED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Incompatibilidade na versão do token..
+        /// </summary>
+        public static string WRONG_TOKEN_VERSION {
+            get {
+                return ResourceManager.GetString("WRONG_TOKEN_VERSION", resourceCulture);
+            }
+        }
     }
 }

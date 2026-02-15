@@ -103,6 +103,9 @@
   <data name="INVALID_ID" xml:space="preserve">
     <value>Formato de ID inválido.</value>
   </data>
+  <data name="INVALID_SEASON" xml:space="preserve">
+    <value>A temporada informada é inválida.</value>
+  </data>
   <data name="GENRE_ALREADY_REGISTERED" xml:space="preserve">
     <value>Este gênero já está cadastrado.</value>
   </data>
@@ -126,6 +129,21 @@
   </data>
   <data name="ANIME_EXCEEDS_LIMIT" xml:space="preserve">
     <value>O nome do anime excede o limite de 256 caracteres.</value>
+  </data>
+  <data name="ANIME_INVALID_SORT_DIR" xml:space="preserve">
+    <value>Direção de ordenação do anime inválida.</value>
+  </data>
+  <data name="ANIME_INVALID_SORT_FIELD" xml:space="preserve">
+    <value>Critério de ordenação do anime inválido.</value>
+  </data>
+  <data name="ANIME_PREMIERED_SEASON_REQUIRED" xml:space="preserve">
+    <value>Quando o ano de estreia for informado, a temporada de estreia também deve ser informada.</value>
+  </data>
+  <data name="ANIME_PREMIERED_YEAR_REQUIRED" xml:space="preserve">
+    <value>Quando a temporada de estreia for informada, o ano de estreia também deve ser informado.</value>
+  </data>
+  <data name="ANIME_QUERY_EXCEEDED" xml:space="preserve">
+    <value>O filtro de anime excede o tamanho máximo de 256 caracteres.</value>
   </data>
   <data name="ANIME_AIRED_UNTIL_EARLY_FROM" xml:space="preserve">
     <value>A data de &quot;exibição até&quot; não pode ser anterior à data de &quot;exibição de&quot;.</value>

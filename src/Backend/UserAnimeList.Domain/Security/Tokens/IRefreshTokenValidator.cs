@@ -4,5 +4,5 @@ namespace UserAnimeList.Domain.Security.Tokens;
 
 public interface IRefreshTokenValidator
 {
-    public void Validate(RefreshToken refreshToken);
+    public void Validate(RefreshToken? refreshToken);
 }

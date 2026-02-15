@@ -60,7 +60,7 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to When the anime status is airing the aired from must be specified..
+        ///   Looks up a localized string similar to When the anime status is &quot;airing&quot;, &quot;aired from&quot; must be specified..
         /// </summary>
         public static string ANIME_AIRED_FROM_REQUIRED_WHEN_AIRING {
             get {
@@ -69,7 +69,7 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to When the anime status is finished the aired from must be specified..
+        ///   Looks up a localized string similar to When the anime status is &quot;finished&quot;, &quot;aired from&quot; must be specified..
         /// </summary>
         public static string ANIME_AIRED_FROM_REQUIRED_WHEN_FINISHED {
             get {
@@ -78,7 +78,7 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The anime aired until cannot be earlier than aired from.
+        ///   Looks up a localized string similar to The &quot;aired until&quot; date cannot be earlier than the &quot;aired from&quot; date..
         /// </summary>
         public static string ANIME_AIRED_UNTIL_EARLY_FROM {
             get {
@@ -87,7 +87,7 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to When aired until is specified aired from must also be provided..
+        ///   Looks up a localized string similar to When &quot;aired until&quot; is provided, &quot;aired from&quot; must also be provided..
         /// </summary>
         public static string ANIME_AIRED_UNTIL_FILLED_AIRED_FROM_NOT_FILLED {
             get {
@@ -96,7 +96,7 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to When the anime status is finished the aired until must be specified..
+        ///   Looks up a localized string similar to When the anime status is &quot;finished&quot;, &quot;aired until&quot; must be specified..
         /// </summary>
         public static string ANIME_AIRED_UNTIL_REQUIRED_WHEN_FINISHED {
             get {
@@ -114,7 +114,7 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The anime name exceeds the limit of 256 characters.
+        ///   Looks up a localized string similar to The anime name exceeds the 256-character limit..
         /// </summary>
         public static string ANIME_EXCEEDS_LIMIT {
             get {
@@ -123,7 +123,25 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The date finished cannot be earlier than date started..
+        ///   Looks up a localized string similar to Invalid anime sorting direction..
+        /// </summary>
+        public static string ANIME_INVALID_SORT_DIR {
+            get {
+                return ResourceManager.GetString("ANIME_INVALID_SORT_DIR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid anime sorting criteria..
+        /// </summary>
+        public static string ANIME_INVALID_SORT_FIELD {
+            get {
+                return ResourceManager.GetString("ANIME_INVALID_SORT_FIELD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The finished date cannot be earlier than the started date..
         /// </summary>
         public static string ANIME_LIST_DATE_FINISHED_EARLIER_DATE_STARTED {
             get {
@@ -141,7 +159,7 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Anime list invalid or not found..
+        ///   Looks up a localized string similar to The anime list is invalid or was not found..
         /// </summary>
         public static string ANIME_LIST_INVALID {
             get {
@@ -168,7 +186,7 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The status for the anime is invalid..
+        ///   Looks up a localized string similar to The anime status is invalid..
         /// </summary>
         public static string ANIME_LIST_INVALID_STATUS {
             get {
@@ -177,7 +195,7 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The filter for name exceeds the maximum length of 256 characters..
+        ///   Looks up a localized string similar to The name filter exceeds the maximum length of 256 characters..
         /// </summary>
         public static string ANIME_LIST_QUERY_EXCEEDED {
             get {
@@ -195,7 +213,7 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The specified anime is not found..
+        ///   Looks up a localized string similar to The specified anime was not found..
         /// </summary>
         public static string ANIME_NOT_FOUND {
             get {
@@ -204,25 +222,34 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid code..
+        ///   Looks up a localized string similar to When premiered year is provided, premiered season must also be provided..
         /// </summary>
-        public static string CODE_INVALID {
+        public static string ANIME_PREMIERED_SEASON_REQUIRED {
             get {
-                return ResourceManager.GetString("CODE_INVALID", resourceCulture);
+                return ResourceManager.GetString("ANIME_PREMIERED_SEASON_REQUIRED", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A code to reset your password is required..
+        ///   Looks up a localized string similar to When premiered season is provided, premiered year must also be provided..
         /// </summary>
-        public static string CODE_RESET_PASSWORD_REQUIRED {
+        public static string ANIME_PREMIERED_YEAR_REQUIRED {
             get {
-                return ResourceManager.GetString("CODE_RESET_PASSWORD_REQUIRED", resourceCulture);
+                return ResourceManager.GetString("ANIME_PREMIERED_YEAR_REQUIRED", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to One or more genre is duplicated..
+        ///   Looks up a localized string similar to The anime query exceeds the maximum length of 256 characters..
+        /// </summary>
+        public static string ANIME_QUERY_EXCEEDED {
+            get {
+                return ResourceManager.GetString("ANIME_QUERY_EXCEEDED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to One or more genres are duplicated..
         /// </summary>
         public static string DUPLICATED_GENRES {
             get {
@@ -231,7 +258,7 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to One or more studio is duplicated..
+        ///   Looks up a localized string similar to One or more studios are duplicated..
         /// </summary>
         public static string DUPLICATED_STUDIOS {
             get {
@@ -240,7 +267,7 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Email already registered on the platform..
+        ///   Looks up a localized string similar to This email is already registered on the platform..
         /// </summary>
         public static string EMAIL_ALREADY_REGISTERED {
             get {
@@ -249,7 +276,7 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The email cannot be empty..
+        ///   Looks up a localized string similar to Email must not be empty..
         /// </summary>
         public static string EMAIL_EMPTY {
             get {
@@ -258,7 +285,7 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The email is invalid..
+        ///   Looks up a localized string similar to Invalid email address..
         /// </summary>
         public static string EMAIL_INVALID {
             get {
@@ -267,20 +294,11 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid e-mail and/or password..
+        ///   Looks up a localized string similar to Invalid email and/or password..
         /// </summary>
         public static string EMAIL_OR_PASSWORD_INVALID {
             get {
                 return ResourceManager.GetString("EMAIL_OR_PASSWORD_INVALID", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The search query cannot be empty..
-        /// </summary>
-        public static string EMPTY_QUERY {
-            get {
-                return ResourceManager.GetString("EMPTY_QUERY", resourceCulture);
             }
         }
         
@@ -294,7 +312,7 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to When anime is finished the anime episodes must be specified..
+        ///   Looks up a localized string similar to When the anime status is &quot;finished&quot;, the number of episodes must be provided..
         /// </summary>
         public static string EPISODE_MUST_BE_SPECIFIED {
             get {
@@ -303,16 +321,7 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The code is expired..
-        /// </summary>
-        public static string EXPIRED_CODE {
-            get {
-                return ResourceManager.GetString("EXPIRED_CODE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Your session has expired. Please log in again to continue..
+        ///   Looks up a localized string similar to Your session has expired. Please sign in again to continue..
         /// </summary>
         public static string EXPIRED_SESSION {
             get {
@@ -339,7 +348,7 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Genres for the anime cannot be null..
+        ///   Looks up a localized string similar to Anime genres cannot be null..
         /// </summary>
         public static string GENRES_CANNOT_BE_NULL {
             get {
@@ -366,7 +375,7 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The following genres entered are invalid: .
+        ///   Looks up a localized string similar to The following genres are invalid:.
         /// </summary>
         public static string INVALID_GENRES_IN_REQUEST {
             get {
@@ -375,11 +384,20 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid Id format..
+        ///   Looks up a localized string similar to Invalid ID format..
         /// </summary>
         public static string INVALID_ID {
             get {
                 return ResourceManager.GetString("INVALID_ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The provided season is invalid..
+        /// </summary>
+        public static string INVALID_SEASON {
+            get {
+                return ResourceManager.GetString("INVALID_SEASON", resourceCulture);
             }
         }
         
@@ -393,7 +411,7 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Password must be between 6 - 50 characters long and contain at least three of the following: uppercase, lowercase, numbers and symbols...
+        ///   Looks up a localized string similar to Password must be 6 to 50 characters long and contain at least three of the following: uppercase letters, lowercase letters, numbers, and symbols..
         /// </summary>
         public static string INVALID_PASSWORD {
             get {
@@ -402,7 +420,7 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Request body is invalid or missing..
+        ///   Looks up a localized string similar to The request body is invalid or missing..
         /// </summary>
         public static string INVALID_REQUEST_BODY {
             get {
@@ -429,7 +447,7 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The following studios entered are invalid: .
+        ///   Looks up a localized string similar to The following studios are invalid:.
         /// </summary>
         public static string INVALID_STUDIOS_IN_REQUEST {
             get {
@@ -438,7 +456,7 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Authentication token is invalid..
+        ///   Looks up a localized string similar to Invalid authentication token..
         /// </summary>
         public static string INVALID_TOKEN {
             get {
@@ -456,7 +474,7 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The name cannot be empty..
+        ///   Looks up a localized string similar to Name must not be empty..
         /// </summary>
         public static string NAME_EMPTY {
             get {
@@ -465,7 +483,7 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter a valid username (letters, numbers, underscores and dashes only)..
+        ///   Looks up a localized string similar to Please enter a valid username (letters, numbers, underscores, and dashes only)..
         /// </summary>
         public static string NAME_INVALID_FORMAT {
             get {
@@ -474,25 +492,7 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The new name cannot be empty..
-        /// </summary>
-        public static string NEW_NAME_EMPTY {
-            get {
-                return ResourceManager.GetString("NEW_NAME_EMPTY", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The new name cannot be the same as the old name..
-        /// </summary>
-        public static string NEW_NAME_EQUAL {
-            get {
-                return ResourceManager.GetString("NEW_NAME_EQUAL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to User has no access..
+        ///   Looks up a localized string similar to The user does not have access..
         /// </summary>
         public static string NO_ACCESS {
             get {
@@ -510,7 +510,7 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Only images (PNG, JPG, JPEG and WEBP) are accepted..
+        ///   Looks up a localized string similar to Only PNG, JPG, JPEG, and WEBP images are accepted..
         /// </summary>
         public static string ONLY_IMAGES_ACCEPTED {
             get {
@@ -519,7 +519,7 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The password entered is different from the current password..
+        ///   Looks up a localized string similar to The entered password does not match the current password..
         /// </summary>
         public static string PASSWORD_DIFFERENT_CURRENT_PASSWORD {
             get {
@@ -528,7 +528,7 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The password cannot be empty..
+        ///   Looks up a localized string similar to Password must not be empty..
         /// </summary>
         public static string PASSWORD_EMPTY {
             get {
@@ -537,7 +537,7 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The passwords does not match..
+        ///   Looks up a localized string similar to The passwords do not match..
         /// </summary>
         public static string PASSWORDS_NOT_MATCH {
             get {
@@ -546,16 +546,7 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The search query must be at least three characters long..
-        /// </summary>
-        public static string QUERY_TOO_SHORT {
-            get {
-                return ResourceManager.GetString("QUERY_TOO_SHORT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Anime source type entered is not valid..
+        ///   Looks up a localized string similar to The provided anime source type is invalid..
         /// </summary>
         public static string SOURCE_NOT_SUPPORTED {
             get {
@@ -564,7 +555,7 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Anime status entered is not valid..
+        ///   Looks up a localized string similar to The provided anime status is invalid..
         /// </summary>
         public static string STATUS_NOT_SUPPORTED {
             get {
@@ -573,7 +564,7 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The Studio is already registered..
+        ///   Looks up a localized string similar to This studio is already registered..
         /// </summary>
         public static string STUDIO_ALREADY_REGISTERED {
             get {
@@ -591,7 +582,7 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Studios for the anime cannot be null..
+        ///   Looks up a localized string similar to Anime studios cannot be null..
         /// </summary>
         public static string STUDIOS_CANNOT_BE_NULL {
             get {
@@ -600,7 +591,7 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The specified synopsis exceeds the maximum character length of 5000..
+        ///   Looks up a localized string similar to The synopsis exceeds the maximum length of 5,000 characters..
         /// </summary>
         public static string SYNOPSIS_EXCEEDS_LIMIT {
             get {
@@ -609,7 +600,7 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Token expired..
+        ///   Looks up a localized string similar to The token has expired..
         /// </summary>
         public static string TOKEN_EXPIRED {
             get {
@@ -618,7 +609,7 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Anime type entered is not valid..
+        ///   Looks up a localized string similar to The provided anime type is invalid..
         /// </summary>
         public static string TYPE_NOT_SUPPORTED {
             get {
@@ -627,7 +618,7 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unknown error..
+        ///   Looks up a localized string similar to An unknown error occurred..
         /// </summary>
         public static string UNKNOWN_ERROR {
             get {
@@ -645,7 +636,7 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User not found in database..
+        ///   Looks up a localized string similar to User not found in the database..
         /// </summary>
         public static string USER_NOT_FOUND {
             get {
@@ -654,16 +645,7 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You can&apos;t access this resource..
-        /// </summary>
-        public static string USER_WITHOUT_PERMISSION_ACCESS_RESOURCE {
-            get {
-                return ResourceManager.GetString("USER_WITHOUT_PERMISSION_ACCESS_RESOURCE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Username already registered on the platform..
+        ///   Looks up a localized string similar to This username is already registered on the platform..
         /// </summary>
         public static string USERNAME_ALREADY_REGISTERED {
             get {
@@ -672,7 +654,7 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Token version mismatch.
+        ///   Looks up a localized string similar to Token version mismatch..
         /// </summary>
         public static string WRONG_TOKEN_VERSION {
             get {

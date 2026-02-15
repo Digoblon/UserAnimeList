@@ -9,5 +9,4 @@ public enum AnimeListSort
     Type,
     DateStarted,
     DateFinished
-    
 }
