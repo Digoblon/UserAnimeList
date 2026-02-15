@@ -1,4 +1,5 @@
 using UserAnimeList.Communication.Responses;
+using UserAnimeList.Errors;
 using UserAnimeList.Exception;
 using UserAnimeList.Exception.Exceptions;
 
@@ -36,7 +37,7 @@ public class ExceptionMiddleware
         context.Response.StatusCode = (int)exception.GetStatusCode();
         context.Response.ContentType = "application/json";
 
-        var response = new ResponseErrorJson(exception.GetErrorMessages());
+        var response = ErrorResponseFactory.FromException(context, exception);
 
         await context.Response.WriteAsJsonAsync(response);
     }
@@ -46,8 +47,7 @@ public class ExceptionMiddleware
         context.Response.StatusCode = StatusCodes.Status500InternalServerError;
         context.Response.ContentType = "application/json";
 
-        var response = new ResponseErrorJson(
-            ResourceMessagesException.UNKNOWN_ERROR);
+        var response = ErrorResponseFactory.Unknown(context);
 
         await context.Response.WriteAsJsonAsync(response);
     }

@@ -1,7 +1,6 @@
 using System.Net;
 using System.Text.Json;
 using UserAnimeList.Communication.Requests;
-using WebApi.Test.InlineData;
 
 namespace WebApi.Test.Anime.Search;
 
@@ -25,7 +24,7 @@ public class SearchAnimeTest : UserAnimeListClassFixture
         {
             Query = _animeName
         };
-        var response = await DoPost($"{Method}",request);
+        var response = await DoGetQuery($"{Method}", request);
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
@@ -37,15 +36,14 @@ public class SearchAnimeTest : UserAnimeListClassFixture
     }
 
     
-    [Theory]
-    [ClassData(typeof(CultureInlineDataTest))]
-    public async Task Success_Empty_Query(string culture)
+    [Fact]
+    public async Task Success_Empty_Query()
     {
         var request = new RequestAnimeSearchJson
         {
             Query = string.Empty
         };
-        var response = await DoPost($"{Method}",request, culture: culture);
+        var response = await DoGetQuery($"{Method}", request);
 
         Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
     }

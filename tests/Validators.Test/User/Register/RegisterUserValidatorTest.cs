@@ -18,7 +18,6 @@ public class RegisterUserValidatorTest
         
         Assert.True(result.IsValid);
         Assert.Empty(result.Errors);
-        //result.IsValid.Should().BeTrue();
     }
     
     [Fact]
@@ -32,10 +31,8 @@ public class RegisterUserValidatorTest
         var result = validator.Validate(request);
         
         Assert.False(result.IsValid);
-        //result.IsValid.Should().BeFalse();
         Assert.Single(result.Errors);
         Assert.Contains(ResourceMessagesException.NAME_EMPTY, result.Errors.First().ErrorMessage);
-        //result.Errors.Should().ContainSingle().And.Contain(e=> e.ErrorMessage.Equals(ResourceMessagesException.NAME_EMPTY));
     }
     
     [Fact]
@@ -49,9 +46,7 @@ public class RegisterUserValidatorTest
         var result = validator.Validate(request);
         
         Assert.False(result.IsValid);
-        //result.IsValid.Should().BeFalse();
         Assert.Contains(ResourceMessagesException.EMAIL_EMPTY, result.Errors.First().ErrorMessage);
-        //result.Errors.Should().ContainSingle().And.Contain(e=> e.ErrorMessage.Equals(ResourceMessagesException.EMAIL_EMPTY));
     }
     
     [Fact]
@@ -65,9 +60,7 @@ public class RegisterUserValidatorTest
         var result = validator.Validate(request);
         
         Assert.False(result.IsValid);
-        //result.IsValid.Should().BeFalse();
         Assert.Contains(ResourceMessagesException.EMAIL_INVALID, result.Errors.First().ErrorMessage);
-        //result.Errors.Should().ContainSingle().And.Contain(e=> e.ErrorMessage.Equals(ResourceMessagesException.EMAIL_INVALID));
     }
     
     [Fact]
@@ -114,9 +107,7 @@ public class RegisterUserValidatorTest
         var result = validator.Validate(request);
         
         Assert.False(result.IsValid);
-        //result.IsValid.Should().BeFalse();
         Assert.Contains(ResourceMessagesException.INVALID_PASSWORD, result.Errors.First().ErrorMessage);
-        //result.Errors.Should().ContainSingle().And.Contain(e=> e.ErrorMessage.Equals(ResourceMessagesException.INVALID_PASSWORD));
         Assert.NotInRange(request.Password.Length, 8, 50);
     }
     
@@ -137,9 +128,7 @@ public class RegisterUserValidatorTest
         var result = validator.Validate(request);
         
         Assert.False(result.IsValid);
-        //result.IsValid.Should().BeFalse();
         Assert.Contains(ResourceMessagesException.INVALID_PASSWORD, result.Errors.First().ErrorMessage);
-        //result.Errors.Should().ContainSingle().And.Contain(e=> e.ErrorMessage.Equals(ResourceMessagesException.INVALID_PASSWORD));
         Assert.InRange(request.Password.Length, 8, 50);
     }
     
@@ -155,9 +144,7 @@ public class RegisterUserValidatorTest
         var result = validator.Validate(request);
         
         Assert.False(result.IsValid);
-        //result.IsValid.Should().BeFalse();
         Assert.Contains(ResourceMessagesException.PASSWORD_EMPTY, result.Errors.First().ErrorMessage);
-        //result.Errors.Should().ContainSingle().And.Contain(e=> e.ErrorMessage.Equals(ResourceMessagesException.PASSWORD_EMPTY));
     }
 
 }

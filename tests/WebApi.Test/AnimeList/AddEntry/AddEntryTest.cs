@@ -59,7 +59,7 @@ public class AddEntryTest : UserAnimeListClassFixture
         var token = JwtTokenGeneratorBuilder.Build().Generate(_id, _tokenVersion, _userRole);
 
         await DoDelete(method: $"{method}/{_animeListId}", token: token);
-        var response = await DoPost(method: method, request: request, token: token);
+        var response = await DoPost(method: method, request: request, token: token, culture: culture);
 
         Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
 

@@ -11,6 +11,7 @@ public static class AnimeMapping
         var config = new TypeAdapterConfig();
 
         config.NewConfig<RequestAnimeJson, Anime>()
+            .IgnoreNullValues(true)
             .Map(dest => dest.Name, src => src.Name)
             .Map(dest => dest.Synopsis, src => src.Synopsis ?? string.Empty)
             .Map(dest => dest.Episodes, src => src.Episodes)
@@ -23,7 +24,7 @@ public static class AnimeMapping
             .Ignore(dest => dest.Id)
             .Ignore(dest => dest.CreatedOn)
             
-            .Ignore(dest => dest.DeletedOn)
+            .Ignore(dest => dest.DeletedOn!)
             .Ignore(dest => dest.IsActive)
             
             .Ignore(dest => dest.NameNormalized)

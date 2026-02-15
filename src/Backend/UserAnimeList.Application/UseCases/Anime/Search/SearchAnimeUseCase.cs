@@ -19,11 +19,11 @@ public class SearchAnimeUseCase : ISearchAnimeUseCase
     
     public async Task<ResponseAnimesJson> Execute(RequestAnimeSearchJson request)
     {
-
-        if(!Validate(request))
+        if(!Validate(request.Query))
             return new ResponseAnimesJson();
+            
         
-        var animes = await _animeRepository.Search(request.Query);
+        var animes = await _animeRepository.Search(request.Query!);
 
         var animesList = _mapper.Map<IList<ResponseShortAnimeJson>>(animes);
 
@@ -43,11 +43,8 @@ public class SearchAnimeUseCase : ISearchAnimeUseCase
         };
     }
 
-    private static bool Validate(RequestAnimeSearchJson request)
+    private static bool Validate(string? query)
     {
-        if(request.Query.Equals("*"))
-            return true;
-        
-        return !string.IsNullOrWhiteSpace(request.Query) && request.Query.Length >= 3;
+        return !string.IsNullOrWhiteSpace(query) && query.Length >= 3;
     }
 }
