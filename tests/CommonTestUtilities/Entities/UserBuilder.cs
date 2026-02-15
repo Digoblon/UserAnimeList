@@ -1,6 +1,7 @@
 using System.Text.RegularExpressions;
 using Bogus;
 using CommonTestUtilities.Cryptography;
+using CommonTestUtilities.Requests;
 using UserAnimeList.Domain.Entities;
 
 namespace CommonTestUtilities.Entities;
@@ -11,7 +12,7 @@ public partial class UserBuilder
     {
         var passwordEncrypter = PasswordEncrypterBuilder.Build();
 
-        var password = new Faker().Internet.Password();
+        var password = PasswordGenerator.GenerateValid();
         var user =  new Faker<User>()
             .RuleFor(user => user.Id, Guid.NewGuid)
             .RuleFor(user => user.UserName, (f) => SanitizeUserName(f.Internet.UserName()))
