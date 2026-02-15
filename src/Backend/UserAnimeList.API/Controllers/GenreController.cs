@@ -13,7 +13,7 @@ namespace UserAnimeList.Controllers;
 public class GenreController : UserAnimeListBaseController
 {
     [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ResponseRegisteredGenreJson),StatusCodes.Status201Created)]
         [AdminOnly]
         public async Task<IActionResult> Register(
             [FromServices]IRegisterGenreUseCase useCase,
@@ -52,6 +52,7 @@ public class GenreController : UserAnimeListBaseController
         
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         [AdminOnly]
         public async Task<IActionResult> Update([FromServices] IUpdateGenreUseCase useCase,
@@ -66,6 +67,7 @@ public class GenreController : UserAnimeListBaseController
         
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [AdminOnly]
         public async Task<IActionResult> SoftDelete([FromServices] ISoftDeleteGenreUseCase useCase,
             [FromRoute]string id)

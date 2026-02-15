@@ -103,6 +103,9 @@
   <data name="INVALID_ID" xml:space="preserve">
     <value>Invalid ID format.</value>
   </data>
+  <data name="INVALID_SEASON" xml:space="preserve">
+    <value>The provided season is invalid.</value>
+  </data>
   <data name="GENRE_ALREADY_REGISTERED" xml:space="preserve">
     <value>This genre is already registered.</value>
   </data>
@@ -126,6 +129,21 @@
   </data>
   <data name="ANIME_EXCEEDS_LIMIT" xml:space="preserve">
     <value>The anime name exceeds the 256-character limit.</value>
+  </data>
+  <data name="ANIME_INVALID_SORT_DIR" xml:space="preserve">
+    <value>Invalid anime sorting direction.</value>
+  </data>
+  <data name="ANIME_INVALID_SORT_FIELD" xml:space="preserve">
+    <value>Invalid anime sorting criteria.</value>
+  </data>
+  <data name="ANIME_PREMIERED_SEASON_REQUIRED" xml:space="preserve">
+    <value>When premiered year is provided, premiered season must also be provided.</value>
+  </data>
+  <data name="ANIME_PREMIERED_YEAR_REQUIRED" xml:space="preserve">
+    <value>When premiered season is provided, premiered year must also be provided.</value>
+  </data>
+  <data name="ANIME_QUERY_EXCEEDED" xml:space="preserve">
+    <value>The anime query exceeds the maximum length of 256 characters.</value>
   </data>
   <data name="ANIME_AIRED_UNTIL_EARLY_FROM" xml:space="preserve">
     <value>The &quot;aired until&quot; date cannot be earlier than the &quot;aired from&quot; date.</value>

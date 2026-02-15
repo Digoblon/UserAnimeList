@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using UserAnimeList.Application.Services.Mapper;
 using UserAnimeList.Application.UseCases.Anime.Delete.SoftDelete;
+using UserAnimeList.Application.UseCases.Anime.Filter;
 using UserAnimeList.Application.UseCases.Anime.Get.ById;
 using UserAnimeList.Application.UseCases.Anime.Image;
 using UserAnimeList.Application.UseCases.Anime.Image.Delete;
@@ -89,6 +90,7 @@ public static class DependencyInjectionExtension
         services.AddScoped<IGetAnimeByIdUseCase, GetAnimeByIdUseCase>();
         services.AddScoped<ISoftDeleteAnimeUseCase, SoftDeleteAnimeUseCase>();
         services.AddScoped<ISearchAnimeUseCase, SearchAnimeUseCase>();
+        services.AddScoped<IFilterAnimeUseCase, FilterAnimeUseCase>();
         services.AddScoped<IUpdateAnimeImageUseCase, UpdateAnimeImageUseCase>();
         services.AddScoped<IDeleteAnimeImageUseCase, DeleteAnimeImageUseCase>();
         //AnimeList

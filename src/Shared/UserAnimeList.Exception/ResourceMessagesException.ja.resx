@@ -103,6 +103,9 @@
   <data name="INVALID_ID" xml:space="preserve">
     <value>IDの形式が無効です。</value>
   </data>
+  <data name="INVALID_SEASON" xml:space="preserve">
+    <value>指定されたシーズンは無効です。</value>
+  </data>
   <data name="GENRE_ALREADY_REGISTERED" xml:space="preserve">
     <value>このジャンルはすでに登録されています。</value>
   </data>
@@ -126,6 +129,21 @@
   </data>
   <data name="ANIME_EXCEEDS_LIMIT" xml:space="preserve">
     <value>アニメ名は256文字以内で入力してください。</value>
+  </data>
+  <data name="ANIME_INVALID_SORT_DIR" xml:space="preserve">
+    <value>アニメの並び替え方向が無効です。</value>
+  </data>
+  <data name="ANIME_INVALID_SORT_FIELD" xml:space="preserve">
+    <value>アニメの並び替え項目が無効です。</value>
+  </data>
+  <data name="ANIME_PREMIERED_SEASON_REQUIRED" xml:space="preserve">
+    <value>放送開始年を指定する場合は、放送開始シーズンも指定してください。</value>
+  </data>
+  <data name="ANIME_PREMIERED_YEAR_REQUIRED" xml:space="preserve">
+    <value>放送開始シーズンを指定する場合は、放送開始年も指定してください。</value>
+  </data>
+  <data name="ANIME_QUERY_EXCEEDED" xml:space="preserve">
+    <value>アニメ検索クエリは最大256文字までです。</value>
   </data>
   <data name="ANIME_AIRED_UNTIL_EARLY_FROM" xml:space="preserve">
     <value>「放送終了日」は「放送開始日」より前にできません。</value>
