@@ -1,11 +1,14 @@
-# UserAnimeList.Web (novo frontend)
+# UserAnimeList Web
 
-Frontend reconstruído do zero para cobrir **todos os endpoints** da API.
+Frontend React + Vite com UX de catálogo (inspirado em MAL/AniList), cobrindo todos os endpoints da API.
 
-## Princípios desta versão
-- Uso dos contratos baseados na pasta `src/Shared/UserAnimeList.Communication`.
-- Inclui todos os requests, responses e enums da Shared em `src/types/contracts.ts`.
-- Inclui chamadas para todos os endpoints existentes nos controllers da API.
+## Páginas
+- Home com destaques, busca com autocomplete e acesso ao filtro avançado.
+- Página de anime (detalhes completos, gêneros clicáveis para filtro e estúdios clicáveis).
+- Página de busca avançada com filtros por enums.
+- Perfil do usuário (auth, imagem, senha, lista pessoal e operações de lista).
+- Studio details.
+- Admin page (somente funções administrativas: register/update/delete e imagens admin).
 
 ## Rodar
 ```bash
