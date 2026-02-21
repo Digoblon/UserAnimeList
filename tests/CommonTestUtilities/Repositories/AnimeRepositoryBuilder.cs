@@ -1,5 +1,7 @@
 using Moq;
+using UserAnimeList.Communication.Enums;
 using UserAnimeList.Communication.Requests;
+using UserAnimeList.Communication.Responses;
 using UserAnimeList.Domain.Entities;
 using UserAnimeList.Domain.Repositories.Anime;
 
@@ -46,15 +48,62 @@ public class AnimeRepositoryBuilder
             .Setup(r => r.Search(It.IsAny<string>()))
             .ReturnsAsync((string query) =>
             {
-                if(query.Equals("*"))
-                    return _animes.ToList();
-                
                 if (string.IsNullOrEmpty(query))
                     return new List<Anime>();
 
                 return _animes
                     .Where(a => a.DeletedOn == null && a.IsActive)
                     .Where(a => a.NameNormalized.Contains(query.ToLower()) || a.Synopsis.ToLower().Contains(query.ToLower()))
+                    .ToList();
+            });
+
+        return this;
+    }
+    
+    public AnimeRepositoryBuilder SearchWithScore()
+    {
+        _repository
+            .Setup(r => r.SearchWithScore(It.IsAny<string>()))
+            .ReturnsAsync((string query) =>
+            {
+                if (string.IsNullOrEmpty(query))
+                    return new List<ResponseShortAnimeJson>();
+
+                if (string.IsNullOrWhiteSpace(query))
+                    return new List<ResponseShortAnimeJson>();
+
+                return _animes
+                    .Where(a => a.DeletedOn == null && a.IsActive)
+                    .Where(a =>
+                        a.NameNormalized.Contains(query.ToLower()) ||
+                        a.Synopsis.ToLower().Contains(query.ToLower()))
+                    .Select(a =>
+                    {
+                        var scores = a.UserEntries
+                            .Where(l => l.IsActive && l.Score != null)
+                            .Select(l => l.Score!.Value)
+                            .ToList();
+
+                        double? average = null;
+
+                        if (scores.Any())
+                            average = Math.Round(
+                                scores.Average(),
+                                2,
+                                MidpointRounding.AwayFromZero);
+
+                        return new ResponseShortAnimeJson
+                        {
+                            Id = a.Id,
+                            Name = a.Name,
+                            ImageUrl = a.ImagePath,
+                            Status = (AnimeStatus)a.Status,
+                            Type = (AnimeType)a.Type,
+                            AiredFrom = a.AiredFrom,
+                            AiredUntil = a.AiredUntil,
+                            Score = average
+                        };
+                    })
                     .ToList();
             });
 
@@ -94,6 +143,80 @@ public class AnimeRepositoryBuilder
 
         return this;
     }
+
+    public AnimeRepositoryBuilder FilterWithScore()
+    {
+        _repository
+        .Setup(r => r.FilterWithScore(It.IsAny<RequestAnimeFilterJson>()))
+        .ReturnsAsync((RequestAnimeFilterJson filter) =>
+        {
+            var query = _animes
+                .Where(a => a.DeletedOn == null && a.IsActive)
+                .AsEnumerable();
+
+            if (!string.IsNullOrWhiteSpace(filter.Query))
+            {
+                var search = filter.Query.ToLower();
+
+                query = query.Where(a =>
+                    a.NameNormalized.Contains(search));
+            }
+
+            if (filter.Status.HasValue)
+            {
+                query = query.Where(a =>
+                    a.Status == (UserAnimeList.Domain.Enums.AnimeStatus)filter.Status.Value);
+            }
+
+            if (filter.Type.HasValue)
+            {
+                query = query.Where(a =>
+                    a.Type == (UserAnimeList.Domain.Enums.AnimeType)filter.Type.Value);
+            }
+
+            if (filter.Genres is { Count: > 0 })
+            {
+                query = query.Where(a =>
+                    a.Genres.Any(g => filter.Genres.Contains(g.GenreId)));
+            }
+
+            if (filter.Studios is { Count: > 0 })
+            {
+                query = query.Where(a =>
+                    a.Studios.Any(s => filter.Studios.Contains(s.StudioId)));
+            }
+
+            return query
+                .Select(a => new ResponseShortAnimeJson
+                {
+                    Id = a.Id,
+                    Name = a.Name,
+                    ImageUrl = a.ImagePath,
+                    Status = (AnimeStatus)a.Status,
+                    Type = (AnimeType)a.Type,
+                    AiredFrom = a.AiredFrom,
+                    AiredUntil = a.AiredUntil,
+                    Score = CalculateAverageScore(a) 
+                })
+                .ToList();
+        });
+
+    return this;
+    }
     
     public IAnimeRepository Build() => _repository.Object;
+    
+    
+    private static double? CalculateAverageScore(Anime anime)
+    {
+        var scores = anime.UserEntries?
+            .Where(l => l.IsActive && l.Score != null)
+            .Select(l => l.Score!.Value)
+            .ToList();
+
+        if (scores is null || !scores.Any())
+            return null;
+
+        return scores.Average();
+    }
 }

@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using UserAnimeList.Communication.Enums;
 using UserAnimeList.Communication.Requests;
+using UserAnimeList.Communication.Responses;
 using UserAnimeList.Domain.Entities;
 using UserAnimeList.Domain.Repositories.Anime;
 using UserAnimeList.Exception;
@@ -50,14 +51,34 @@ public class AnimeRepository : IAnimeRepository
 
     public async Task<IList<Anime>> Search(string query)
     {
-        if (query.Equals("*"))
-            return await _dbContext.Animes.Where(a => a.IsActive && a.DeletedOn == null).ToListAsync();
-        
         return await _dbContext
             .Animes
             .AsNoTracking()
             .Where(a => a.IsActive && a.DeletedOn == null)
             .Where(a => a.NameNormalized.Contains(query.ToLower()) || a.Synopsis.ToLower().Contains(query.ToLower()))
+            .ToListAsync();
+    }
+
+    public async Task<IList<ResponseShortAnimeJson>> SearchWithScore(string query)
+    {
+        return await _dbContext.Animes
+            .AsNoTracking()
+            .Where(a => a.IsActive && a.DeletedOn == null)
+            .Where(a => a.NameNormalized.Contains(query.ToLower()) || a.Synopsis.ToLower().Contains(query.ToLower()))
+            .Select(a => new ResponseShortAnimeJson
+            {
+                Id = a.Id,
+                Name = a.Name,
+                ImageUrl = a.ImagePath,
+                Status = (Communication.Enums.AnimeStatus)a.Status,
+                Type = (Communication.Enums.AnimeType)a.Type,
+                AiredFrom = a.AiredFrom,
+                AiredUntil = a.AiredUntil,
+                Score = a.UserEntries
+                    .Where(l => l.IsActive && l.Score != null)
+                    .Select(l => (double?)l.Score)
+                    .Average()
+            })
             .ToListAsync();
     }
 
@@ -101,35 +122,35 @@ public class AnimeRepository : IAnimeRepository
         }
 
         var field = filter.SortField ?? AnimeSort.Name;
-        var desc = filter.SortDirection == SortDirection.Desc;
+        var sortDescending = filter.SortDirection == SortDirection.Desc;
 
         query = field switch
         {
-            AnimeSort.Name => desc
+            AnimeSort.Name => sortDescending
                 ? query.OrderByDescending(a => a.NameNormalized)
                 : query.OrderBy(a => a.NameNormalized),
 
-            AnimeSort.Episodes => desc
+            AnimeSort.Episodes => sortDescending
                 ? query.OrderByDescending(a => a.Episodes)
                 : query.OrderBy(a => a.Episodes),
 
-            AnimeSort.Status => desc
+            AnimeSort.Status => sortDescending
                 ? query.OrderByDescending(a => a.Status)
                 : query.OrderBy(a => a.Status),
 
-            AnimeSort.Type => desc
+            AnimeSort.Type => sortDescending
                 ? query.OrderByDescending(a => a.Type)
                 : query.OrderBy(a => a.Type),
 
-            AnimeSort.AiredFrom => desc
+            AnimeSort.AiredFrom => sortDescending
                 ? query.OrderByDescending(a => a.AiredFrom)
                 : query.OrderBy(a => a.AiredFrom),
 
-            AnimeSort.AiredUntil => desc
+            AnimeSort.AiredUntil => sortDescending
                 ? query.OrderByDescending(a => a.AiredUntil)
                 : query.OrderBy(a => a.AiredUntil),
 
-            AnimeSort.Premiered => desc
+            AnimeSort.Premiered => sortDescending
                 ? query.OrderByDescending(a => a.AiredFrom)
                 : query.OrderBy(a => a.AiredFrom),
 
@@ -137,6 +158,108 @@ public class AnimeRepository : IAnimeRepository
         };
 
         return await query.ToListAsync();
+    }
+
+    public async Task<IList<ResponseShortAnimeJson>> FilterWithScore(RequestAnimeFilterJson filter)
+    {
+        var query = _dbContext.Animes
+            .AsNoTracking()
+            .Where(a => a.DeletedOn == null && a.IsActive);
+
+        if (!string.IsNullOrWhiteSpace(filter.Query))
+        {
+            var q = filter.Query.ToLower();
+            query = query.Where(a => a.NameNormalized.Contains(q));
+        }
+
+        if (filter.Status.HasValue)
+            query = query.Where(a => a.Status == (AnimeStatus)filter.Status.Value);
+
+        if (filter.Type.HasValue)
+            query = query.Where(a => a.Type == (AnimeType)filter.Type.Value);
+
+        if (filter.AiredFrom.HasValue)
+            query = query.Where(a => a.AiredFrom.HasValue && a.AiredFrom.Value >= filter.AiredFrom.Value);
+
+        if (filter.AiredUntil.HasValue)
+            query = query.Where(a => a.AiredUntil.HasValue && a.AiredUntil.Value <= filter.AiredUntil.Value);
+
+        if (filter.Genres is { Count: > 0 })
+            query = query.Where(a => a.Genres.Any(ag => filter.Genres.Contains(ag.GenreId)));
+
+        if (filter.Studios is { Count: > 0 })
+            query = query.Where(a => a.Studios.Any(ast => filter.Studios.Contains(ast.StudioId)));
+
+        if (filter.PremieredSeason.HasValue && filter.PremieredYear.HasValue)
+        {
+            var (start, end) = GetSeasonRange((Season)filter.PremieredSeason.Value, filter.PremieredYear.Value);
+
+            query = query.Where(a => a.AiredFrom.HasValue
+                                     && a.AiredFrom.Value >= start
+                                     && a.AiredFrom.Value <= end);
+        }
+
+        var field = filter.SortField ?? AnimeSort.Name;
+        var sortDescending = filter.SortDirection == SortDirection.Desc;
+
+        query = field switch
+        {
+            AnimeSort.Name => sortDescending
+                ? query.OrderByDescending(a => a.NameNormalized)
+                : query.OrderBy(a => a.NameNormalized),
+
+            AnimeSort.Episodes => sortDescending
+                ? query.OrderByDescending(a => a.Episodes)
+                : query.OrderBy(a => a.Episodes),
+
+            AnimeSort.Status => sortDescending
+                ? query.OrderByDescending(a => a.Status)
+                : query.OrderBy(a => a.Status),
+
+            AnimeSort.Type => sortDescending
+                ? query.OrderByDescending(a => a.Type)
+                : query.OrderBy(a => a.Type),
+
+            AnimeSort.AiredFrom => sortDescending
+                ? query.OrderByDescending(a => a.AiredFrom)
+                : query.OrderBy(a => a.AiredFrom),
+
+            AnimeSort.AiredUntil => sortDescending
+                ? query.OrderByDescending(a => a.AiredUntil)
+                : query.OrderBy(a => a.AiredUntil),
+
+            AnimeSort.Premiered => sortDescending
+                ? query.OrderByDescending(a => a.AiredFrom)
+                : query.OrderBy(a => a.AiredFrom),
+            
+            AnimeSort.Score => sortDescending
+                ? query.OrderByDescending(a => a.UserEntries
+                    .Where(l => l.IsActive && l.Score != null)
+                    .Select(l => (double?)l.Score)
+                    .Average())
+                : query.OrderBy(a => a.UserEntries
+                    .Where(l => l.IsActive && l.Score != null)
+                    .Select(l => (double?)l.Score)
+                    .Average()),
+
+            _ => query.OrderBy(a => a.NameNormalized)
+        };
+        
+
+        return await query.Select(a => new ResponseShortAnimeJson
+        {
+            Id = a.Id,
+            Name = a.Name,
+            ImageUrl = a.ImagePath,
+            Status = (Communication.Enums.AnimeStatus)a.Status,
+            Type = (Communication.Enums.AnimeType)a.Type,
+            AiredFrom = a.AiredFrom,
+            AiredUntil = a.AiredUntil,
+            Score = a.UserEntries
+                .Where(l => l.IsActive && l.Score != null)
+                .Select(l => (double?)l.Score)
+                .Average()
+        }).ToListAsync();
     }
 
     private static (DateOnly start, DateOnly end) GetSeasonRange(Season season, int year)

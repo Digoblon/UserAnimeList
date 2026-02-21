@@ -8,5 +8,6 @@ public enum AnimeSort
     Type,
     AiredFrom,
     AiredUntil,
-    Premiered
+    Premiered,
+    Score
 }

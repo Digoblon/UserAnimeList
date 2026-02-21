@@ -8,13 +8,10 @@ namespace UserAnimeList.Application.UseCases.Anime.Search;
 public class SearchAnimeUseCase : ISearchAnimeUseCase
 {
     private readonly IAnimeRepository _animeRepository;
-    private readonly IAppMapper _mapper;
     
-    public SearchAnimeUseCase(IAnimeRepository animeRepository, 
-        IAppMapper mapper)
+    public SearchAnimeUseCase(IAnimeRepository animeRepository)
     {
         _animeRepository = animeRepository;
-        _mapper = mapper;
     }
     
     public async Task<ResponseAnimesJson> Execute(RequestAnimeSearchJson request)
@@ -23,23 +20,18 @@ public class SearchAnimeUseCase : ISearchAnimeUseCase
             return new ResponseAnimesJson();
             
         
-        var animes = await _animeRepository.Search(request.Query!);
+        var animes = await _animeRepository.SearchWithScore(request.Query!);
 
-        var animesList = _mapper.Map<IList<ResponseShortAnimeJson>>(animes);
-
-        foreach (var anime in animesList)
+        foreach (var anime in animes)
         {
-            var score = await _animeRepository.AverageScore(anime.Id);
-
-            if(score is not null)
-                score = Math.Round(score.Value, 2, MidpointRounding.AwayFromZero);
-            
-            anime.Score = score;
+            anime.Score = anime.Score is null
+                ? null
+                : Math.Round(anime.Score.Value, 2, MidpointRounding.AwayFromZero);
         }
 
         return new ResponseAnimesJson
         {
-            Animes = animesList
+            Animes = animes
         };
     }
 

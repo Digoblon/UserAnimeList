@@ -1,4 +1,3 @@
-using UserAnimeList.Application.Services.Mapper;
 using UserAnimeList.Communication.Requests;
 using UserAnimeList.Communication.Responses;
 using UserAnimeList.Domain.Repositories.Anime;
@@ -9,26 +8,28 @@ namespace UserAnimeList.Application.UseCases.Anime.Filter;
 public class FilterAnimeUseCase : IFilterAnimeUseCase
 {
     private readonly IAnimeRepository _animeRepository;
-    private readonly IAppMapper _mapper;
     
-    public FilterAnimeUseCase(IAnimeRepository animeRepository, 
-        IAppMapper mapper)
+    public FilterAnimeUseCase(IAnimeRepository animeRepository)
     {
         _animeRepository = animeRepository;
-        _mapper = mapper;
     }
     
     public async Task<ResponseAnimesJson> Execute(RequestAnimeFilterJson request)
     {
         Validate(request);
 
-        var animes = await _animeRepository.Filter(request);
+        var animes = await _animeRepository.FilterWithScore(request);
 
-        var dtos = _mapper.Map<IList<ResponseShortAnimeJson>>(animes);
-
+        foreach (var anime in animes)
+        {
+            anime.Score = anime.Score is null
+                ? null
+                : Math.Round(anime.Score.Value, 2, MidpointRounding.AwayFromZero);
+        }
+        
         return new ResponseAnimesJson
         {
-            Animes = dtos
+            Animes = animes
         };
     }
 

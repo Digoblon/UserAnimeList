@@ -127,13 +127,12 @@ public class AnimeFilterUseCaseTest
 
     private static FilterAnimeUseCase CreateUseCase(UserAnimeList.Domain.Entities.Anime anime, IList<UserAnimeList.Domain.Entities.Anime>? animeList = null)
     {
-        var mapper = MapperBuilder.Build();
         var animeRepositoryBuilder = new AnimeRepositoryBuilder();
-        var animeRepository = animeRepositoryBuilder.WithAnime(anime).Filter().Build();
+        var animeRepository = animeRepositoryBuilder.WithAnime(anime).FilterWithScore().Build();
 
         if (animeList is not null)
             animeRepositoryBuilder.AddList(animeList);
 
-        return new FilterAnimeUseCase(animeRepository, mapper);
+        return new FilterAnimeUseCase(animeRepository);
     }
 }

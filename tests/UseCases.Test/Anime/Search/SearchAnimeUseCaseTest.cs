@@ -1,5 +1,4 @@
 using CommonTestUtilities.Entities;
-using CommonTestUtilities.Mapper;
 using CommonTestUtilities.Repositories;
 using Bogus;
 using UserAnimeList.Application.UseCases.Anime.Search;
@@ -67,13 +66,12 @@ public class SearchAnimeUseCaseTest
     
     private static SearchAnimeUseCase CreateUseCase(UserAnimeList.Domain.Entities.Anime anime, IList<UserAnimeList.Domain.Entities.Anime>? animeList = null)
     {
-        var mapper = MapperBuilder.Build();
         var animeRepositoryBuilder = new AnimeRepositoryBuilder();
-        var animeRepository = animeRepositoryBuilder.WithAnime(anime).GetById(anime).Search().Build();
+        var animeRepository = animeRepositoryBuilder.WithAnime(anime).GetById(anime).SearchWithScore().Build();
         
         if(animeList is not null)
             animeRepositoryBuilder.AddList(animeList);
         
-        return new SearchAnimeUseCase(animeRepository,mapper);
+        return new SearchAnimeUseCase(animeRepository);
     }
 }
