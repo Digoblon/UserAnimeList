@@ -1,75 +1,226 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<root>
-    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-        <xsd:element name="root" msdata:IsDataSet="true">
-            
-        </xsd:element>
-    </xsd:schema>
-    <resheader name="resmimetype">
-        <value>text/microsoft-resx</value>
-    </resheader>
-    <resheader name="version">
-        <value>1.3</value>
-    </resheader>
-    <resheader name="reader">
-        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </resheader>
-    <resheader name="writer">
-        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </resheader>
-  <data name="CODE_INVALID" xml:space="preserve">
-      <value>Invalid code.</value>
-    </data>
-    <data name="CODE_RESET_PASSWORD_REQUIRED" xml:space="preserve">
-      <value>A code to reset your password is required.</value>
-    </data>
-    <data name="EMAIL_ALREADY_REGISTERED" xml:space="preserve">
-      <value>Email already registered on the platform.</value>
-    </data>
-  <data name="USERNAME_ALREADY_REGISTERED" xml:space="preserve">
-    <value>Username already registered on the platform.</value>
+<root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:schema id="root">
+    <xs:element name="root" ns1:IsDataSet="true">
+        </xs:element>
+  </xs:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="EMAIL_ALREADY_REGISTERED" xml:space="preserve">
+    <value>This email is already registered on the platform.</value>
   </data>
-    <data name="EMAIL_EMPTY" xml:space="preserve">
-      <value>The email cannot be empty.</value>
-    </data>
-    <data name="EMAIL_INVALID" xml:space="preserve">
-      <value>The email is invalid.</value>
-    </data>
-    <data name="EMAIL_OR_PASSWORD_INVALID" xml:space="preserve">
-      <value>Invalid e-mail and/or password.</value>
-    </data>
-    <data name="EXPIRED_CODE" xml:space="preserve">
-      <value>The code is expired.</value>
-    </data>
-    <data name="EXPIRED_SESSION" xml:space="preserve">
-      <value>Your session has expired. Please log in again to continue.</value>
-    </data>
-    <data name="INVALID_PASSWORD" xml:space="preserve">
-      <value>Password must be between 6 - 50 characters long and contain at least three of the following: uppercase, lowercase, numbers and symbols..</value>
-    </data>
-    <data name="INVALID_SESSION" xml:space="preserve">
-      <value>We couldn't find a valid session. Please log in to access this feature.</value>
-    </data>
-    <data name="NAME_EMPTY" xml:space="preserve">
-      <value>The name cannot be empty.</value>
-    </data>
-    <data name="NO_TOKEN" xml:space="preserve">
-      <value>Request don't have token.</value>
-    </data>
-    <data name="ONLY_IMAGES_ACCEPTED" xml:space="preserve">
-      <value>Only images (PNG, JPG, JPEG) are accepted.</value>
-    </data>
-    <data name="PASSWORD_DIFFERENT_CURRENT_PASSWORD" xml:space="preserve">
-      <value>The password entered is different from the current password.</value>
-    </data>
-    <data name="PASSWORD_EMPTY" xml:space="preserve">
-      <value>The password cannot be empty.</value>
-    </data>
-    <data name="UNKNOWN_ERROR" xml:space="preserve">
-      <value>Unknown error.</value>
-    </data>
-    <data name="USER_WITHOUT_PERMISSION_ACCESS_RESOURCE" xml:space="preserve">
-      <value>You can't access this resource.</value>
-    </data>
+  <data name="USERNAME_ALREADY_REGISTERED" xml:space="preserve">
+    <value>This username is already registered on the platform.</value>
+  </data>
+  <data name="EMAIL_EMPTY" xml:space="preserve">
+    <value>Email must not be empty.</value>
+  </data>
+  <data name="EMAIL_INVALID" xml:space="preserve">
+    <value>Invalid email address.</value>
+  </data>
+  <data name="EMAIL_OR_PASSWORD_INVALID" xml:space="preserve">
+    <value>Invalid email and/or password.</value>
+  </data>
+  <data name="EXPIRED_SESSION" xml:space="preserve">
+    <value>Your session has expired. Please sign in again to continue.</value>
+  </data>
+  <data name="INVALID_PASSWORD" xml:space="preserve">
+    <value>Password must be 6 to 50 characters long and contain at least three of the following: uppercase letters, lowercase letters, numbers, and symbols.</value>
+  </data>
+  <data name="INVALID_SESSION" xml:space="preserve">
+    <value>We couldn't find a valid session. Please log in to access this feature.</value>
+  </data>
+  <data name="NAME_EMPTY" xml:space="preserve">
+    <value>Name must not be empty.</value>
+  </data>
+  <data name="NO_TOKEN" xml:space="preserve">
+    <value>Authentication token was not provided.</value>
+  </data>
+  <data name="ONLY_IMAGES_ACCEPTED" xml:space="preserve">
+    <value>Only PNG, JPG, JPEG, and WEBP images are accepted.</value>
+  </data>
+  <data name="PASSWORD_DIFFERENT_CURRENT_PASSWORD" xml:space="preserve">
+    <value>The entered password does not match the current password.</value>
+  </data>
+  <data name="PASSWORD_EMPTY" xml:space="preserve">
+    <value>Password must not be empty.</value>
+  </data>
+  <data name="UNKNOWN_ERROR" xml:space="preserve">
+    <value>An unknown error occurred.</value>
+  </data>
+  <data name="INVALID_JSON" xml:space="preserve">
+    <value>Invalid JSON format.</value>
+  </data>
+  <data name="INVALID_REQUEST_BODY" xml:space="preserve">
+    <value>The request body is invalid or missing.</value>
+  </data>
+  <data name="NAME_INVALID_FORMAT" xml:space="preserve">
+    <value>Please enter a valid username (letters, numbers, underscores, and dashes only).</value>
+  </data>
+  <data name="LOGIN_OR_PASSWORD_INVALID" xml:space="preserve">
+    <value>Your username or password is incorrect.</value>
+  </data>
+  <data name="PASSWORDS_NOT_MATCH" xml:space="preserve">
+    <value>The passwords do not match.</value>
+  </data>
+  <data name="INVALID_TOKEN" xml:space="preserve">
+    <value>Invalid authentication token.</value>
+  </data>
+  <data name="TOKEN_EXPIRED" xml:space="preserve">
+    <value>The token has expired.</value>
+  </data>
+  <data name="NO_ACCESS" xml:space="preserve">
+    <value>The user does not have access.</value>
+  </data>
+  <data name="USER_NOT_FOUND" xml:space="preserve">
+    <value>User not found in the database.</value>
+  </data>
+  <data name="WRONG_TOKEN_VERSION" xml:space="preserve">
+    <value>Token version mismatch.</value>
+  </data>
+  <data name="USER_HAS_NO_ACCESS" xml:space="preserve">
+    <value>The user has no access.</value>
+  </data>
+  <data name="INVALID_ROLE_CLAIM" xml:space="preserve">
+    <value>Invalid role claim.</value>
+  </data>
+  <data name="STUDIO_ALREADY_REGISTERED" xml:space="preserve">
+    <value>This studio is already registered.</value>
+  </data>
+  <data name="STUDIO_NOT_FOUND" xml:space="preserve">
+    <value>Studio not found.</value>
+  </data>
+  <data name="INVALID_ID" xml:space="preserve">
+    <value>Invalid ID format.</value>
+  </data>
+  <data name="INVALID_SEASON" xml:space="preserve">
+    <value>The provided season is invalid.</value>
+  </data>
+  <data name="GENRE_ALREADY_REGISTERED" xml:space="preserve">
+    <value>This genre is already registered.</value>
+  </data>
+  <data name="EPISODE_COUNT_INVALID" xml:space="preserve">
+    <value>Invalid episode count.</value>
+  </data>
+  <data name="STATUS_NOT_SUPPORTED" xml:space="preserve">
+    <value>The provided anime status is invalid.</value>
+  </data>
+  <data name="SOURCE_NOT_SUPPORTED" xml:space="preserve">
+    <value>The provided anime source type is invalid.</value>
+  </data>
+  <data name="TYPE_NOT_SUPPORTED" xml:space="preserve">
+    <value>The provided anime type is invalid.</value>
+  </data>
+  <data name="DUPLICATED_GENRES" xml:space="preserve">
+    <value>One or more genres are duplicated.</value>
+  </data>
+  <data name="DUPLICATED_STUDIOS" xml:space="preserve">
+    <value>One or more studios are duplicated.</value>
+  </data>
+  <data name="ANIME_EXCEEDS_LIMIT" xml:space="preserve">
+    <value>The anime name exceeds the 256-character limit.</value>
+  </data>
+  <data name="ANIME_INVALID_SORT_DIR" xml:space="preserve">
+    <value>Invalid anime sorting direction.</value>
+  </data>
+  <data name="ANIME_INVALID_SORT_FIELD" xml:space="preserve">
+    <value>Invalid anime sorting criteria.</value>
+  </data>
+  <data name="ANIME_PREMIERED_SEASON_REQUIRED" xml:space="preserve">
+    <value>When premiered year is provided, premiered season must also be provided.</value>
+  </data>
+  <data name="ANIME_PREMIERED_YEAR_REQUIRED" xml:space="preserve">
+    <value>When premiered season is provided, premiered year must also be provided.</value>
+  </data>
+  <data name="ANIME_QUERY_EXCEEDED" xml:space="preserve">
+    <value>The anime query exceeds the maximum length of 256 characters.</value>
+  </data>
+  <data name="ANIME_AIRED_UNTIL_EARLY_FROM" xml:space="preserve">
+    <value>The &quot;aired until&quot; date cannot be earlier than the &quot;aired from&quot; date.</value>
+  </data>
+  <data name="ANIME_AIRED_UNTIL_FILLED_AIRED_FROM_NOT_FILLED" xml:space="preserve">
+    <value>When &quot;aired until&quot; is provided, &quot;aired from&quot; must also be provided.</value>
+  </data>
+  <data name="EPISODE_MUST_BE_SPECIFIED" xml:space="preserve">
+    <value>When the anime status is &quot;finished&quot;, the number of episodes must be provided.</value>
+  </data>
+  <data name="GENRES_CANNOT_BE_NULL" xml:space="preserve">
+    <value>Anime genres cannot be null.</value>
+  </data>
+  <data name="STUDIOS_CANNOT_BE_NULL" xml:space="preserve">
+    <value>Anime studios cannot be null.</value>
+  </data>
+  <data name="ANIME_AIRED_FROM_REQUIRED_WHEN_FINISHED" xml:space="preserve">
+    <value>When the anime status is &quot;finished&quot;, &quot;aired from&quot; must be specified.</value>
+  </data>
+  <data name="ANIME_AIRED_UNTIL_REQUIRED_WHEN_FINISHED" xml:space="preserve">
+    <value>When the anime status is &quot;finished&quot;, &quot;aired until&quot; must be specified.</value>
+  </data>
+  <data name="ANIME_AIRED_FROM_REQUIRED_WHEN_AIRING" xml:space="preserve">
+    <value>When the anime status is &quot;airing&quot;, &quot;aired from&quot; must be specified.</value>
+  </data>
+  <data name="ANIME_ALREADY_REGISTERED" xml:space="preserve">
+    <value>An anime with this name is already registered.</value>
+  </data>
+  <data name="INVALID_STUDIOS_IN_REQUEST" xml:space="preserve">
+    <value>The following studios are invalid:</value>
+  </data>
+  <data name="INVALID_GENRES_IN_REQUEST" xml:space="preserve">
+    <value>The following genres are invalid:</value>
+  </data>
+  <data name="ANIME_NOT_FOUND" xml:space="preserve">
+    <value>The specified anime was not found.</value>
+  </data>
+  <data name="GENRE_NOT_FOUND" xml:space="preserve">
+    <value>The specified genre was not found.</value>
+  </data>
+  <data name="SYNOPSIS_EXCEEDS_LIMIT" xml:space="preserve">
+    <value>The synopsis exceeds the maximum length of 5,000 characters.</value>
+  </data>
+  <data name="ANIME_LIST_DATE_FINISHED_EARLIER_DATE_STARTED" xml:space="preserve">
+    <value>The finished date cannot be earlier than the started date.</value>
+  </data>
+  <data name="ANIME_LIST_SCORE_INVALID" xml:space="preserve">
+    <value>The anime score must be between 1 and 10.</value>
+  </data>
+  <data name="ANIME_LIST_INVALID_STATUS" xml:space="preserve">
+    <value>The anime status is invalid.</value>
+  </data>
+  <data name="ANIME_LIST_ENTRY_ALREADY_EXISTS" xml:space="preserve">
+    <value>This anime list entry already exists.</value>
+  </data>
+  <data name="ANIME_LIST_INVALID" xml:space="preserve">
+    <value>The anime list is invalid or was not found.</value>
+  </data>
+  <data name="ANIME_LIST_QUERY_EXCEEDED" xml:space="preserve">
+    <value>The name filter exceeds the maximum length of 256 characters.</value>
+  </data>
+  <data name="ANIME_LIST_INVALID_SORT_FIELD" xml:space="preserve">
+    <value>Invalid sorting criteria.</value>
+  </data>
+  <data name="ANIME_LIST_INVALID_SORT_DIR" xml:space="preserve">
+    <value>Invalid sorting direction.</value>
+  </data>
+  <data name="IMAGE_NULL" xml:space="preserve">
+    <value>No image was provided.</value>
+  </data>
+  <data name="IMAGE_EXCEEDS_FILE_SIZE" xml:space="preserve">
+    <value>The provided image exceeds the maximum size (5 MB).</value>
+  </data>
+  <data name="CONNECTION_STRING_NOT_FOUND" xml:space="preserve">
+    <value>No connection string found.</value>
+  </data>
+  <data name="INVALID_SIGNING_KEY" xml:space="preserve">
+    <value>No jwt signing key was found.</value>
+  </data>
 </root>

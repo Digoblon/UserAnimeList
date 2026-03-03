@@ -13,7 +13,7 @@ public class UserConfiguration : BaseEntityConfiguration<User>
         builder.ToTable("Users");
         
         
-         builder.Property(u => u.UserName)
+        builder.Property(u => u.UserName)
              .IsRequired()
              .HasMaxLength(50);
         builder.HasIndex(u => u.UserName).IsUnique();
@@ -21,10 +21,23 @@ public class UserConfiguration : BaseEntityConfiguration<User>
         builder.Property(u => u.Email)
             .IsRequired()
             .HasMaxLength(150);
+        builder.HasIndex(u => u.Email).IsUnique();
 
         builder.Property(u => u.Password)
             .IsRequired()
             .HasMaxLength(256);
 
+        builder.Property(u => u.TokenVersion)
+            .IsRequired();
+        
+        builder.Property(u => u.Role)
+            .IsRequired();
+
+        builder.Property(u => u.ImagePath)
+            .IsRequired(false);
+        
+        builder.HasMany(u => u.RefreshTokens)
+            .WithOne(rt => rt.User)
+            .HasForeignKey(rt => rt.UserId);
     }
 }

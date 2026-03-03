@@ -1,0 +1,13 @@
+[
+  { "userName": "naruto_fan", "email": "naruto@email.com", "password": "Senha@123", "role": "User" },
+  { "userName": "anime_master", "email": "admin@email.com", "password": "Senha@123", "role": "Admin" },
+  { "userName": "otaku_brasil", "email": "otaku@email.com", "password": "Senha@123", "role": "User" },
+  { "userName": "luffy_king", "email": "luffy@email.com", "password": "Senha@123", "role": "User" },
+  { "userName": "eren_jaeger", "email": "eren@email.com", "password": "Senha@123", "role": "User" },
+  { "userName": "light_yagami", "email": "light@email.com", "password": "Senha@123", "role": "User" },
+  { "userName": "goku_ssj", "email": "goku@email.com", "password": "Senha@123", "role": "User" },
+  { "userName": "ichigo_kurosaki", "email": "ichigo@email.com", "password": "Senha@123", "role": "User" },
+  { "userName": "tanjiro_k", "email": "tanjiro@email.com", "password": "Senha@123", "role": "User" },
+  { "userName": "sailor_moon", "email": "sailor@email.com", "password": "Senha@123", "role": "User" },
+  { "userName": "hachiman_h", "email": "hh@email.com", "password": "Senha@123", "role": "User" }
+]

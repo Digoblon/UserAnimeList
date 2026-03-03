@@ -6,4 +6,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\Shared\UserAnimeList.Communication\UserAnimeList.Communication.csproj" />
+    </ItemGroup>
+
 </Project>

@@ -1,0 +1,7 @@
+[
+  { "name": "Action", "description": "Conflitos, batalhas, alta energia." },
+  { "name": "Adventure", "description": "Jornadas, exploração, viagens." },
+  { "name": "Drama", "description": "Conflitos emocionais e desenvolvimento de personagens." },
+  { "name": "Fantasy", "description": "Mundos e elementos sobrenaturais." },
+  { "name": "Psychological", "description": "Tensão mental, jogos psicológicos e dilemas morais." }
+]

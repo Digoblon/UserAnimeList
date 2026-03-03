@@ -1,0 +1,122 @@
+[
+  {
+    "name": "Attack on Titan",
+    "synopsis": "A humanidade luta pela sobrevivência contra Titãs gigantes.",
+    "episodes": 87,
+    "genres": ["Action", "Drama", "Fantasy"],
+    "studios": ["Wit Studio", "MAPPA"],
+    "status": "Finished",
+    "source": "Manga",
+    "type": "Tv",
+    "airedFrom": "2013-04-07",
+    "airedUntil": "2023-11-05"
+  },
+  {
+    "name": "Jujutsu Kaisen",
+    "synopsis": "Um estudante entra no mundo dos feiticeiros após consumir um objeto amaldiçoado.",
+    "episodes": 47,
+    "genres": ["Action", "Fantasy"],
+    "studios": ["MAPPA"],
+    "status": "Airing",
+    "source": "Manga",
+    "type": "Tv",
+    "airedFrom": "2020-10-03",
+    "airedUntil": null
+  },
+  {
+    "name": "Demon Slayer",
+    "synopsis": "Um garoto torna-se caçador de demônios para salvar sua irmã.",
+    "episodes": 55,
+    "genres": ["Action", "Adventure", "Fantasy"],
+    "studios": ["ufotable"],
+    "status": "Airing",
+    "source": "Manga",
+    "type": "Tv",
+    "airedFrom": "2019-04-06",
+    "airedUntil": null
+  },
+  {
+    "name": "Death Note",
+    "synopsis": "Um estudante encontra um caderno que mata qualquer pessoa cujo nome seja escrito nele.",
+    "episodes": 37,
+    "genres": ["Psychological", "Drama"],
+    "studios": ["Bones"],
+    "status": "Finished",
+    "source": "Manga",
+    "type": "Tv",
+    "airedFrom": "2006-10-04",
+    "airedUntil": "2007-06-27"
+  },
+  {
+    "name": "One Piece",
+    "synopsis": "Luffy parte em uma jornada para se tornar o Rei dos Piratas.",
+    "episodes": 1100,
+    "genres": ["Adventure", "Action", "Fantasy"],
+    "studios": ["Toei Animation"],
+    "status": "Airing",
+    "source": "Manga",
+    "type": "Tv",
+    "airedFrom": "1999-10-20",
+    "airedUntil": null
+  },
+  {
+    "name": "My Hero Academia",
+    "synopsis": "Um garoto sem poderes entra na maior academia de heróis.",
+    "episodes": 138,
+    "genres": ["Action", "Adventure"],
+    "studios": ["Bones"],
+    "status": "Airing",
+    "source": "Manga",
+    "type": "Tv",
+    "airedFrom": "2016-04-03",
+    "airedUntil": null
+  },
+  {
+    "name": "Chainsaw Man",
+    "synopsis": "Um jovem funde-se com um demônio e vira o Chainsaw Man.",
+    "episodes": 12,
+    "genres": ["Action", "Fantasy", "Psychological"],
+    "studios": ["MAPPA"],
+    "status": "Finished",
+    "source": "Manga",
+    "type": "Tv",
+    "airedFrom": "2022-10-12",
+    "airedUntil": "2022-12-28"
+  },
+  {
+    "name": "Vinland Saga",
+    "synopsis": "Um jovem viking busca vingança e um propósito em meio à guerra.",
+    "episodes": 48,
+    "genres": ["Action", "Drama"],
+    "studios": ["Wit Studio", "MAPPA"],
+    "status": "Airing",
+    "source": "Manga",
+    "type": "Tv",
+    "airedFrom": "2019-07-08",
+    "airedUntil": null
+  },
+  {
+    "name": "Fullmetal Alchemist: Brotherhood",
+    "synopsis": "Dois irmãos buscam a Pedra Filosofal após uma transmutação dar errado.",
+    "episodes": 64,
+    "genres": ["Action", "Adventure", "Fantasy"],
+    "studios": ["Bones"],
+    "status": "Finished",
+    "source": "Manga",
+    "type": "Tv",
+    "airedFrom": "2009-04-05",
+    "airedUntil": "2010-07-04"
+  },
+  {
+    "name": "Your Name",
+    "synopsis": "Dois jovens conectados por um fenômeno inexplicável tentam se encontrar.",
+    "episodes": 1,
+    "genres": ["Drama", "Fantasy"],
+    "studios": ["Bones"],
+    "status": "Finished",
+    "source": "Original",
+    "type": "Movie",
+    "airedFrom": "2016-08-26",
+    "airedUntil": "2016-08-26"
+  }
+]
