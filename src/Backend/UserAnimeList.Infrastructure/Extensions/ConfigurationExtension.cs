@@ -6,7 +6,12 @@ public static class ConfigurationExtension
 {
     public static string ConnectionString(this IConfiguration configuration)
     {
-        return configuration.GetConnectionString("DefaultConnection")!;
+        var connectionString = configuration.GetConnectionString("DefaultConnection");
+
+        if (connectionString is null)
+            throw new InvalidOperationException("No connection string found.");
+        
+        return connectionString;
     }
 
     public static bool IsUnitTestEnvironment(this IConfiguration configuration)

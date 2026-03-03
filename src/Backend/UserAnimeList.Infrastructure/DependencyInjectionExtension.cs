@@ -14,6 +14,7 @@ using UserAnimeList.Domain.Security.Tokens;
 using UserAnimeList.Domain.Services.DataSeed;
 using UserAnimeList.Domain.Services.FileStorage;
 using UserAnimeList.Domain.Services.LoggedUser;
+using UserAnimeList.Exception.Exceptions;
 using UserAnimeList.Infrastructure.Data;
 using UserAnimeList.Infrastructure.Data.Repositories;
 using UserAnimeList.Infrastructure.Data.Seed;
@@ -47,6 +48,9 @@ public static class DependencyInjectionExtension
     {
         var expirationTimeMinutes = configuration.GetValue<uint>("Settings:Jwt:ExpirationTimeMinutes");
         var signingKey = configuration.GetValue<string>("Settings:Jwt:SigningKey");
+        
+        if (signingKey is null)
+            throw new InvalidSingingKeyException();
         
         services.AddScoped<IAccessTokenGenerator>(options => new JwtTokenGenerator(expirationTimeMinutes, signingKey!));
         services.AddScoped<IAccessTokenValidator>(options => new JwtTokenValidator(signingKey!));

@@ -217,4 +217,10 @@
   <data name="IMAGE_EXCEEDS_FILE_SIZE" xml:space="preserve">
     <value>提供された画像は最大サイズ（5MB）を超えています。</value>
   </data>
+  <data name="CONNECTION_STRING_NOT_FOUND" xml:space="preserve">
+    <value>接続文字列が見つかりません。</value>
+  </data>
+  <data name="INVALID_SIGNING_KEY" xml:space="preserve">
+    <value>jwt 署名キーが見つかりませんでした。</value>
+  </data>
 </root>

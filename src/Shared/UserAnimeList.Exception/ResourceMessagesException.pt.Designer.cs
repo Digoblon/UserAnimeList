@@ -249,6 +249,15 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nenhuma string de conexão foi encontrada..
+        /// </summary>
+        public static string CONNECTION_STRING_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("CONNECTION_STRING_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Um ou mais gêneros estão duplicados..
         /// </summary>
         public static string DUPLICATED_GENRES {
@@ -393,15 +402,6 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A temporada informada é inválida..
-        /// </summary>
-        public static string INVALID_SEASON {
-            get {
-                return ResourceManager.GetString("INVALID_SEASON", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Formato JSON inválido..
         /// </summary>
         public static string INVALID_JSON {
@@ -438,11 +438,29 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A temporada informada é inválida..
+        /// </summary>
+        public static string INVALID_SEASON {
+            get {
+                return ResourceManager.GetString("INVALID_SEASON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Não foi possível localizar uma sessão válida. Faça login para acessar este recurso..
         /// </summary>
         public static string INVALID_SESSION {
             get {
                 return ResourceManager.GetString("INVALID_SESSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nenhuma jwt signing key foi encontrada..
+        /// </summary>
+        public static string INVALID_SIGNING_KEY {
+            get {
+                return ResourceManager.GetString("INVALID_SIGNING_KEY", resourceCulture);
             }
         }
         

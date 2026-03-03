@@ -249,6 +249,15 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No connection string found..
+        /// </summary>
+        public static string CONNECTION_STRING_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("CONNECTION_STRING_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to One or more genres are duplicated..
         /// </summary>
         public static string DUPLICATED_GENRES {
@@ -393,15 +402,6 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The provided season is invalid..
-        /// </summary>
-        public static string INVALID_SEASON {
-            get {
-                return ResourceManager.GetString("INVALID_SEASON", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Invalid JSON format..
         /// </summary>
         public static string INVALID_JSON {
@@ -438,11 +438,29 @@ namespace UserAnimeList.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The provided season is invalid..
+        /// </summary>
+        public static string INVALID_SEASON {
+            get {
+                return ResourceManager.GetString("INVALID_SEASON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to We couldn&apos;t find a valid session. Please log in to access this feature..
         /// </summary>
         public static string INVALID_SESSION {
             get {
                 return ResourceManager.GetString("INVALID_SESSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No jwt signing key was found..
+        /// </summary>
+        public static string INVALID_SIGNING_KEY {
+            get {
+                return ResourceManager.GetString("INVALID_SIGNING_KEY", resourceCulture);
             }
         }
         

@@ -217,4 +217,10 @@
   <data name="IMAGE_EXCEEDS_FILE_SIZE" xml:space="preserve">
     <value>A imagem informada excede o tamanho máximo de 5 MB.</value>
   </data>
+  <data name="CONNECTION_STRING_NOT_FOUND" xml:space="preserve">
+    <value>Nenhuma string de conexão foi encontrada.</value>
+  </data>
+  <data name="INVALID_SIGNING_KEY" xml:space="preserve">
+    <value>Nenhuma jwt signing key foi encontrada.</value>
+  </data>
 </root>
