@@ -1,16 +1,20 @@
-# UserAnimeList Web
+# UserAnimeList Frontend (Demo)
 
-Frontend React + Vite com UX de catálogo (inspirado em MAL/AniList), cobrindo todos os endpoints da API.
+This is a **simple frontend demo** for the UserAnimeList project.
 
-## Páginas
-- Home com destaques, busca com autocomplete e acesso ao filtro avançado.
-- Página de anime (detalhes completos, gêneros clicáveis para filtro e estúdios clicáveis).
-- Página de busca avançada com filtros por enums.
-- Perfil do usuário (auth, imagem, senha, lista pessoal e operações de lista).
-- Studio details.
-- Admin page (somente funções administrativas: register/update/delete e imagens admin).
+It was **generated with Artificial Intelligence (Codex)** and exists only to demonstrate how a web UI can consume the main project API (backend).
 
-## Rodar
+## Important Notes
+- This frontend is **not the main focus** of the project.
+- The **backend is the core** of the project.
+- The frontend is only here to show API usage in a basic and practical way.
+
+## What it does
+- Calls the backend API.
+- Displays anime-related data.
+- Provides a basic interface for navigation and interaction.
+
+## Run locally
 ```bash
 npm install
 npm run dev
